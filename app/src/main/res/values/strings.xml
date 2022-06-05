@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Steam Prototype</string>
+    <string name="sign_in">Sign In</string>
+    <string name="reg">Register</string>
+</resources>
