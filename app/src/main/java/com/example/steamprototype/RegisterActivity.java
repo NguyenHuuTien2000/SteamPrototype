@@ -1,7 +1,6 @@
 package com.example.steamprototype;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnReg.setOnClickListener(view -> {
             String username = editNewUsername.getText().toString();
             String password = editNewPassword.getText().toString();
-            String email = editNewUsername.getText().toString();
+            String email = editNewEmail.getText().toString();
 
             if (checkInput(username, password, email)) {
                 Intent intent = getIntent();
@@ -49,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         }
         UserDataStorage dataStorage = MainActivity.userDataStorage;
-        User storedUser = dataStorage.getUserData();
+        User storedUser = dataStorage.getUserData(name, pass);
         if (storedUser != null) {
             if (storedUser.getUsername().equals(name)) {
                 errorMsg += "Username, ";

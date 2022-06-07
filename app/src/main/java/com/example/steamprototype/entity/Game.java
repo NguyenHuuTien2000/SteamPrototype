@@ -6,19 +6,31 @@ public class Game {
     private String gameID;
     private String title;
     private String publisher;
+    private String developer;
     private String genre;
     private String platform;
+
+
     private Date releaseDate;
     private double price;
 
-    public Game(String gameID, String title, String publisher, String genre, String platform, Date releaseDate, double price) {
+    public Game(String gameID, String title, String publisher, String developer, String genre, String platform, Date releaseDate, double price) {
         this.gameID = gameID;
         this.title = title;
         this.publisher = publisher;
+        this.developer = developer;
         this.genre = genre;
         this.platform = platform;
         this.releaseDate = releaseDate;
         this.price = price;
+    }
+
+    public String getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(String developer) {
+        this.developer = developer;
     }
 
     public String getGameID() {

@@ -30,7 +30,7 @@ public class SignInActivity extends AppCompatActivity {
         innit();
 
         UserDataStorage dataStorage = MainActivity.userDataStorage;
-        user = dataStorage.getUserData();
+        user = dataStorage.getUserData("","");
 
         if (user == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
