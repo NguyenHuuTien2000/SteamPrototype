@@ -78,7 +78,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     private String getPriceTag(double price) {
-        return price == 0.0 ? "Free" : "Price: $" + String.format("%.2f", price);
+        return price == 0.0 ? "Free" : "$" + String.format("%.2f", price);
     }
 
     private class ListView_Row{

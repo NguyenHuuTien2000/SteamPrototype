@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/lsttV_img_gameImg"
-        android:layout_width="50dp"
+        android:layout_width="140dp"
         android:layout_height="70dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
@@ -17,6 +18,7 @@
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="70dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="#673AB7"
         android:orientation="vertical">
@@ -46,6 +48,7 @@
     <LinearLayout
         android:layout_width="100dp"
         android:layout_height="70dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="#673AB7"
         android:orientation="vertical">

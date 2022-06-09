@@ -50,7 +50,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
     }
 
     private String getPriceTag(double price) {
-        return price == 0.0 ? "Free" : "Price: $" + String.format("%.2f", price);
+        return price == 0.0 ? "Free" : "$" + String.format("%.2f", price);
     }
 
     // this method will return
