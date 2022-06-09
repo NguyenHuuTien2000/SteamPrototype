@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/list_view_item.xml" value="0.25" />
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/register_activity.xml" value="0.2" />
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/sign_in_activity.xml" value="0.17074275362318841" />
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/slider_item.xml" value="0.22" />
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/stack_item.xml" value="0.33" />
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/store_front_activity.xml" value="0.18" />
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/storefront_activity.xml" value="0.25" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/SteamPrototype/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/SteamPrototype/app/src/main/res/layout/register_activity.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/SteamPrototype/app/src/main/res/layout/sign_in_activity.xml" value="0.25416666666666665" />

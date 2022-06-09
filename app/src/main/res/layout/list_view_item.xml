@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/lsttV_img_gameImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lsttV_txtV_gameName"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/lsttV_txtV_genre"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="Genre" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lsttV_txtV_discount"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="discount" />
+
+        <TextView
+            android:id="@+id/lsttV_txtV_price"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:text="price" />
+
+    </LinearLayout>
+
+</LinearLayout>
