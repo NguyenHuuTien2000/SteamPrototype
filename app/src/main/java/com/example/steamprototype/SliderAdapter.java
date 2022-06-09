@@ -41,8 +41,8 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         Game game = gameList.get(position);
         viewHolder.imageView.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         viewHolder.gameName.setText(game.getTitle());
-        viewHolder.gameDiscount.setText("" + game.getDiscount() * 100);
-        viewHolder.gamePrice.setText(String.format("%.3f",game.getPrice()));
+        viewHolder.gameDiscount.setText("-" + game.getDiscount() * 100 + "%");
+        viewHolder.gamePrice.setText("Price: " + String.format("%.3f",game.getPrice()) + "đ");
     }
 
     // this method will return
