@@ -3,7 +3,6 @@ package com.example.steamprototype;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -30,9 +29,7 @@ public class SignInActivity extends AppCompatActivity {
         innit();
 
         UserDataStorage dataStorage = MainActivity.userDataStorage;
-        user = dataStorage.getUserData("","");
-
-        if (user == null) {
+        if (!dataStorage.checkContains()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setPositiveButton("Yes", (dialog, id) -> {
                 Intent intent = getIntent();
@@ -54,7 +51,6 @@ public class SignInActivity extends AppCompatActivity {
             String password = editPassword.getText().toString();
             if (checkInput(username, password)) {
                 Intent intent = new Intent(SignInActivity.this, StoreFrontActivity.class);
-                intent.putExtra("user", (Parcelable) this.user);
                 startActivity(intent);
                 finish();
             } else {
@@ -66,10 +62,11 @@ public class SignInActivity extends AppCompatActivity {
 
     public boolean checkInput(String name, String pass) {
         if (name.isEmpty() || pass.isEmpty()) {
-            errorMsg = "Check your name or password and try again";
+            errorMsg = "Username or password cannot be empty and try again";
             return false;
         }
-        if (!name.equals(user.getUsername()) || !pass.equals(user.getPassword())) {
+        this.user = MainActivity.userDataStorage.getUserData(name, pass);
+        if (this.user == null) {
             errorMsg = "Username or password do not match";
             return false;
         }

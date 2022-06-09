@@ -50,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
             String password = data.getStringExtra("password");
             String email = data.getStringExtra("email");
             User newUser = new User(username, password, email);
-            userDataStorage.saveUserData(newUser);
-            Toast.makeText(this, "Register success now you will be direct to the store front", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(MainActivity.this, StoreFrontActivity.class);
-            startActivity(intent);
+
+            if (userDataStorage.saveUserData(newUser)) {
+                Toast.makeText(this, "Register success now you will be direct to the store front", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, StoreFrontActivity.class);
+                startActivity(intent);
+            }
         }
         if (requestCode == REQUEST_CODE_SIGN_IN && resultCode == RESULT_CODE_SIGN_IN_NO_ACC) {
             toRegister();

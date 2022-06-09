@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3F51B5">
+    android:background="#9C27B0">
 
     <Button
         android:id="@+id/btnSignIn"
@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/steamdeck_steamlogo"/>
+        app:srcCompat="@drawable/steamdeck_steamlogo" />
 
     <EditText
         android:id="@+id/editUsername"

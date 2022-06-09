@@ -31,6 +31,8 @@ public class UserDataStorage {
         this.sharedPreferences = context.getSharedPreferences(SP_NAME,Context.MODE_PRIVATE);
     }
 
+
+
     public void innitDB(Activity activity) {
         try {
             String savePath = activity.getApplicationInfo().dataDir + "/databases/";
@@ -58,7 +60,7 @@ public class UserDataStorage {
     }
 
     public boolean saveUserData(User user) {
-        Cursor cursor = database.rawQuery("SELECT * FROM user", null);
+        Cursor cursor = this.database.rawQuery("SELECT * FROM user", null);
         //cursor.moveToPosition(-1);
         while (cursor.moveToNext()) {
             String username = cursor.getString(0);
@@ -72,13 +74,13 @@ public class UserDataStorage {
         contentValues.put("username", user.getUsername());
         contentValues.put("password", user.getPassword());
         contentValues.put("email", user.getEmail());
-        database.insert("user", null, contentValues);
+        this.database.insert("user", null, contentValues);
         cursor.close();
         return true;
     }
 
     public User getUserData(String name, String pass) {
-        Cursor cursor = database.rawQuery("SELECT * FROM user", null);
+        Cursor cursor = this.database.rawQuery("SELECT * FROM user", null);
         while (cursor.moveToNext()) {
             String username = cursor.getString(0);
             String password = cursor.getString(1);
@@ -87,6 +89,13 @@ public class UserDataStorage {
             }
         }
         return null;
+    }
+
+    public boolean checkContains() {
+        Cursor cursor = this.database.rawQuery("SELECT * FROM user", null);
+        boolean res = cursor.moveToFirst();
+        cursor.close();
+        return res;
     }
 
     public void saveCurrentUser() {
