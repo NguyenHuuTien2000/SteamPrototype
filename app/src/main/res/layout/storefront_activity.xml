@@ -42,6 +42,7 @@
             android:layout_width="223dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/white"
             android:ems="10"
             android:hint="Search"
             android:inputType="textPersonName"
@@ -53,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@android:color/darker_gray"
+            android:backgroundTint="#4CAF50"
             android:text="GO"
             android:textColor="@color/black" />
     </LinearLayout>
@@ -68,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#F44336"
             android:text="New" />
 
         <Button
@@ -75,6 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#F44336"
             android:text="Popular" />
 
         <Button
@@ -82,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#F44336"
             android:text="Special" />
     </LinearLayout>
 
