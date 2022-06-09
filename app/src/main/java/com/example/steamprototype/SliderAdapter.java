@@ -46,7 +46,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
     }
 
     private String getDiscountTag(double discount) {
-        return discount == 0.0 ? "" : "-" + discount * 100 + "%";
+        return discount == 0.0 ? "" : "-" + discount + "%";
     }
 
     private String getPriceTag(double price) {

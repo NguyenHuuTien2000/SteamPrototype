@@ -61,12 +61,12 @@ public class GameDataStorage {
 
         date = convertDate(2015, 11, 3);
         imagePath = createImageStorage(activity, "nfs.jpg");
-        game = new Game(2, "Need for Speed", "Electronic Arts", "Ghost Games", "Racing", "PC", date, 82, 0, imagePath);
+        game = new Game(2, "Need for Speed", "Electronic Arts", "Ghost Games", "Racing", "PC", date, 82, 10, imagePath);
         gameLists.add(game);
 
         date = convertDate(2017, 7, 5);
         imagePath = createImageStorage(activity, "cold_water.jpg");
-        game = new Game(3, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 0, imagePath);
+        game = new Game(3, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 25, imagePath);
         gameLists.add(game);
     }
 

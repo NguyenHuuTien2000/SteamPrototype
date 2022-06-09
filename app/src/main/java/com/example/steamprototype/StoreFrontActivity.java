@@ -26,6 +26,7 @@ public class StoreFrontActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storefront_activity);
+
         init();
 
         this.gameArrayList = MainActivity.gameDataStorage.getGameList();
@@ -41,6 +42,8 @@ public class StoreFrontActivity extends AppCompatActivity {
         listView.setAdapter(listViewAdapter);
 
     }
+
+
     public void init() {
         sliderView = (SliderView) findViewById(R.id.slider);
         btn_search = (Button) findViewById(R.id.btn_search);

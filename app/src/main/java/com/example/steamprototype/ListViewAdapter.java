@@ -24,7 +24,7 @@ public class ListViewAdapter extends BaseAdapter {
         this.context = context;
         this.gameList = gameList;
     }
-    
+
     @Override
     public int getCount() {
         return 0;
@@ -72,7 +72,8 @@ public class ListViewAdapter extends BaseAdapter {
 
         return convertView;
     }
-    public class ListView_Row{
+
+    private class ListView_Row{
         public ImageView img;
         public TextView gameName;
         public TextView genre;
