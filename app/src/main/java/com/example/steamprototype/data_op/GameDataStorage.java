@@ -41,6 +41,10 @@ public class GameDataStorage {
         database.execSQL(query);
     }
 
+    public List<Game> getGameList() {
+        return this.gameLists;
+    }
+
     public void seedGameData(Activity activity) {
 
         this.gameLists = new ArrayList<>();
