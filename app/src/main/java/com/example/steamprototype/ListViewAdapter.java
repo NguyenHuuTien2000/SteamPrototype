@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.ListViewItem;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 public class ListViewAdapter extends BaseAdapter {
     Context context;
     ArrayList<Game> gameList;
+    GameDataStorage gameDataStorage = MainActivity.gameDataStorage;
 
     public ListViewAdapter(Context context, ArrayList<Game> gameList) {
         this.context = context;
@@ -57,18 +59,18 @@ public class ListViewAdapter extends BaseAdapter {
 
             convertView.setTag(lv_row);
 
-
-
-
-
-        } else  lv_row = (ListView_Row) convertView.getTag();
+        } else {
+            lv_row = (ListView_Row) convertView.getTag();
+        }
 
         Game game = gameList.get(position);
-        lv_row.img.setImageResource(game.getGameID());
+
+        lv_row.img.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         lv_row.gameName.setText(game.getTitle());
         lv_row.genre.setText(game.getGenre());
         lv_row.discount.setText(game.getGenre());
         lv_row.price.setText(String.format("%.3f",game.getPrice()));
+
         return convertView;
     }
     public class ListView_Row{
