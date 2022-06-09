@@ -12,11 +12,6 @@ import com.example.steamprototype.entity.User;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class UserDataStorage {
     private SQLiteDatabase database;
@@ -30,8 +25,6 @@ public class UserDataStorage {
         innitDB(activity);
         this.sharedPreferences = context.getSharedPreferences(SP_NAME,Context.MODE_PRIVATE);
     }
-
-
 
     public void innitDB(Activity activity) {
         try {
@@ -98,13 +91,27 @@ public class UserDataStorage {
         return res;
     }
 
-    public void saveCurrentUser() {
-
+    public void saveCurrentUser(String name, String pass, String email) {
+        this.editor = sharedPreferences.edit();
+        this.editor.putString("name", name);
+        this.editor.putString("pass", pass);
+        this.editor.putString("email", email);
+        this.editor.commit();
     }
 
-    public void getCurrentUser() {
-        editor = sharedPreferences.edit();
-        editor.clear();
-        editor.commit();
+    public User getCurrentUser() {
+        String username = sharedPreferences.getString("name","");
+        String password = sharedPreferences.getString("pass", "");
+        String email = sharedPreferences.getString("email", "");
+        if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
+            return null;
+        }
+        return new User(username, password, email);
+    }
+
+    public void clearCurrentUser() {
+        this.editor = sharedPreferences.edit();
+        this.editor.clear();
+        this.editor.commit();
     }
 }

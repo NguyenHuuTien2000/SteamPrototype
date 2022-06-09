@@ -42,18 +42,41 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public boolean checkInput(String name, String pass, String email) {
-        if (name.isEmpty() || pass.isEmpty() || email.isEmpty()) {
-            errorMsg = "Name,password or email must not be left";
+    public boolean checkInput(String username, String password, String email) {
+        if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
+            errorMsg = "Name,password or email cannot be empty";
             return false;
         }
+
+        boolean checkPattern = true;
+        String pattern = "^[a-zA-Z0-9]+$";
+        if (!username.matches(pattern)) {
+            this.errorMsg = "Username invalid, cannot contains special characters\n";
+            checkPattern = false;
+        }
+
+        pattern = "^[\\S]{6,}$";
+        if (!password.matches(pattern)) {
+            this.errorMsg += "Password invalid, must be at least 6 characters long\n";
+            checkPattern = false;
+        }
+
+        pattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        if (!email.matches(pattern)) {
+            this.errorMsg += "Email invalid\n";
+        }
+
+        if (!checkPattern) {
+            return false;
+        }
+
         UserDataStorage dataStorage = MainActivity.userDataStorage;
-        User storedUser = dataStorage.getUserData(name, pass);
+        User storedUser = dataStorage.getUserData(username, password);
         if (storedUser != null) {
-            if (storedUser.getUsername().equals(name)) {
+            if (storedUser.getUsername().equals(username)) {
                 errorMsg += "Username, ";
             }
-            if (storedUser.getPassword().equals(pass)) {
+            if (storedUser.getPassword().equals(password)) {
                 errorMsg += "Password, ";
             }
             if (storedUser.getEmail().equals(email)) {

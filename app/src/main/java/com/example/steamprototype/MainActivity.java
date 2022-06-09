@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SIGN_IN && resultCode == RESULT_CODE_SIGN_IN_NO_ACC) {
             toRegister();
         }
+
+
     }
 
     public void toRegister() {

@@ -29,6 +29,7 @@ public class SignInActivity extends AppCompatActivity {
         innit();
 
         UserDataStorage dataStorage = MainActivity.userDataStorage;
+
         if (!dataStorage.checkContains()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setPositiveButton("Yes", (dialog, id) -> {
@@ -46,11 +47,24 @@ public class SignInActivity extends AppCompatActivity {
             dialog.show();
         }
 
+        this.user = dataStorage.getCurrentUser();
+        if (this.user != null) {
+            editUsername.setText(user.getUsername());
+            editPassword.setText(user.getPassword());
+            checkSave.setChecked(true);
+        }
+
         btnSignIn.setOnClickListener(view -> {
             String username = editUsername.getText().toString();
             String password = editPassword.getText().toString();
             if (checkInput(username, password)) {
+                if (checkSave.isChecked()) {
+                    dataStorage.saveCurrentUser(username, password, this.user.getEmail());
+                } else {
+                    dataStorage.clearCurrentUser();
+                }
                 Intent intent = new Intent(SignInActivity.this, StoreFrontActivity.class);
+                intent.putExtra("User", this.user);
                 startActivity(intent);
                 finish();
             } else {
@@ -60,14 +74,32 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    public boolean checkInput(String name, String pass) {
-        if (name.isEmpty() || pass.isEmpty()) {
-            errorMsg = "Username or password cannot be empty and try again";
+    public boolean checkInput(String username, String password) {
+        if (username.isEmpty() || password.isEmpty()) {
+            this.errorMsg = "Username or password cannot be empty";
             return false;
         }
-        this.user = MainActivity.userDataStorage.getUserData(name, pass);
+
+        boolean checkPattern = true;
+        String pattern = "^[a-zA-Z0-9]+$";
+        if (!username.matches(pattern)) {
+            this.errorMsg = "Username invalid, cannot contains special characters\n";
+            checkPattern = false;
+        }
+
+        pattern = "^[\\S]{6,}$";
+        if (!password.matches(pattern)) {
+            this.errorMsg += "Password invalid, must be at least 6 characters long\n";
+            checkPattern = false;
+        }
+
+        if (!checkPattern) {
+            return false;
+        }
+
+        this.user = MainActivity.userDataStorage.getUserData(username, password);
         if (this.user == null) {
-            errorMsg = "Username or password do not match";
+            this.errorMsg = "Username or password do not match";
             return false;
         }
         return true;
@@ -75,6 +107,7 @@ public class SignInActivity extends AppCompatActivity {
 
     public void innit() {
         btnSignIn = findViewById(R.id.btnSignIn);
+        checkSave = findViewById(R.id.checkRemember);
         editUsername = findViewById(R.id.editUsername);
         editPassword = findViewById(R.id.editPass);
     }

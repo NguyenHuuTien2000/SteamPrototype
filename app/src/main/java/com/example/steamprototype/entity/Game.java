@@ -1,8 +1,9 @@
 package com.example.steamprototype.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Game {
+public class Game implements Serializable {
     private String gameID;
     private String title;
     private String publisher;
