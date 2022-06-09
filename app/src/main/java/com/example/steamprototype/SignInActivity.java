@@ -33,7 +33,6 @@ public class SignInActivity extends AppCompatActivity {
         if (!dataStorage.checkContains()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setPositiveButton("Yes", (dialog, id) -> {
-                Intent intent = getIntent();
                 setResult(MainActivity.RESULT_CODE_SIGN_IN_NO_ACC);
                 finish();
             });

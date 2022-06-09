@@ -19,24 +19,28 @@ public class UserDataStorage {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    private String dbname = "steam_prototype.sqlite";
 
     public UserDataStorage(Context context, Activity activity) {
         innitDB(activity);
         this.sharedPreferences = context.getSharedPreferences(SP_NAME,Context.MODE_PRIVATE);
     }
 
+    public SQLiteDatabase getDatabase() {
+        return database;
+    }
+
     public void innitDB(Activity activity) {
+        String dbname = "steam_prototype.sqlite";
         try {
             String savePath = activity.getApplicationInfo().dataDir + "/databases/";
-            File file = new File(savePath + this.dbname);
+            File file = new File(savePath + dbname);
             if (!file.exists()) {
-                InputStream inputStream = activity.getAssets().open(this.dbname);
+                InputStream inputStream = activity.getAssets().open(dbname);
                 File folder = new File(savePath);
                 if (!folder.exists()) {
                     folder.mkdir();
                 }
-                FileOutputStream fileOutputStream = new FileOutputStream(savePath + this.dbname);
+                FileOutputStream fileOutputStream = new FileOutputStream(savePath + dbname);
                 byte[] buffer = new byte[1024];
                 int length;
                 while ((length = inputStream.read(buffer)) > 0) {
@@ -49,7 +53,7 @@ public class UserDataStorage {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.database = activity.openOrCreateDatabase(this.dbname, Context.MODE_PRIVATE, null);
+        this.database = activity.openOrCreateDatabase(dbname, Context.MODE_PRIVATE, null);
     }
 
     public boolean saveUserData(User user) {

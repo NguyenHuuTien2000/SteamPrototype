@@ -4,18 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Game implements Serializable {
-    private String gameID;
+    private int gameID;
     private String title;
     private String publisher;
     private String developer;
     private String genre;
     private String platform;
 
-
     private Date releaseDate;
     private double price;
+    private double discount;
+    private String image;
 
-    public Game(String gameID, String title, String publisher, String developer, String genre, String platform, Date releaseDate, double price) {
+    public Game(int gameID, String title, String publisher, String developer, String genre, String platform, Date releaseDate, double price, double discount, String image) {
         this.gameID = gameID;
         this.title = title;
         this.publisher = publisher;
@@ -24,6 +25,24 @@ public class Game implements Serializable {
         this.platform = platform;
         this.releaseDate = releaseDate;
         this.price = price;
+        this.discount = discount;
+        this.image = image;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDeveloper() {
@@ -34,11 +53,11 @@ public class Game implements Serializable {
         this.developer = developer;
     }
 
-    public String getGameID() {
+    public int getGameID() {
         return gameID;
     }
 
-    public void setGameID(String gameID) {
+    public void setGameID(int gameID) {
         this.gameID = gameID;
     }
 
