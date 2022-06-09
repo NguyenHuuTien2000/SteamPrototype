@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.data_op.UserDataStorage;
 import com.example.steamprototype.entity.User;
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnToSignIn, btnToReg;
 
     public static UserDataStorage userDataStorage;
+    public static GameDataStorage gameDataStorage;
 
     public static final int REQUEST_CODE_SIGN_IN = 69;
     public static final int RESULT_CODE_SIGN_IN_SUCCESS = 70;
@@ -30,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         btnToSignIn = findViewById(R.id.btnToSignIn);
         btnToReg = findViewById(R.id.btnToReg);
+
         userDataStorage = new UserDataStorage(this, this);
+        gameDataStorage = new GameDataStorage(this);
 
         btnToSignIn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SignInActivity.class);
@@ -60,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_SIGN_IN && resultCode == RESULT_CODE_SIGN_IN_NO_ACC) {
             toRegister();
         }
-
-
     }
 
     public void toRegister() {

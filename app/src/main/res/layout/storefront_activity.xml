@@ -39,12 +39,13 @@
 
         <EditText
             android:id="@+id/edt_search"
-            android:layout_width="wrap_content"
+            android:layout_width="223dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:hint="Search"
             android:inputType="textPersonName"
+            android:minHeight="48dp"
             android:textColorHint="@color/white" />
 
         <Button
