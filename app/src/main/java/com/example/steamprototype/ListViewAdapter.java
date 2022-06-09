@@ -24,8 +24,7 @@ public class ListViewAdapter extends BaseAdapter {
         this.context = context;
         this.gameList = gameList;
     }
-
-
+    
     @Override
     public int getCount() {
         return 0;

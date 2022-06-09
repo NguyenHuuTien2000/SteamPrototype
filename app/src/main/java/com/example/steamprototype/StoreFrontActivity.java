@@ -37,7 +37,7 @@ public class StoreFrontActivity extends AppCompatActivity {
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
 
-        listViewAdapter = new ListViewAdapter(this,gameArrayList);
+        listViewAdapter = new ListViewAdapter(StoreFrontActivity.this, gameArrayList);
         listView.setAdapter(listViewAdapter);
 
     }
@@ -49,6 +49,5 @@ public class StoreFrontActivity extends AppCompatActivity {
         btn_special = (Button) findViewById(R.id.btn_special);
         edt_search = (EditText) findViewById(R.id.edt_search);
         listView = (ListView) findViewById(R.id.lstStore);
-
     }
 }

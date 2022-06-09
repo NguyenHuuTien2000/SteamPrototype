@@ -15,7 +15,7 @@
         android:id="@+id/sldV_txtV_nameGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#673AB7"
+        android:background="#9C27B0"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:text="Name"
@@ -27,16 +27,16 @@
         android:id="@+id/sldV_txtV_sliderVdiscount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#673AB7"
+        android:background="#9C27B0"
         android:paddingLeft="10dp"
         android:text="TextView"
-        android:textColor="#69F0AE" />
+        android:textColor="#FFD740" />
 
     <TextView
         android:id="@+id/sldV_txtV_sliderVprice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#673AB7"
+        android:background="#9C27B0"
         android:paddingLeft="10dp"
         android:paddingBottom="5dp"
         android:text="Price"
