@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +20,7 @@ public class StoreFrontActivity extends AppCompatActivity {
     ListView listView;
     ListViewAdapter listViewAdapter;
     SliderAdapter sliderAdapter;
-    ArrayList<Game> gameArrayList = new ArrayList<>();
-    int[] img = {};
+    ArrayList<Game> gameArrayList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,7 +28,9 @@ public class StoreFrontActivity extends AppCompatActivity {
         setContentView(R.layout.storefront_activity);
         init();
 
-        sliderAdapter = new SliderAdapter(this,gameArrayList,img);
+        this.gameArrayList = MainActivity.gameDataStorage.getGameList();
+
+        sliderAdapter = new SliderAdapter(gameArrayList);
         sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
         sliderView.setSliderAdapter(sliderAdapter);
         sliderView.setScrollTimeInSec(3);

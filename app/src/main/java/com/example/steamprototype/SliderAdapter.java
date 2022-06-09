@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.entity.Game;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
@@ -17,13 +18,12 @@ import java.util.List;
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapterViewHolder> {
 
     // list for storing urls of images.
-    int[] imgList;
-    private List<Game> gameList;
+    private final List<Game> gameList;
+    private final GameDataStorage gameDataStorage = MainActivity.gameDataStorage;
 
     // Constructor
-    public SliderAdapter(Context context, ArrayList<Game> list, int[] imgList) {
+    public SliderAdapter(ArrayList<Game> list) {
         this.gameList = list;
-        this.imgList = imgList;
     }
 
     // We are inflating the slider_layout
@@ -38,10 +38,11 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
     // set data to item of Slider View.
     @Override
     public void onBindViewHolder(SliderAdapterViewHolder viewHolder, final int position) {
-        viewHolder.imageView.setImageResource(imgList[position]);;
-        viewHolder.gameName.setText(gameList.get(position).getTitle());
-        viewHolder.gameDiscount.setText("" + gameList.get(position).getDiscount()*100);
-        viewHolder.gamePrice.setText(String.format("%.3f",gameList.get(position).getPrice()));
+        Game game = gameList.get(position);
+        viewHolder.imageView.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
+        viewHolder.gameName.setText(game.getTitle());
+        viewHolder.gameDiscount.setText("" + game.getDiscount() * 100);
+        viewHolder.gamePrice.setText(String.format("%.3f",game.getPrice()));
     }
 
     // this method will return
@@ -59,7 +60,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
 
         public SliderAdapterViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.sldV_txtV_sliderVprice);
+            imageView = itemView.findViewById(R.id.imgV_imgGameSlider);
             gameName = itemView.findViewById(R.id.sldV_txtV_nameGame);
             gameDiscount = itemView.findViewById(R.id.sldV_txtV_sliderVdiscount);
             gamePrice = itemView.findViewById(R.id.sldV_txtV_sliderVprice);

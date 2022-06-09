@@ -19,7 +19,7 @@ import java.util.List;
 public class GameDataStorage {
 
     private SQLiteDatabase database;
-    private List<Game> gameLists;
+    private ArrayList<Game> gameLists;
 
     public GameDataStorage(Activity activity) {
         this.database = MainActivity.userDataStorage.getDatabase();
@@ -41,7 +41,7 @@ public class GameDataStorage {
         database.execSQL(query);
     }
 
-    public List<Game> getGameList() {
+    public ArrayList<Game> getGameList() {
         return this.gameLists;
     }
 
@@ -51,6 +51,7 @@ public class GameDataStorage {
         Game game;
         Date date;
         String imagePath;
+
         //hell
 
         date = convertDate(2018, 6, 1);
@@ -97,8 +98,8 @@ public class GameDataStorage {
         return path;
     }
 
-    public Bitmap getGameImage(Game game) {
-        File imgFile = new  File(game.getImage());
+    public Bitmap getGameImage(String path) {
+        File imgFile = new  File(path);
         Bitmap bitmap = null;
         if(imgFile.exists()){
             bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
