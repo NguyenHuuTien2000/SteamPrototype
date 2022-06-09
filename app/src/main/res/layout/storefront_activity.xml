@@ -93,6 +93,6 @@
         android:id="@+id/lstStore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4CAF50" />
+        android:background="#3F51B5" />
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,10 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         listViewAdapter = new ListViewAdapter(StoreFrontActivity.this, gameArrayList);
         listView.setAdapter(listViewAdapter);
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+        });
 
     }
 

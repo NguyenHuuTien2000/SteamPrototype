@@ -27,17 +27,17 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return gameList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return gameList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -67,10 +67,18 @@ public class ListViewAdapter extends BaseAdapter {
         lv_row.img.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         lv_row.gameName.setText(game.getTitle());
         lv_row.genre.setText(game.getGenre());
-        lv_row.discount.setText(game.getGenre());
-        lv_row.price.setText(String.format("%.3f",game.getPrice()));
+        lv_row.discount.setText(getDiscountTag(game.getDiscount()));
+        lv_row.price.setText(getPriceTag(game.getPrice()));
 
         return convertView;
+    }
+
+    private String getDiscountTag(double discount) {
+        return discount == 0.0 ? "" : "-" + discount + "%";
+    }
+
+    private String getPriceTag(double price) {
+        return price == 0.0 ? "Free" : "Price: $" + String.format("%.2f", price);
     }
 
     private class ListView_Row{
