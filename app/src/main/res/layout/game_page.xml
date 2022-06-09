@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3F51B5"
+    android:background="#4CAF50"
     android:orientation="vertical">
 
     <ImageView
@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:background="#2979FF"
         android:text="Name"
+        android:textColor="@color/white"
         android:textSize="25sp" />
 
     <TextView
@@ -41,6 +42,13 @@
         android:layout_height="wrap_content"
         android:background="#00B0FF"
         android:text="Date" />
+
+    <TextView
+        android:id="@+id/txtV_page_genre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00B0FF"
+        android:text="Genre" />
 
     <LinearLayout
         android:layout_width="match_parent"
