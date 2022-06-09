@@ -1,12 +1,16 @@
 package com.example.steamprototype.data_op;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.example.steamprototype.entity.User;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,14 +19,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserDataStorage {
+    private SQLiteDatabase database;
     public static final String SP_NAME = "UserData";
+
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    private Connection connection;
-    private String dbname = "steam_prototype";
+    private String dbname = "steam_prototype.sqlite";
 
-    public UserDataStorage(Context context) {
-
+    public UserDataStorage(Context context, Activity activity) {
+        innitDB(activity);
         this.sharedPreferences = context.getSharedPreferences(SP_NAME,Context.MODE_PRIVATE);
     }
 
@@ -34,52 +39,54 @@ public class UserDataStorage {
                 InputStream inputStream = activity.getAssets().open(this.dbname);
                 File folder = new File(savePath);
                 if (!folder.exists()) {
-
+                    folder.mkdir();
                 }
+                FileOutputStream fileOutputStream = new FileOutputStream(savePath + this.dbname);
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = inputStream.read(buffer)) > 0) {
+                    fileOutputStream.write(buffer, 0, length);
+                }
+                fileOutputStream.flush();
+                fileOutputStream.close();
+                inputStream.close();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.database = activity.openOrCreateDatabase(this.dbname, Context.MODE_PRIVATE, null);
     }
 
     public boolean saveUserData(User user) {
-        try {
-            Statement statement = this.connection.createStatement();
-            String query = String.format("select username from user where username = %s;", user.getUsername());
-            ResultSet result = statement.executeQuery(query);
-
-            if (!result.next()) {
-                PreparedStatement pst = this.connection.prepareStatement("insert into user values(?,?,?);");
-                pst.setString(1, user.getUsername());
-                pst.setString(2, user.getPassword());
-                pst.setString(3, user.getEmail());
-                pst.executeUpdate();
-            } else {
+        Cursor cursor = database.rawQuery("SELECT * FROM user", null);
+        //cursor.moveToPosition(-1);
+        while (cursor.moveToNext()) {
+            String username = cursor.getString(0);
+            String password = cursor.getString(1);
+            String email = cursor.getString(2);
+            if (username.equals(user.getUsername()) || password.equals(user.getPassword()) || email.equals(user.getEmail())) {
                 return false;
             }
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", user.getUsername());
+        contentValues.put("password", user.getPassword());
+        contentValues.put("email", user.getEmail());
+        database.insert("user", null, contentValues);
+        cursor.close();
         return true;
     }
 
     public User getUserData(String name, String pass) {
-        User user = null;
-        try {
-            Statement statement = this.connection.createStatement();
-            String query = String.format("select * from user where username = %s && password = %s;", name, pass);
-            ResultSet result = statement.executeQuery(query);
-
-            if (result.next()) {
-                user = new User(name, pass, result.getString(3));
+        Cursor cursor = database.rawQuery("SELECT * FROM user", null);
+        while (cursor.moveToNext()) {
+            String username = cursor.getString(0);
+            String password = cursor.getString(1);
+            if (username.equals(name) && password.equals(pass)) {
+                return new User(username, password, cursor.getString(2));
             }
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
     public void saveCurrentUser() {

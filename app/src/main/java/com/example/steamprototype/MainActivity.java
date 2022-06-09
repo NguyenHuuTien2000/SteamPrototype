@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnToSignIn = findViewById(R.id.btnToSignIn);
         btnToReg = findViewById(R.id.btnToReg);
-        userDataStorage = new UserDataStorage(this);
+        userDataStorage = new UserDataStorage(this, this);
 
         btnToSignIn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, SignInActivity.class);
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             User newUser = new User(username, password, email);
             userDataStorage.saveUserData(newUser);
             Toast.makeText(this, "Register success now you will be direct to the store front", Toast.LENGTH_LONG).show();
-
             Intent intent = new Intent(MainActivity.this, StoreFrontActivity.class);
             startActivity(intent);
         }

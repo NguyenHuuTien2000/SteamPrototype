@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
         innit();
 
         btnReg.setOnClickListener(view -> {
-            String username = editNewUsername.getText().toString();
+            String username = editNewUsername.getText().toString().trim();
             String password = editNewPassword.getText().toString();
             String email = editNewEmail.getText().toString();
 
@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
                 intent.putExtra("username", username);
                 intent.putExtra("password", password);
                 intent.putExtra("email", email);
-                setResult(MainActivity.RESULT_CODE_REGISTER_SUCCESS);
+                setResult(MainActivity.RESULT_CODE_REGISTER_SUCCESS, intent);
                 finish();
             } else {
                 Toast.makeText(this, this.errorMsg,Toast.LENGTH_LONG).show();
@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public boolean checkInput(String name, String pass, String email) {
         if (name.isEmpty() || pass.isEmpty() || email.isEmpty()) {
-            errorMsg = "Check your name,password or email and try again";
+            errorMsg = "Name,password or email must not be left";
             return false;
         }
         UserDataStorage dataStorage = MainActivity.userDataStorage;
