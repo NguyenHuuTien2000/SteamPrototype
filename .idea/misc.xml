@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/SteamPrototype/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/SteamPrototype/app/src/main/res/layout/game_page.xml" value="0.5" />
         <entry key="..\:/SteamPrototype/app/src/main/res/layout/list_view_item.xml" value="0.25" />
         <entry key="..\:/SteamPrototype/app/src/main/res/layout/register_activity.xml" value="0.2" />
         <entry key="..\:/SteamPrototype/app/src/main/res/layout/sign_in_activity.xml" value="0.17074275362318841" />

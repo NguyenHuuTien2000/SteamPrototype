@@ -10,7 +10,7 @@
         android:layout_height="200dp" />
 
     <TextView
-        android:id="@+id/txtV_nameGame"
+        android:id="@+id/sldV_txtV_nameGame"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Name"
@@ -18,7 +18,13 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txtV_sliderVprice"
+        android:id="@+id/sldV_txtV_sliderVdiscount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/sldV_txtV_sliderVprice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Price" />

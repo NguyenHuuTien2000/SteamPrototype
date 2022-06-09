@@ -64,9 +64,11 @@ public class ListViewAdapter extends BaseAdapter {
         } else  lv_row = (ListView_Row) convertView.getTag();
 
         Game game = gameList.get(position);
-
-
-
+        lv_row.img.setImageResource(game.getGameID());
+        lv_row.gameName.setText(game.getTitle());
+        lv_row.genre.setText(game.getGenre());
+        lv_row.discount.setText(game.getGenre());
+        lv_row.price.setText(String.format("%.3f",game.getPrice()));
         return convertView;
     }
     public class ListView_Row{

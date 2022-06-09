@@ -5,61 +5,65 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-import java.util.Objects;
+import android.widget.TextView;
 
-class SliderAdapter extends PagerAdapter {
+import com.bumptech.glide.Glide;
+import com.example.steamprototype.entity.Game;
+import com.smarteist.autoimageslider.SliderViewAdapter;
 
-    // Context object
-    Context context;
+import java.util.ArrayList;
+import java.util.List;
 
-    // Array of images
-    int[] images;
+public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapterViewHolder> {
 
-    // Layout Inflater
-    LayoutInflater mLayoutInflater;
+    // list for storing urls of images.
+    int[] imgList;
+    private List<Game> gameList;
 
-
-    // Viewpager Constructor
-    public SliderAdapter(Context context, int[] images) {
-        this.context = context;
-        this.images = images;
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    // Constructor
+    public SliderAdapter(Context context, ArrayList<Game> list, int[] imgList) {
+        this.gameList = list;
+        this.imgList = imgList;
     }
 
+    // We are inflating the slider_layout
+    // inside on Create View Holder method.
     @Override
+    public SliderAdapterViewHolder onCreateViewHolder(ViewGroup parent) {
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.slider_item, null);
+        return new SliderAdapterViewHolder(inflate);
+    }
+
+    // Inside on bind view holder we will
+    // set data to item of Slider View.
+    @Override
+    public void onBindViewHolder(SliderAdapterViewHolder viewHolder, final int position) {
+        viewHolder.imageView.setImageResource(imgList[position]);;
+        viewHolder.gameName.setText(gameList.get(position).getTitle());
+        viewHolder.gameDiscount.setText("" + gameList.get(position).getDiscount()*100);
+        viewHolder.gamePrice.setText(String.format("%.3f",gameList.get(position).getPrice()));
+    }
+
+    // this method will return
+    // the count of our list.
     public int getCount() {
-        // return the number of images
-        return images.length;
+        return gameList.size();
     }
 
-    @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == ((LinearLayout) object);
-    }
+    static class SliderAdapterViewHolder extends SliderViewAdapter.ViewHolder {
+        // Adapter class for initializing
+        // the views of our slider view.
+        View itemView;
+        ImageView imageView;
+        TextView gameName, gamePrice, gameDiscount;
 
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        // inflating the item.xml
-        View itemView = mLayoutInflater.inflate(R.layout.slider_item, container, false);
-
-        // referencing the image view from the item.xml file
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.imgV_imgGameSlider);
-
-        // setting the image in the imageView
-        imageView.setImageResource(images[position]);
-
-        // Adding the View
-        Objects.requireNonNull(container).addView(itemView);
-
-        return itemView;
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((LinearLayout) object);
+        public SliderAdapterViewHolder(View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.sldV_txtV_sliderVprice);
+            gameName = itemView.findViewById(R.id.sldV_txtV_nameGame);
+            gameDiscount = itemView.findViewById(R.id.sldV_txtV_sliderVdiscount);
+            gamePrice = itemView.findViewById(R.id.sldV_txtV_sliderVprice);
+            this.itemView = itemView;
+        }
     }
 }
