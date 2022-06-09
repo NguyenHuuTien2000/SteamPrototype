@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.steamprototype.adapter.ListViewAdapter;
 import com.example.steamprototype.adapter.SliderAdapter;
 import com.example.steamprototype.entity.Game;
+import com.example.steamprototype.entity.User;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
@@ -25,6 +26,12 @@ public class StoreFrontActivity extends AppCompatActivity {
     SliderAdapter sliderAdapter;
     ArrayList<Game> gameArrayList;
 
+    User user;
+
+    public static final int REQUEST_CODE_BUY = 30;
+    public static final int RESULT_CODE_BOUGHT = 31;
+    public static final int RESULT_CODE_ADD_TO_WISHLIST = 32;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +39,8 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         init();
 
+        Intent intent = getIntent();
+        this.user = (User) intent.getSerializableExtra("game");
         this.gameArrayList = MainActivity.gameDataStorage.getGameList();
 
         sliderAdapter = new SliderAdapter(gameArrayList);
@@ -46,9 +55,11 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Game game = gameArrayList.get(position);
-            Intent intent = new Intent(StoreFrontActivity.this, GamePageActivity.class);
-
+            Intent buyIntent = new Intent(StoreFrontActivity.this, GamePageActivity.class);
+            buyIntent.putExtra("game", game);
+            startActivityForResult(buyIntent, REQUEST_CODE_BUY);
         });
+
 
     }
 

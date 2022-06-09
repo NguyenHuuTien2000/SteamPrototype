@@ -41,16 +41,8 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         Game game = gameList.get(position);
         viewHolder.imageView.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         viewHolder.gameName.setText(game.getTitle());
-        viewHolder.gameDiscount.setText(getDiscountTag(game.getDiscount()));
-        viewHolder.gamePrice.setText(getPriceTag(game.getPrice()));
-    }
-
-    private String getDiscountTag(double discount) {
-        return discount == 0.0 ? "" : "-" + discount + "%";
-    }
-
-    private String getPriceTag(double price) {
-        return price == 0.0 ? "Free" : "$" + String.format("%.2f", price);
+        viewHolder.gameDiscount.setText(game.getDiscountString());
+        viewHolder.gamePrice.setText(game.getPriceString());
     }
 
     // this method will return

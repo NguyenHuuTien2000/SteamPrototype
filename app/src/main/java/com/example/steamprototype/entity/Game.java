@@ -1,6 +1,7 @@
 package com.example.steamprototype.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Game implements Serializable {
@@ -97,6 +98,11 @@ public class Game implements Serializable {
         return releaseDate;
     }
 
+    public String getReleaseDateString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(this.releaseDate);
+    }
+
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
@@ -107,5 +113,13 @@ public class Game implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getPriceString() {
+        return this.price == 0.0 ? "Free" : "$" + String.format("%.2f", this.price);
+    }
+
+    public String getDiscountString() {
+        return discount == 0.0 ? "" : "-" + discount + "%";
     }
 }

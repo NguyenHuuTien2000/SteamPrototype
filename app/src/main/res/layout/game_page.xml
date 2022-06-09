@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#2979FF"
+        android:paddingLeft="5dp"
         android:text="Name"
         android:textColor="@color/white"
         android:textSize="25sp" />
@@ -27,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00B0FF"
+        android:paddingLeft="5dp"
         android:text="DEV" />
 
     <TextView
@@ -34,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00B0FF"
+        android:paddingLeft="5dp"
         android:text="Pub" />
 
     <TextView
@@ -41,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00B0FF"
+        android:paddingLeft="5dp"
         android:text="Date" />
 
     <TextView
@@ -48,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00B0FF"
+        android:paddingLeft="5dp"
         android:text="Genre" />
 
     <LinearLayout
@@ -60,6 +65,11 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btnWish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add to Wishlist" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#76FF03"
+                android:paddingLeft="5dp"
                 android:text="discount" />
 
             <TextView
@@ -79,7 +90,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00E5FF"
-                android:text="price" />
+                android:text="price"
+                android:paddingLeft="5dp" />
+
+            <Button
+                android:id="@+id/btnBuy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F44336"
+                android:text="Buy"
+                android:textSize="16sp" />
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
