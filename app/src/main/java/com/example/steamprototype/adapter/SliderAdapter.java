@@ -1,13 +1,17 @@
 package com.example.steamprototype.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.steamprototype.GamePageActivity;
 import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.R;
+import com.example.steamprototype.StoreFrontActivity;
 import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.entity.Game;
 import com.smarteist.autoimageslider.SliderViewAdapter;
@@ -20,6 +24,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
     // list for storing urls of images.
     private final List<Game> gameList;
     private final GameDataStorage gameDataStorage = MainActivity.gameDataStorage;
+    private SliderAdapter.OnItemClickListener listener;
 
     // Constructor
     public SliderAdapter(ArrayList<Game> list) {
@@ -34,6 +39,15 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         return new SliderAdapterViewHolder(inflate);
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    // lets create the set onclick method
+    public void setOnItemClickListener(SliderAdapter.OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
     // Inside on bind view holder we will
     // set data to item of Slider View.
     @Override
@@ -43,6 +57,12 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         viewHolder.gameName.setText(game.getTitle());
         viewHolder.gameDiscount.setText(game.getDiscountString());
         viewHolder.gamePrice.setText(game.getPriceString());
+
+        viewHolder.itemView.setOnClickListener(v -> {
+            if (this.listener != null) {
+                this.listener.onItemClick(position);
+            }
+        });
     }
 
     // this method will return

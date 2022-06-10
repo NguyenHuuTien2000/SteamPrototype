@@ -59,11 +59,10 @@ public class StoreFrontActivity extends AppCompatActivity {
         listView.setAdapter(listViewAdapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            Game game = gameArrayList.get(position);
-            Intent buyIntent = new Intent(StoreFrontActivity.this, GamePageActivity.class);
-            buyIntent.putExtra("game", game);
-            startActivityForResult(buyIntent, REQUEST_CODE_BUY);
+            gotoGamePage(position);
         });
+
+        sliderAdapter.setOnItemClickListener(this::gotoGamePage);
     }
 
     @Override
@@ -76,6 +75,13 @@ public class StoreFrontActivity extends AppCompatActivity {
                 Toast.makeText(this, game.getTitle() + " added to your library", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public void gotoGamePage(int pos) {
+        Game game = gameArrayList.get(pos);
+        Intent buyIntent = new Intent(StoreFrontActivity.this, GamePageActivity.class);
+        buyIntent.putExtra("game", game);
+        startActivityForResult(buyIntent, REQUEST_CODE_BUY);
     }
 
     public void init() {
