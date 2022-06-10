@@ -36,12 +36,13 @@
             android:layout_weight="1"
             android:backgroundTint="#2196F3"
             android:text="Go" />
+
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lstlibrary"
+    <ListView
+        android:id="@+id/lstVLib"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="#00BCD4" />
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
 </LinearLayout>

@@ -40,11 +40,9 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lstWishlist"
+    <ListView
+        android:id="@+id/lstVWL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:scrollbars="vertical"
-        android:background="#03A9F4" />
+        android:layout_height="match_parent" />
+
 </LinearLayout>

@@ -35,7 +35,7 @@ public class WishListActivity extends AppCompatActivity {
         init();
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
-
+        gameArrayList = (ArrayList<Game>) this.user.getWishlist();
         listViewAdapter = new ListViewAdapter(WishListActivity.this, gameArrayList);
         listView.setAdapter(listViewAdapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -45,7 +45,7 @@ public class WishListActivity extends AppCompatActivity {
     public void init() {
         btn_search = (Button) findViewById(R.id.btn_wishsearch);
         edt_search = (EditText) findViewById(R.id.edit_wishsearch);
-        listView = (ListView) findViewById(R.id.lstWishlist);
+        listView = (ListView) findViewById(R.id.lstVWL);
     }
     public void gotoGamePage(int pos) {
         Game game = gameArrayList.get(pos);

@@ -32,8 +32,9 @@ public class LibraryActivity  extends AppCompatActivity {
         setContentView(R.layout.library_activity);
         init();
         Intent intent = getIntent();
-        this.user = (User) intent.getSerializableExtra("user");
 
+        this.user = (User) intent.getSerializableExtra("user");
+        gameArrayList = (ArrayList<Game>) this.user.getLibrary();
         listViewAdapter = new ListViewAdapter(this, gameArrayList);
         listView.setAdapter(listViewAdapter);
 
@@ -45,7 +46,7 @@ public class LibraryActivity  extends AppCompatActivity {
     } public void init() {
         btn_search = (Button) findViewById(R.id.btn_librarysrch);
         edt_search = (EditText) findViewById(R.id.edit_librarysrch);
-        listView = (ListView) findViewById(R.id.lstlibrary);
+        listView = (ListView) findViewById(R.id.lstVLib);
     }
     public void gotoGamePage(int pos) {
         Game game = gameArrayList.get(pos);

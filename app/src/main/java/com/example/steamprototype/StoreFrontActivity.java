@@ -55,9 +55,9 @@ public class StoreFrontActivity extends AppCompatActivity {
         if (id == R.id.mn_lib) {
             goToLibrary();
         }
-//        if (id == R.id.mn_wlst) {
-//            goToWishList();
-//        }
+        if (id == R.id.mn_wlst) {
+            goToWishList();
+        }
 //        if (id == R.id.mn_prof) {
 //            goToProfile();
 //        }
@@ -124,11 +124,12 @@ public class StoreFrontActivity extends AppCompatActivity {
         buyIntent.putExtra("game", game);
         startActivityForResult(buyIntent, REQUEST_CODE_BUY);
     }
-    public void goToStore( ) {
-        startActivity(new Intent(this, StoreFrontActivity.class));
-    }
+//    public void goToStore( ) {
+//        startActivity(new Intent(this, StoreFrontActivity.class));
+//    }
     public void goToLibrary( ) {
         Intent goIntent = new Intent(this, LibraryActivity.class);
+        goIntent.putExtra("user", this.user);
         startActivity(goIntent);
     }
 //
@@ -136,8 +137,9 @@ public class StoreFrontActivity extends AppCompatActivity {
 //    }
 //
     public void goToWishList(){
-        startActivity(new Intent(this, WishListActivity.class));
-
+        Intent goIntent = new Intent(this, WishListActivity.class);
+        goIntent.putExtra("user", this.user);
+        startActivity(goIntent);
     }
 
     public void init() {
