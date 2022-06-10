@@ -31,10 +31,10 @@ public class GamePageActivity extends AppCompatActivity {
         this.game = (Game) intent.getSerializableExtra("game");
         this.gameImage.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         this.gameName.setText(game.getTitle());
-        this.gamePub.setText(game.getPublisher());
-        this.gameDev.setText(game.getDeveloper());
-        this.gameGenre.setText(game.getGenre());
-        this.gameDate.setText(game.getReleaseDateString());
+        this.gamePub.setText("Publisher:\t" + game.getPublisher());
+        this.gameDev.setText("Developer:\t" + game.getDeveloper());
+        this.gameGenre.setText("Genre:\t" + game.getGenre());
+        this.gameDate.setText("Release Date:\t" + game.getReleaseDateString());
         this.gamePrice.setText(game.getPriceString());
         this.gameDiscount.setText(game.getDiscountString());
 
