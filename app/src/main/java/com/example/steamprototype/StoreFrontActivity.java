@@ -61,9 +61,9 @@ public class StoreFrontActivity extends AppCompatActivity {
 //        if (id == R.id.mn_prof) {
 //            goToProfile();
 //        }
-//        if (id == R.id.mn_out) {
-//            logOut();
-//        }
+        if (id == R.id.mn_out) {
+            logOut();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -136,12 +136,15 @@ public class StoreFrontActivity extends AppCompatActivity {
 //    public void goToProfile(){
 //    }
 //
+
     public void goToWishList(){
         Intent goIntent = new Intent(this, WishListActivity.class);
         goIntent.putExtra("user", this.user);
         startActivity(goIntent);
     }
-
+    public void logOut() {
+        finish();
+    }
     public void init() {
         sliderView = (SliderView) findViewById(R.id.slider);
         btn_search = (Button) findViewById(R.id.btn_search);
