@@ -43,7 +43,7 @@ public class StoreFrontActivity extends AppCompatActivity {
         init();
 
         Intent intent = getIntent();
-        this.user = (User) intent.getSerializableExtra("game");
+        this.user = (User) intent.getSerializableExtra("user");
         this.gameArrayList = MainActivity.gameDataStorage.getGameList();
         this.userLibraryStorage = new UserLibraryStorage(this.gameArrayList);
         this.userLibraryStorage.loadUserLibrary(this.user);
