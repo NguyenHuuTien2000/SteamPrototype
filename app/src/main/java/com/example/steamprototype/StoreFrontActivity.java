@@ -2,11 +2,14 @@ package com.example.steamprototype;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +39,33 @@ public class StoreFrontActivity extends AppCompatActivity {
     public static final int RESULT_CODE_ADD_TO_WISHLIST = 32;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+//        if (id == R.id.mn_store) {
+//            goToStore();
+//        }
+//        if (id == R.id.mn_lib) {
+//            goToLibrary();
+//        }
+//        if (id == R.id.mn_wlst) {
+//            goToWishList();
+//        }
+//        if (id == R.id.mn_prof) {
+//            goToProfile();
+//        }
+//        if (id == R.id.mn_out) {
+//            logOut();
+//        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storefront_activity);
@@ -54,6 +84,7 @@ public class StoreFrontActivity extends AppCompatActivity {
         sliderView.setScrollTimeInSec(3);
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
+
 
         listViewAdapter = new ListViewAdapter(StoreFrontActivity.this, gameArrayList);
         listView.setAdapter(listViewAdapter);
@@ -83,6 +114,17 @@ public class StoreFrontActivity extends AppCompatActivity {
         buyIntent.putExtra("game", game);
         startActivityForResult(buyIntent, REQUEST_CODE_BUY);
     }
+//    public void goToStore( ) {
+//    }
+//    public void goToLibrary( ) {
+//    }
+//
+//    public void goToProfile(){
+//    }
+//
+//    public void goToWishList(){
+//
+//    }
 
     public void init() {
         sliderView = (SliderView) findViewById(R.id.slider);

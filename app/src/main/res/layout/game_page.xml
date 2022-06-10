@@ -89,20 +89,24 @@
             <TextView
                 android:id="@+id/txtV_page_discount"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#76FF03"
+                android:gravity="center"
                 android:paddingLeft="5dp"
-                android:text="discount" />
+                android:text="discount"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtV_page_price"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#00E5FF"
+                android:gravity="center"
                 android:paddingLeft="5dp"
-                android:text="price" />
+                android:text="price"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </LinearLayout>
