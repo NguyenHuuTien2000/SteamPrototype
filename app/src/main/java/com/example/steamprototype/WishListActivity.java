@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.steamprototype.adapter.ListViewAdapter;
 import com.example.steamprototype.adapter.SliderAdapter;
@@ -26,7 +27,7 @@ public class WishListActivity extends AppCompatActivity {
     ArrayList<Game> gameArrayList;
     User user;
     UserLibraryStorage userLibraryStorage;
-
+    public static final int REQUEST_CODE_BUY = 30;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +35,21 @@ public class WishListActivity extends AppCompatActivity {
         init();
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
+        listViewAdapter = new ListViewAdapter(WishListActivity.this, gameArrayList);
+        listView.setAdapter(listViewAdapter);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            gotoGamePage(position);
+        });
     }
     public void init() {
         btn_search = (Button) findViewById(R.id.btn_wishsearch);
         edt_search = (EditText) findViewById(R.id.edit_wishsearch);
         listView = (ListView) findViewById(R.id.lstWishlist);
+    }
+    public void gotoGamePage(int pos) {
+        Game game = gameArrayList.get(pos);
+        Intent buyIntent = new Intent(WishListActivity.this, GamePageActivity.class);
+        buyIntent.putExtra("game", game);
+        startActivityForResult(buyIntent, REQUEST_CODE_BUY);
     }
 }
