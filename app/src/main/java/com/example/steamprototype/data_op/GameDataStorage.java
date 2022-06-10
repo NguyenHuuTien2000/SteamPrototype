@@ -74,6 +74,30 @@ public class GameDataStorage {
         game = new Game(2, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 25, imagePath);
         gameLists.add(game);
         insertGameToDB(game);
+
+        date = convertDate(2019, 4, 19);
+        imagePath = createImageStorage(activity, "arknights.jpg");
+        game = new Game(3, "Arknights", "Yostar", "Hyper Gryph", "Towerdefense", "Mobile", date, 0, 0, imagePath);
+        gameLists.add(game);
+        insertGameToDB(game);
+
+        date = convertDate(2019, 3, 22);
+        imagePath = createImageStorage(activity, "sekiro.jpg");
+        game = new Game(4, "Sekiro", "FromSoftware", "FromSoftware", "Action", "PC", date, 60, 0, imagePath);
+        gameLists.add(game);
+        insertGameToDB(game);
+
+        date = convertDate(2011, 8, 18);
+        imagePath = createImageStorage(activity, "portal2.jpg");
+        game = new Game(5, "Portal 2", "Valve Corp", "Valve Corp", "Puzzle", "PC", date, 10, 0, imagePath);
+        gameLists.add(game);
+        insertGameToDB(game);
+
+        date = convertDate(2020, 9, 28);
+        imagePath = createImageStorage(activity, "genshin.jpg");
+        game = new Game(6, "Genshin Impact", "Mihoyo", "Mihoyo", "Adventure", "PC, Mobile", date, 0, 0, imagePath);
+        gameLists.add(game);
+        insertGameToDB(game);
     }
 
     public void insertGameToDB(Game game) {
