@@ -21,6 +21,7 @@ import com.example.steamprototype.entity.User;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StoreFrontActivity extends AppCompatActivity {
     SliderView sliderView;
@@ -77,8 +78,9 @@ public class StoreFrontActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
         this.gameArrayList = MainActivity.gameDataStorage.getGameList();
-        this.userLibraryStorage = new UserLibraryStorage(this.gameArrayList, this.wishList);
-        this.userLibraryStorage.loadUserLibrary(this.user);
+
+        userLibraryStorage = new UserLibraryStorage(this.gameArrayList, this.wishList);
+        userLibraryStorage.loadUserLibrary(this.user);
 
         sliderAdapter = new SliderAdapter(gameArrayList);
         sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
@@ -96,6 +98,11 @@ public class StoreFrontActivity extends AppCompatActivity {
         });
 
         sliderAdapter.setOnItemClickListener(this::gotoGamePage);
+
+        btn_search.setOnClickListener(v -> {
+            String text = edt_search.getText().toString().trim();
+            listViewAdapter.getFilter().filter(text);
+        });
     }
 
     @Override
@@ -109,7 +116,6 @@ public class StoreFrontActivity extends AppCompatActivity {
             }
         }
         if (requestCode == RESULT_CODE_ADD_TO_WISHLIST) {
-
             Game game = (Game) data.getSerializableExtra("wishlist");
             this.userLibraryStorage.addGameToLibrary(this.user, game);
             Toast.makeText(this, game.getTitle() + " added to your library", Toast.LENGTH_LONG).show();

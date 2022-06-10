@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +18,11 @@ import com.example.steamprototype.entity.Game;
 
 import java.util.ArrayList;
 
-public class ListViewAdapter extends BaseAdapter {
+public class ListViewAdapter extends BaseAdapter implements Filterable {
     Context context;
     ArrayList<Game> gameList;
+    ArrayList<Game> tempList;
+
     GameDataStorage gameDataStorage = MainActivity.gameDataStorage;
 
     public ListViewAdapter(Context context, ArrayList<Game> gameList) {
@@ -82,4 +86,45 @@ public class ListViewAdapter extends BaseAdapter {
         public TextView price;
     }
 
+    @Override
+    public Filter getFilter() {
+        Filter filter = new Filter() {
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint,FilterResults results) {
+
+                gameList = (ArrayList<Game>) results.values; // has the filtered values
+                notifyDataSetChanged();  // notifies the data with new filtered values
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                ArrayList<Game> FilteredArrList = new ArrayList<>();
+
+                if (tempList == null) {
+                    tempList = new ArrayList<>(gameList);
+                }
+
+                if (constraint == null || constraint.length() == 0) {
+
+                    results.count = tempList.size();
+                    results.values = tempList;
+                } else {
+                    constraint = constraint.toString().toLowerCase();
+                    for (int i = 0; i < tempList.size(); i++) {
+                        String data = tempList.get(i).getTitle();
+                        if (data.toLowerCase().startsWith(constraint.toString())) {
+                            FilteredArrList.add(tempList.get(i));
+                        }
+                    }
+                    results.count = FilteredArrList.size();
+                    results.values = FilteredArrList;
+                }
+                return results;
+            }
+        };
+        return filter;
+    }
 }
