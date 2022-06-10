@@ -50,8 +50,8 @@ public class LibraryActivity  extends AppCompatActivity {
     }
     public void gotoGamePage(int pos) {
         Game game = gameArrayList.get(pos);
-        Intent buyIntent = new Intent(LibraryActivity.this, GamePageActivity.class);
-        buyIntent.putExtra("game", game);
-        startActivityForResult(buyIntent, REQUEST_CODE_BUY);
+        Intent intent = new Intent(LibraryActivity.this, GamePageActivity.class);
+        intent.putExtra("game", game);
+        startActivity(intent);
     }
 }
