@@ -1,6 +1,5 @@
 package com.example.steamprototype;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -46,11 +45,11 @@ public class GamePageActivity extends AppCompatActivity {
                 setResult(StoreFrontActivity.RESULT_CODE_BOUGHT, intent);
                 finish();
             });
-            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, id) -> {
+            builder.setNegativeButton("No", (dialog, id) -> {
 
             });
-            builder.setMessage("No account was found do you want to create one?");
-            builder.setTitle("Cannot retrieve account data");
+            builder.setMessage("Confirm order");
+            builder.setTitle("Do you want to buy this game");
             builder.setIcon(R.drawable.steamdeck_steamlogo);
             AlertDialog dialog = builder.create();
             dialog.show();

@@ -36,7 +36,7 @@ public class SignInActivity extends AppCompatActivity {
                 setResult(MainActivity.RESULT_CODE_SIGN_IN_NO_ACC);
                 finish();
             });
-            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, id) -> {
+            builder.setNegativeButton("No", (dialog, id) -> {
 
             });
             builder.setMessage("No account was found do you want to create one?");

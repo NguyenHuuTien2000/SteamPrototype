@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.steamprototype.adapter.ListViewAdapter;
 import com.example.steamprototype.adapter.SliderAdapter;
+import com.example.steamprototype.data_op.UserLibraryStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 import com.smarteist.autoimageslider.SliderView;
@@ -27,6 +29,7 @@ public class StoreFrontActivity extends AppCompatActivity {
     ArrayList<Game> gameArrayList;
 
     User user;
+    UserLibraryStorage userLibraryStorage;
 
     public static final int REQUEST_CODE_BUY = 30;
     public static final int RESULT_CODE_BOUGHT = 31;
@@ -42,6 +45,8 @@ public class StoreFrontActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("game");
         this.gameArrayList = MainActivity.gameDataStorage.getGameList();
+        this.userLibraryStorage = new UserLibraryStorage(this.gameArrayList);
+        this.userLibraryStorage.loadUserLibrary(this.user);
 
         sliderAdapter = new SliderAdapter(gameArrayList);
         sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
@@ -59,10 +64,19 @@ public class StoreFrontActivity extends AppCompatActivity {
             buyIntent.putExtra("game", game);
             startActivityForResult(buyIntent, REQUEST_CODE_BUY);
         });
-
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_BUY) {
+            if (resultCode == RESULT_CODE_BOUGHT) {
+                Game game = (Game) data.getSerializableExtra("bought");
+                this.userLibraryStorage.addGameToLibrary(this.user, game);
+                Toast.makeText(this, game.getTitle() + " added to your library", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
     public void init() {
         sliderView = (SliderView) findViewById(R.id.slider);
