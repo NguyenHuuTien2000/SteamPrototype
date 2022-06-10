@@ -48,8 +48,8 @@ public class GamePageActivity extends AppCompatActivity {
             builder.setNegativeButton("No", (dialog, id) -> {
 
             });
-            builder.setMessage("Confirm order");
-            builder.setTitle("Do you want to buy this game");
+            builder.setMessage("Do you want to buy this game?");
+            builder.setTitle("Confirm order");
             builder.setIcon(R.drawable.steamdeck_steamlogo);
             AlertDialog dialog = builder.create();
             dialog.show();

@@ -63,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
                     dataStorage.clearCurrentUser();
                 }
                 Intent intent = new Intent(SignInActivity.this, StoreFrontActivity.class);
-                intent.putExtra("User", this.user);
+                intent.putExtra("user", this.user);
                 startActivity(intent);
                 finish();
             } else {

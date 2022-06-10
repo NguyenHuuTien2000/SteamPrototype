@@ -30,7 +30,7 @@ public class GameDataStorage {
     }
 
     public void createTable() {
-        String query = "CREATE TABLE IF NOT EXISTS game ( " +
+        String query = "CREATE TABLE IF NOT EXISTS game( " +
                 "gameID INTEGER PRIMARY KEY NOT NUll UNIQUE," +
                 "title VARCHAR(60) NOT NUll UNIQUE," +
                 "publisher VARCHAR(30) NOT NUll," +
@@ -88,7 +88,7 @@ public class GameDataStorage {
         contentValues.put("price", game.getPrice());
         contentValues.put("discount", game.getDiscount());
         contentValues.put("image", game.getImage());
-        this.database.insert("user", null, contentValues);
+        this.database.insert("game", null, contentValues);
     }
 
     public String createImageStorage(Activity activity, String imageName) {
