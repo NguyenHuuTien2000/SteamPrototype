@@ -26,7 +26,6 @@ public class UserLibraryStorage {
     }
 
     public void createTable() {
-        database.execSQL("DROP TABLE library;");
         String query = "CREATE TABLE IF NOT EXISTS library ( " +
                 "username VARCHAR(20) REFERENCES user(username)," +
                 "gameID INTEGER REFERENCES game(gameID)," +
