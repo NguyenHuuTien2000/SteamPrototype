@@ -29,10 +29,11 @@ public class StoreFrontActivity extends AppCompatActivity {
     ListView listView;
     ListViewAdapter listViewAdapter;
     SliderAdapter sliderAdapter;
+
     ArrayList<Game> gameArrayList;
 
     User user;
-    UserLibraryStorage userLibraryStorage;
+    public static UserLibraryStorage userLibraryStorage;
 
     public static final int REQUEST_CODE_BUY = 30;
     public static final int RESULT_CODE_BOUGHT = 31;
@@ -111,6 +112,7 @@ public class StoreFrontActivity extends AppCompatActivity {
     public void gotoGamePage(int pos) {
         Game game = gameArrayList.get(pos);
         Intent buyIntent = new Intent(StoreFrontActivity.this, GamePageActivity.class);
+        buyIntent.putExtra("buyingUser", this.user);
         buyIntent.putExtra("game", game);
         startActivityForResult(buyIntent, REQUEST_CODE_BUY);
     }

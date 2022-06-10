@@ -30,6 +30,8 @@
         <activity android:name=".SignInActivity"></activity>
         <activity android:name=".StoreFrontActivity"></activity>
         <activity android:name=".GamePageActivity"></activity>
+        <activity android:name=".LibraryActivity"></activity>
+        <activity android:name=".WishListActivity"></activity>
     </application>
 
 </manifest>

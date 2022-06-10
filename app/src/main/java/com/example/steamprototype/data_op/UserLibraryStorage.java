@@ -30,7 +30,20 @@ public class UserLibraryStorage {
         database.execSQL(query);
     }
 
-    public void addGameToLibrary(User user, Game game) {
+    public boolean checkContain(User user, Game game) {
+        List<Game> library = user.getLibrary();
+        for (Game libGame : library) {
+            if (game.getGameID() == libGame.getGameID()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean addGameToLibrary(User user, Game game) {
+        if (checkContain(user, game)) {
+            return false;
+        }
         user.addToLibrary(game);
         ContentValues contentValues = new ContentValues();
         contentValues.put("gameID", game.getGameID());
@@ -41,6 +54,7 @@ public class UserLibraryStorage {
         contentValues.put("dateAdded", formatter.format(date));
 
         this.database.insert("library", null, contentValues);
+        return true;
     }
 
     public void loadUserLibrary(User user) {
