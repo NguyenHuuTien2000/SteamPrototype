@@ -24,12 +24,12 @@ public class GameDataStorage {
 
     public GameDataStorage(Activity activity) {
         this.database = MainActivity.userDataStorage.getDatabase();
-
         this.createTable();
         this.seedGameData(activity);
     }
 
     public void createTable() {
+        database.execSQL("DROP TABLE game;");
         String query = "CREATE TABLE IF NOT EXISTS game( " +
                 "gameID INTEGER PRIMARY KEY NOT NUll UNIQUE," +
                 "title VARCHAR(60) NOT NUll UNIQUE," +
