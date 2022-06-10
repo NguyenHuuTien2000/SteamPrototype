@@ -13,7 +13,6 @@ import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.R;
 import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.entity.Game;
-import com.example.steamprototype.entity.ListViewItem;
 
 import java.util.ArrayList;
 

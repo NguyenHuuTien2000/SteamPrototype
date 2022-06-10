@@ -1,5 +1,6 @@
 package com.example.steamprototype;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.steamprototype.data_op.GameDataStorage;
@@ -36,6 +38,23 @@ public class GamePageActivity extends AppCompatActivity {
         this.gameDate.setText(game.getReleaseDateString());
         this.gamePrice.setText(game.getPriceString());
         this.gameDiscount.setText(game.getDiscountString());
+
+        btnBuy.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setPositiveButton("Yes", (dialog, id) -> {
+                intent.putExtra("bought", game);
+                setResult(StoreFrontActivity.RESULT_CODE_BOUGHT, intent);
+                finish();
+            });
+            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, id) -> {
+
+            });
+            builder.setMessage("No account was found do you want to create one?");
+            builder.setTitle("Cannot retrieve account data");
+            builder.setIcon(R.drawable.steamdeck_steamlogo);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        });
     }
 
     public void innit() {

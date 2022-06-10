@@ -1,6 +1,7 @@
 package com.example.steamprototype.data_op;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.steamprototype.MainActivity;
@@ -8,20 +9,23 @@ import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class UserLibraryStorage {
     private SQLiteDatabase database = MainActivity.userDataStorage.getDatabase();
+    private List<Game> fullList;
 
-    public UserLibraryStorage() {
-
+    public UserLibraryStorage(ArrayList<Game> fullList) {
+        this.fullList = fullList;
+        this.createTable();
     }
 
     public void createTable() {
-        database.execSQL("DROP TABLE library");
         String query = "CREATE TABLE IF NOT EXISTS library ( " +
-                "gameID INTEGER PRIMARY KEY NOT NULL," +
-                "username VARCHAR(20) REFERENCES user(username)," +
+                "username VARCHAR(20) PRIMARY KEY NOT NULL," +
+                "gameID INTEGER REFERENCES game(gameID)," +
                 "dateAdded DATETIME NOT NULL )";
         database.execSQL(query);
     }
@@ -37,6 +41,16 @@ public class UserLibraryStorage {
         contentValues.put("dateAdded", formatter.format(date));
 
         this.database.insert("library", null, contentValues);
+    }
+
+    public void loadUserLibrary(User user) {
+        List<Game> library = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT * FROM library WHERE username == '" + user.getUsername() + "'", null);
+        while (cursor.moveToNext()) {
+            int gameID = Integer.parseInt(cursor.getString(1));
+            library.add(fullList.get(gameID));
+        }
+        user.setLibrary(library);
     }
 
 

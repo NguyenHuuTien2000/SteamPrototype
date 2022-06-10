@@ -13,6 +13,7 @@ public class Game implements Serializable {
     private String platform;
 
     private Date releaseDate;
+    private Date addedDate;
     private double price;
     private double discount;
     private String image;
@@ -126,5 +127,18 @@ public class Game implements Serializable {
 
     public String getDiscountString() {
         return discount == 0.0 ? "" : "-" + discount + "%";
+    }
+
+    public Date getAddedDate() {
+        return addedDate;
+    }
+
+    public String getDateAddedString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(this.addedDate);
+    }
+
+    public void setAddedDate(Date addedDate) {
+        this.addedDate = addedDate;
     }
 }

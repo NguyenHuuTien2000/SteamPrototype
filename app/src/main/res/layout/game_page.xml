@@ -66,10 +66,19 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btnBuy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#F44336"
+                android:text="Buy"
+                android:textSize="16sp" />
+
+            <Button
                 android:id="@+id/btnWish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add to Wishlist" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -92,14 +101,6 @@
                 android:background="#00E5FF"
                 android:text="price"
                 android:paddingLeft="5dp" />
-
-            <Button
-                android:id="@+id/btnBuy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#F44336"
-                android:text="Buy"
-                android:textSize="16sp" />
 
         </LinearLayout>
     </LinearLayout>

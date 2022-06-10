@@ -30,7 +30,6 @@ public class GameDataStorage {
     }
 
     public void createTable() {
-        database.execSQL("DROP TABLE game");
         String query = "CREATE TABLE IF NOT EXISTS game ( " +
                 "gameID INTEGER PRIMARY KEY NOT NUll UNIQUE," +
                 "title VARCHAR(60) NOT NUll UNIQUE," +
@@ -60,19 +59,19 @@ public class GameDataStorage {
 
         date = convertDate(2018, 6, 1);
         imagePath = createImageStorage(activity, "azur_lane.jpg");
-        game = new Game(1, "Azure Lane", "Yostar", "Manjuu, Yongshi", "Strategy", "Mobile", date, 0, 0, imagePath);
+        game = new Game(0, "Azure Lane", "Yostar", "Manjuu, Yongshi", "Strategy", "Mobile", date, 0, 0, imagePath);
         gameLists.add(game);
         insertGameToDB(game);
 
         date = convertDate(2015, 11, 3);
         imagePath = createImageStorage(activity, "nfs.jpg");
-        game = new Game(2, "Need for Speed", "Electronic Arts", "Ghost Games", "Racing", "PC", date, 82, 10, imagePath);
+        game = new Game(1, "Need for Speed", "Electronic Arts", "Ghost Games", "Racing", "PC", date, 82, 10, imagePath);
         gameLists.add(game);
         insertGameToDB(game);
 
         date = convertDate(2017, 7, 5);
         imagePath = createImageStorage(activity, "cold_water.jpg");
-        game = new Game(3, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 25, imagePath);
+        game = new Game(2, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 25, imagePath);
         gameLists.add(game);
         insertGameToDB(game);
     }
