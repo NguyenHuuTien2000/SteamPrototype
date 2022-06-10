@@ -42,6 +42,11 @@ public class LibraryActivity  extends AppCompatActivity {
             gotoGamePage(position);
         });
 
+        btn_search.setOnClickListener(v -> {
+            String text = edt_search.getText().toString().trim();
+            listViewAdapter.getFilter().filter(text);
+        });
+
 
     } public void init() {
         btn_search = (Button) findViewById(R.id.btn_librarysrch);
