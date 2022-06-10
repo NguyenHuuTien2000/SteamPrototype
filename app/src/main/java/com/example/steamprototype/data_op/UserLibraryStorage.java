@@ -16,9 +16,12 @@ import java.util.List;
 public class UserLibraryStorage {
     private SQLiteDatabase database = MainActivity.userDataStorage.getDatabase();
     private List<Game> fullList;
+    private List<Game> wishlist;
 
-    public UserLibraryStorage(ArrayList<Game> fullList) {
+
+    public UserLibraryStorage(ArrayList<Game> fullList, ArrayList<Game> wishlist) {
         this.fullList = fullList;
+        this.wishlist = wishlist;
         this.createTable();
     }
 
@@ -56,6 +59,20 @@ public class UserLibraryStorage {
         this.database.insert("library", null, contentValues);
         return true;
     }
+
+    public void addGameToWL(User user, Game game) {
+        user.addToWishlist(game);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("gameID", game.getGameID());
+        contentValues.put("username", user.getUsername());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        contentValues.put("dateAdded", formatter.format(date));
+
+        this.database.insert("Wishlist", null, contentValues);
+    }
+
 
     public void loadUserLibrary(User user) {
         List<Game> library = new ArrayList<>();

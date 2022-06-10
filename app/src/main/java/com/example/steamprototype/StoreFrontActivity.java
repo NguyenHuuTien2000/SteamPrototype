@@ -31,6 +31,7 @@ public class StoreFrontActivity extends AppCompatActivity {
     SliderAdapter sliderAdapter;
 
     ArrayList<Game> gameArrayList;
+    ArrayList<Game> wishList;
 
     User user;
     public static UserLibraryStorage userLibraryStorage;
@@ -51,9 +52,9 @@ public class StoreFrontActivity extends AppCompatActivity {
 //        if (id == R.id.mn_store) {
 //            goToStore();
 //        }
-//        if (id == R.id.mn_lib) {
-//            goToLibrary();
-//        }
+        if (id == R.id.mn_lib) {
+            goToLibrary();
+        }
 //        if (id == R.id.mn_wlst) {
 //            goToWishList();
 //        }
@@ -76,7 +77,7 @@ public class StoreFrontActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
         this.gameArrayList = MainActivity.gameDataStorage.getGameList();
-        this.userLibraryStorage = new UserLibraryStorage(this.gameArrayList);
+        this.userLibraryStorage = new UserLibraryStorage(this.gameArrayList, this.wishList);
         this.userLibraryStorage.loadUserLibrary(this.user);
 
         sliderAdapter = new SliderAdapter(gameArrayList);
@@ -107,6 +108,13 @@ public class StoreFrontActivity extends AppCompatActivity {
                 Toast.makeText(this, game.getTitle() + " added to your library", Toast.LENGTH_LONG).show();
             }
         }
+        if (requestCode == RESULT_CODE_ADD_TO_WISHLIST) {
+
+            Game game = (Game) data.getSerializableExtra("wishlist");
+            this.userLibraryStorage.addGameToLibrary(this.user, game);
+            Toast.makeText(this, game.getTitle() + " added to your library", Toast.LENGTH_LONG).show();
+
+        }
     }
 
     public void gotoGamePage(int pos) {
@@ -116,17 +124,21 @@ public class StoreFrontActivity extends AppCompatActivity {
         buyIntent.putExtra("game", game);
         startActivityForResult(buyIntent, REQUEST_CODE_BUY);
     }
-//    public void goToStore( ) {
-//    }
-//    public void goToLibrary( ) {
-//    }
+    public void goToStore( ) {
+        startActivity(new Intent(this, StoreFrontActivity.class));
+    }
+    public void goToLibrary( ) {
+        Intent goIntent = new Intent(this, LibraryActivity.class);
+        startActivity(goIntent);
+    }
 //
 //    public void goToProfile(){
 //    }
 //
-//    public void goToWishList(){
-//
-//    }
+    public void goToWishList(){
+        startActivity(new Intent(this, WishListActivity.class));
+
+    }
 
     public void init() {
         sliderView = (SliderView) findViewById(R.id.slider);
