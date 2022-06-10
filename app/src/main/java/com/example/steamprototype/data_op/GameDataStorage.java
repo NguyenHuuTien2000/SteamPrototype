@@ -1,6 +1,7 @@
 package com.example.steamprototype.data_op;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,21 +24,24 @@ public class GameDataStorage {
 
     public GameDataStorage(Activity activity) {
         this.database = MainActivity.userDataStorage.getDatabase();
+
         this.createTable();
         this.seedGameData(activity);
     }
 
     public void createTable() {
-        String query = "CREATE TABLE IF NOT EXISTS game ( gameID INTEGER PRIMARY KEY," +
-                "title VARCHAR(60)," +
-                "publisher VARCHAR(30)," +
-                "developer VARCHAR(30)," +
-                "genre VARCHAR(40)," +
-                "platform VARCHAR(40)," +
-                "releaseDate DATETIME," +
-                "price DOUBLE," +
-                "discount DOUBLE," +
-                "image TEXT )";
+        database.execSQL("DROP TABLE game");
+        String query = "CREATE TABLE IF NOT EXISTS game ( " +
+                "gameID INTEGER PRIMARY KEY NOT NUll UNIQUE," +
+                "title VARCHAR(60) NOT NUll UNIQUE," +
+                "publisher VARCHAR(30) NOT NUll," +
+                "developer VARCHAR(30) NOT NUll," +
+                "genre VARCHAR(40) NOT NUll," +
+                "platform VARCHAR(40) NOT NUll," +
+                "releaseDate DATETIME NOT NUll," +
+                "price DOUBLE NOT NUll," +
+                "discount DOUBLE NOT NUll," +
+                "image TEXT NOT NUll UNIQUE )";
         database.execSQL(query);
     }
 
@@ -58,16 +62,34 @@ public class GameDataStorage {
         imagePath = createImageStorage(activity, "azur_lane.jpg");
         game = new Game(1, "Azure Lane", "Yostar", "Manjuu, Yongshi", "Strategy", "Mobile", date, 0, 0, imagePath);
         gameLists.add(game);
+        insertGameToDB(game);
 
         date = convertDate(2015, 11, 3);
         imagePath = createImageStorage(activity, "nfs.jpg");
         game = new Game(2, "Need for Speed", "Electronic Arts", "Ghost Games", "Racing", "PC", date, 82, 10, imagePath);
         gameLists.add(game);
+        insertGameToDB(game);
 
         date = convertDate(2017, 7, 5);
         imagePath = createImageStorage(activity, "cold_water.jpg");
         game = new Game(3, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 25, imagePath);
         gameLists.add(game);
+        insertGameToDB(game);
+    }
+
+    public void insertGameToDB(Game game) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("gameID", game.getGameID());
+        contentValues.put("title", game.getTitle());
+        contentValues.put("publisher", game.getPublisher());
+        contentValues.put("developer", game.getDeveloper());
+        contentValues.put("genre", game.getGenre());
+        contentValues.put("platform", game.getPlatform());
+        contentValues.put("releaseDate", game.getReleaseDateFormatted());
+        contentValues.put("price", game.getPrice());
+        contentValues.put("discount", game.getDiscount());
+        contentValues.put("image", game.getImage());
+        this.database.insert("user", null, contentValues);
     }
 
     public String createImageStorage(Activity activity, String imageName) {

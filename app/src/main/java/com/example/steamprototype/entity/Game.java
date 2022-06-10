@@ -103,6 +103,11 @@ public class Game implements Serializable {
         return formatter.format(this.releaseDate);
     }
 
+    public String getReleaseDateFormatted() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return formatter.format(this.releaseDate);
+    }
+
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }

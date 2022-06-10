@@ -11,12 +11,14 @@ public class User implements Serializable {
     private String password;
     private String email;
     private List<Game> library;
+    private List<Game> wishlist;
 
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.library = new ArrayList<>();
+        this.wishlist = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -47,15 +49,15 @@ public class User implements Serializable {
         return library;
     }
 
-    public String getLibString() {
-        StringBuilder lib = new StringBuilder();
-        for (Game game : library) {
-            lib.append(game.getGameID()).append(",");
-        }
-        return lib.toString();
+    public void addToLibrary(Game game) {
+        this.library.add(game);
     }
 
-    public void setLibrary(List<Game> library) {
-        this.library = library;
+    public List<Game> getWishlist() {
+        return wishlist;
+    }
+
+    public void addToWishlist (Game game) {
+        this.wishlist.add(game);
     }
 }
