@@ -40,6 +40,12 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_wishAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ALL" />
+
     <ListView
         android:id="@+id/lstVWL"
         android:layout_width="match_parent"

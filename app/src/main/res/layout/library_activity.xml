@@ -39,6 +39,12 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_libraryall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ALL" />
+
     <ListView
         android:id="@+id/lstVLib"
         android:layout_width="match_parent"

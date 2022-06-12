@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.steamprototype.adapter.ListViewAdapter;
-import com.example.steamprototype.data_op.UserLibraryStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class LibraryActivity  extends AppCompatActivity {
-    Button btn_search;
+    Button btn_search, btn_all;
     EditText edt_search;
     ListView listView;
     ListViewAdapter listViewAdapter;
@@ -57,7 +56,9 @@ public class LibraryActivity  extends AppCompatActivity {
             }
         });
 
-
+        btn_all.setOnClickListener(v -> {
+            loadListView(this.gameArrayList);
+        });
     }
 
     public void loadListView(ArrayList<Game> displayList) {
@@ -69,6 +70,7 @@ public class LibraryActivity  extends AppCompatActivity {
         btn_search = findViewById(R.id.btn_librarysrch);
         edt_search = findViewById(R.id.edit_librarysrch);
         listView = findViewById(R.id.lstVLib);
+        btn_all = findViewById(R.id.btn_libraryall);
     }
     public void gotoGamePage(int pos) {
         Game game = gameArrayList.get(pos);

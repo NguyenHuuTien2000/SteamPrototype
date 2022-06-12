@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:backgroundTint="#4CAF50"
             android:text="GO"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
