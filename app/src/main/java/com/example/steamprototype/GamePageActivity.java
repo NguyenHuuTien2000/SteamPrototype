@@ -35,7 +35,7 @@ public class GamePageActivity extends AppCompatActivity {
         this.game = (Game) intent.getSerializableExtra("game");
         this.user = (User) intent.getSerializableExtra("buyingUser");
 
-        if (userLibraryStorage.checkContain(this.user, this.game)) {
+        if (userLibraryStorage.checkContainLib(this.user, this.game)) {
             btnBuy.setVisibility(View.INVISIBLE);
             btnWish.setVisibility(View.INVISIBLE);
             btnBuy.setEnabled(false);

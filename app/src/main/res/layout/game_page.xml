@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4CAF50"
+    android:background="#673AB7"
     android:orientation="vertical">
 
     <ImageView
@@ -86,7 +86,8 @@
                 android:id="@+id/btnWish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add to Wishlist" />
+                android:text="Add to Wishlist"
+                android:textSize="16sp" />
 
         </LinearLayout>
 

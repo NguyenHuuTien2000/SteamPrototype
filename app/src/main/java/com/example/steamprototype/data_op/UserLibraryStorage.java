@@ -31,9 +31,16 @@ public class UserLibraryStorage {
                 "gameID INTEGER REFERENCES game(gameID)," +
                 "dateAdded DATETIME NOT NULL )";
         database.execSQL(query);
+
+        query = "CREATE TABLE IF NOT EXISTS wishlist ( " +
+                "username VARCHAR(20) REFERENCES user(username)," +
+                "gameID INTEGER REFERENCES game(gameID)," +
+                "dateAdded DATETIME NOT NULL," +
+                "discounted BOOL NOT NULL )";
+        database.execSQL(query);
     }
 
-    public boolean checkContain(User user, Game game) {
+    public boolean checkContainLib(User user, Game game) {
         List<Game> library = user.getLibrary();
         for (Game libGame : library) {
             if (game.getGameID() == libGame.getGameID()) {
@@ -43,8 +50,18 @@ public class UserLibraryStorage {
         return false;
     }
 
+    public boolean checkContainWish(User user, Game game) {
+        List<Game> wishlist = user.getWishlist();
+        for (Game wishGame : wishlist) {
+            if (game.getGameID() == wishGame.getGameID()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean addGameToLibrary(User user, Game game) {
-        if (checkContain(user, game)) {
+        if (checkContainLib(user, game)) {
             return false;
         }
         user.addToLibrary(game);
@@ -74,14 +91,22 @@ public class UserLibraryStorage {
     }
 
 
-    public void loadUserLibrary(User user) {
-        List<Game> library = new ArrayList<>();
+    public void loadUserLists(User user) {
+        List<Game> games = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM library WHERE username == '" + user.getUsername() + "'", null);
         while (cursor.moveToNext()) {
             int gameID = Integer.parseInt(cursor.getString(1));
-            library.add(fullList.get(gameID));
+            games.add(fullList.get(gameID));
         }
-        user.setLibrary(library);
+        user.setLibrary(games);
+        games.clear();
+
+        cursor = database.rawQuery("SELECT * FROM wishlist WHERE username == '" + user.getUsername() + "'", null);
+        while (cursor.moveToNext()) {
+            int gameID = Integer.parseInt(cursor.getString(1));
+            games.add(fullList.get(gameID));
+        }
+        user.setWishlist(games);
     }
 
 
