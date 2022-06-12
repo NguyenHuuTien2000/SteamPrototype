@@ -119,11 +119,13 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         btn_new.setOnClickListener(v -> {
             ArrayList<Game> sorted = new ArrayList<>(this.gameArrayList);
-            sorted.sort(Comparator.comparing(Game::getReleaseDate));
+            sorted.sort((o1, o2) -> o2.getReleaseDate().compareTo(o1.getReleaseDate()));
             loadListView(sorted);
         });
 
-
+        btn_popular.setOnClickListener(v -> {
+            loadListView(userLibraryStorage.getPopularList());
+        });
 
         btn_special.setOnClickListener(v -> {
             loadListView(this.gameArrayList);
@@ -141,13 +143,13 @@ public class StoreFrontActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_BUY) {
             if (resultCode == RESULT_CODE_BOUGHT) {
                 Game game = (Game) data.getSerializableExtra("bought");
-                this.userLibraryStorage.addGameToLibrary(this.user, game);
+                userLibraryStorage.addGameToLibrary(this.user, game);
                 Toast.makeText(this, game.getTitle() + " added to your library", Toast.LENGTH_LONG).show();
             }
         }
         if (resultCode == RESULT_CODE_ADD_TO_WISHLIST) {
             Game game = (Game) data.getSerializableExtra("wish");
-            this.userLibraryStorage.addGameToWL(this.user, game);
+            userLibraryStorage.addGameToWL(this.user, game);
             Toast.makeText(this, game.getTitle() + " added to your wishlist\n Any discount will be notified through email", Toast.LENGTH_LONG).show();
         }
     }
@@ -165,7 +167,7 @@ public class StoreFrontActivity extends AppCompatActivity {
 //    }
 
     public void goToLibrary( ) {
-        Intent goIntent = new Intent(this, LibraryActivity.class);
+        Intent goIntent = new Intent(StoreFrontActivity.this, LibraryActivity.class);
         goIntent.putExtra("user", this.user);
         startActivity(goIntent);
     }
@@ -175,7 +177,7 @@ public class StoreFrontActivity extends AppCompatActivity {
 //
 
     public void goToWishList(){
-        Intent goIntent = new Intent(this, WishListActivity.class);
+        Intent goIntent = new Intent(StoreFrontActivity.this, WishListActivity.class);
         goIntent.putExtra("user", this.user);
         startActivity(goIntent);
     }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,8 +37,10 @@ public class WishListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
         gameArrayList = (ArrayList<Game>) this.user.getWishlist();
+
         listViewAdapter = new ListViewAdapter(WishListActivity.this, gameArrayList);
         listView.setAdapter(listViewAdapter);
+
         listView.setOnItemClickListener((parent, view, position, id) -> {
             gotoGamePage(position);
         });
@@ -49,8 +52,20 @@ public class WishListActivity extends AppCompatActivity {
     }
     public void gotoGamePage(int pos) {
         Game game = gameArrayList.get(pos);
-        Intent buyIntent = new Intent(WishListActivity.this, GamePageActivity.class);
-        buyIntent.putExtra("game", game);
-        startActivityForResult(buyIntent, StoreFrontActivity.REQUEST_CODE_BUY);
+        Intent intent = new Intent(WishListActivity.this, GamePageActivity.class);
+        intent.putExtra("user", this.user);
+        intent.putExtra("game", game);
+        startActivityForResult(intent, StoreFrontActivity.REQUEST_CODE_BUY);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == StoreFrontActivity.REQUEST_CODE_BUY) {
+            if (resultCode == StoreFrontActivity.RESULT_CODE_BOUGHT) {
+                Game game = (Game) data.getSerializableExtra("bought");
+                this.userLibraryStorage.addGameToLibrary(this.user, game);
+                Toast.makeText(this, game.getTitle() + " added to your library", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

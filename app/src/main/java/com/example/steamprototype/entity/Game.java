@@ -18,6 +18,8 @@ public class Game implements Serializable {
     private double discount;
     private String image;
 
+    public int popularity;
+
     public Game(int gameID, String title, String publisher, String developer, String genre, String platform, Date releaseDate, double price, double discount, String image) {
         this.gameID = gameID;
         this.title = title;
@@ -140,5 +142,13 @@ public class Game implements Serializable {
 
     public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
     }
 }

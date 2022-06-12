@@ -30,6 +30,7 @@ public class LibraryActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.library_activity);
         init();
+
         Intent intent = getIntent();
 
         this.user = (User) intent.getSerializableExtra("user");
@@ -72,6 +73,7 @@ public class LibraryActivity  extends AppCompatActivity {
     public void gotoGamePage(int pos) {
         Game game = gameArrayList.get(pos);
         Intent intent = new Intent(LibraryActivity.this, GamePageActivity.class);
+        intent.putExtra("user", this.user);
         intent.putExtra("game", game);
         startActivity(intent);
     }

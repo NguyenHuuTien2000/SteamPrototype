@@ -53,8 +53,8 @@ public class User implements Serializable {
         this.library.add(game);
     }
 
-    public void setLibrary(List<Game> library) {
-        this.library = library;
+    public void setLibrary(List<Game> newLibrary) {
+        this.library = newLibrary;
     }
 
     public List<Game> getWishlist() {

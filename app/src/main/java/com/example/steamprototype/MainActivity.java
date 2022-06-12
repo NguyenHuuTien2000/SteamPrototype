@@ -58,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
             if (userDataStorage.saveUserData(newUser)) {
                 Toast.makeText(this, "Register success now you will be direct to the store front", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, StoreFrontActivity.class);
+                intent.putExtra("user", newUser);
                 startActivity(intent);
+                finish();
             }
         }
         if (requestCode == REQUEST_CODE_SIGN_IN && resultCode == RESULT_CODE_SIGN_IN_NO_ACC) {

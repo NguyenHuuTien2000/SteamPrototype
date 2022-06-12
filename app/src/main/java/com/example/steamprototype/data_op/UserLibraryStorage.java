@@ -3,6 +3,9 @@ package com.example.steamprototype.data_op;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.entity.Game;
@@ -10,6 +13,7 @@ import com.example.steamprototype.entity.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +51,13 @@ public class UserLibraryStorage {
                 return true;
             }
         }
+        Cursor cursor = database.rawQuery("SELECT * FROM library WHERE username == '" + user.getUsername() + "'", null);
+        while (cursor.moveToNext()) {
+            if (game.getGameID() == cursor.getInt(1)) {
+                return true;
+            }
+        }
+        cursor.close();
         return false;
     }
 
@@ -57,6 +68,13 @@ public class UserLibraryStorage {
                 return true;
             }
         }
+        Cursor cursor = database.rawQuery("SELECT * FROM wishlist WHERE username == '" + user.getUsername() + "'", null);
+        while (cursor.moveToNext()) {
+            if (game.getGameID() == cursor.getInt(1)) {
+                return true;
+            }
+        }
+        cursor.close();
         return false;
     }
 
@@ -92,22 +110,31 @@ public class UserLibraryStorage {
 
 
     public void loadUserLists(User user) {
-        List<Game> games = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM library WHERE username == '" + user.getUsername() + "'", null);
         while (cursor.moveToNext()) {
             int gameID = Integer.parseInt(cursor.getString(1));
-            games.add(fullList.get(gameID));
+            user.addToLibrary(fullList.get(gameID));
         }
-        user.setLibrary(games);
-        games.clear();
+        cursor.close();
 
         cursor = database.rawQuery("SELECT * FROM wishlist WHERE username == '" + user.getUsername() + "'", null);
         while (cursor.moveToNext()) {
             int gameID = Integer.parseInt(cursor.getString(1));
-            games.add(fullList.get(gameID));
+            user.addToWishlist(fullList.get(gameID));
         }
-        user.setWishlist(games);
+        cursor.close();
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<Game> getPopularList() {
+        ArrayList<Game> popularGames = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT gameID, COUNT(gameID) FROM library GROUP BY gameID", null);
+        while (cursor.moveToNext()) {
+            Game game = fullList.get(cursor.getInt(0));
+            game.setPopularity(cursor.getInt(1));
+            popularGames.add(game);
+        }
+        popularGames.sort(Comparator.comparing(Game::getPopularity));
+        return popularGames;
+    }
 }

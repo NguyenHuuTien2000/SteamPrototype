@@ -2,6 +2,7 @@ package com.example.steamprototype.data_op;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,10 +13,10 @@ import com.example.steamprototype.entity.Game;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class GameDataStorage {
 
@@ -24,12 +25,16 @@ public class GameDataStorage {
 
     public GameDataStorage(Activity activity) {
         this.database = MainActivity.userDataStorage.getDatabase();
-        this.createTable();
-        this.seedGameData(activity);
+
+        if (MainActivity.userDataStorage.checkFirstRun()) {
+            this.createTable();
+            this.seedGameData(activity);
+        } else {
+            loadAllGameFromDB();
+        }
     }
 
     public void createTable() {
-        database.execSQL("DROP TABLE game;");
         String query = "CREATE TABLE IF NOT EXISTS game( " +
                 "gameID INTEGER PRIMARY KEY NOT NUll UNIQUE," +
                 "title VARCHAR(60) NOT NUll UNIQUE," +
@@ -113,6 +118,35 @@ public class GameDataStorage {
         contentValues.put("discount", game.getDiscount());
         contentValues.put("image", game.getImage());
         this.database.insert("game", null, contentValues);
+    }
+
+    public void loadAllGameFromDB() {
+        this.gameLists = new ArrayList<>();
+        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Cursor cursor = database.rawQuery("SELECT * FROM game", null);
+        Game game;
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String title = cursor.getString(1);
+            String publisher = cursor.getString(2);
+            String developer = cursor.getString(3);
+            String genre = cursor.getString(4);
+            String platform = cursor.getString(5);
+
+            Date releaseDate = new Date();
+            try {
+                releaseDate = formatter.parse(cursor.getString(6));
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+
+            double price = cursor.getDouble(7);
+            double discount = cursor.getDouble(8);
+            String imagePath = cursor.getString(9);
+            game = new Game(id, title, publisher, developer, genre, platform, releaseDate, price, discount, imagePath);
+            this.gameLists.add(game);
+        }
+        cursor.close();
     }
 
     public String createImageStorage(Activity activity, String imageName) {

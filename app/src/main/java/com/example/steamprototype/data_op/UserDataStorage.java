@@ -16,6 +16,7 @@ import java.io.InputStream;
 public class UserDataStorage {
     private SQLiteDatabase database;
     public static final String SP_NAME = "UserData";
+    public boolean firstRun = false;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -23,6 +24,14 @@ public class UserDataStorage {
     public UserDataStorage(Context context, Activity activity) {
         innitDB(activity);
         this.sharedPreferences = context.getSharedPreferences(SP_NAME,Context.MODE_PRIVATE);
+
+        this.editor = sharedPreferences.edit();
+        this.editor.putBoolean("firstRun", this.firstRun);
+        this.editor.commit();
+    }
+
+    public boolean checkFirstRun() {
+        return this.sharedPreferences.getBoolean("firstRun", true);
     }
 
     public SQLiteDatabase getDatabase() {
@@ -38,6 +47,7 @@ public class UserDataStorage {
                 InputStream inputStream = activity.getAssets().open(dbname);
                 File folder = new File(savePath);
                 if (!folder.exists()) {
+                    this.firstRun = true;
                     folder.mkdir();
                 }
                 FileOutputStream fileOutputStream = new FileOutputStream(savePath + dbname);
@@ -85,6 +95,7 @@ public class UserDataStorage {
                 return new User(username, password, cursor.getString(2));
             }
         }
+        cursor.close();
         return null;
     }
 
