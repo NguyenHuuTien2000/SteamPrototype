@@ -20,6 +20,8 @@ public class Game implements Serializable {
 
     public int popularity;
 
+    private String description;
+
     public Game(int gameID, String title, String publisher, String developer, String genre, String platform, Date releaseDate, double price, double discount, String image) {
         this.gameID = gameID;
         this.title = title;
@@ -150,5 +152,14 @@ public class Game implements Serializable {
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

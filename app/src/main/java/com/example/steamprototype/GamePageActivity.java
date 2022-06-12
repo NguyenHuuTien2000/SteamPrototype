@@ -2,6 +2,7 @@ package com.example.steamprototype;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,7 +19,7 @@ import com.example.steamprototype.entity.User;
 
 public class GamePageActivity extends AppCompatActivity {
     ImageView gameImage;
-    TextView gameName, gameDev, gamePub, gameDate, gameGenre, gameDiscount, gamePrice;
+    TextView gameName, gameDev, gamePub, gameDate, gameGenre, gameDiscount, gamePrice, gameDesc;
     Button btnBuy, btnWish;
     Game game;
     User user;
@@ -59,6 +60,8 @@ public class GamePageActivity extends AppCompatActivity {
         this.gameDate.setText("Release Date:\t" + game.getReleaseDateString());
         this.gamePrice.setText(game.getPriceString());
         this.gameDiscount.setText(game.getDiscountString());
+        this.gameDesc.setText(game.getDescription());
+        this.gameDesc.setMovementMethod(new ScrollingMovementMethod());
 
         btnBuy.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -93,7 +96,7 @@ public class GamePageActivity extends AppCompatActivity {
         this.gameGenre = findViewById(R.id.txtV_page_genre);
         this.gameDiscount = findViewById(R.id.txtV_page_discount);
         this.gamePrice = findViewById(R.id.txtV_page_price);
-
+        this.gameDesc = findViewById(R.id.txtV_page_description);
         this.btnBuy = findViewById(R.id.btnBuy);
         this.btnWish = findViewById(R.id.btnWish);
     }

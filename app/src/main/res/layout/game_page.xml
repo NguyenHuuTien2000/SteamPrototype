@@ -11,6 +11,8 @@
         android:id="@+id/img_page"
         android:layout_width="match_parent"
         android:layout_height="166dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -31,7 +33,7 @@
         android:background="#00B0FF"
         android:paddingLeft="5dp"
         android:text="DEV"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <TextView
@@ -41,17 +43,19 @@
         android:background="#00B0FF"
         android:paddingLeft="5dp"
         android:text="Pub"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtV_page_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="#00B0FF"
         android:paddingLeft="5dp"
         android:text="Date"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <TextView
@@ -61,7 +65,7 @@
         android:background="#00B0FF"
         android:paddingLeft="5dp"
         android:text="Genre"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <LinearLayout
@@ -126,4 +130,14 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtV_page_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:justificationMode="inter_word"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 </LinearLayout>

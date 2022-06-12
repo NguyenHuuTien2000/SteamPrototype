@@ -44,10 +44,12 @@ public class UserDataStorage {
             String savePath = activity.getApplicationInfo().dataDir + "/databases/";
             File file = new File(savePath + dbname);
             if (!file.exists()) {
+                this.firstRun = true;
+                //this.clearCurrentUser();
+
                 InputStream inputStream = activity.getAssets().open(dbname);
                 File folder = new File(savePath);
                 if (!folder.exists()) {
-                    this.firstRun = true;
                     folder.mkdir();
                 }
                 FileOutputStream fileOutputStream = new FileOutputStream(savePath + dbname);

@@ -95,12 +95,7 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         loadListView(this.gameArrayList);
 
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            gotoGamePage(position);
-        });
-
-        sliderAdapter.setOnItemClickListener(this::gotoGamePage);
+        sliderAdapter.setOnItemClickListener(position -> gotoGamePage(position, this.gameArrayList));
 
         btn_search.setOnClickListener(v -> {
             String text = edt_search.getText().toString().toLowerCase(Locale.ROOT).trim();
@@ -132,11 +127,6 @@ public class StoreFrontActivity extends AppCompatActivity {
         });
     }
 
-    public void loadListView(ArrayList<Game> displayList) {
-        this.listViewAdapter = new ListViewAdapter(StoreFrontActivity.this, displayList);
-        this.listView.setAdapter(this.listViewAdapter);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -154,8 +144,16 @@ public class StoreFrontActivity extends AppCompatActivity {
         }
     }
 
-    public void gotoGamePage(int pos) {
-        Game game = gameArrayList.get(pos);
+    public void loadListView(ArrayList<Game> displayList) {
+        this.listViewAdapter = new ListViewAdapter(StoreFrontActivity.this, displayList);
+        this.listView.setAdapter(this.listViewAdapter);
+        this.listView.setOnItemClickListener((parent, view, position, id) -> {
+            gotoGamePage(position, displayList);
+        });
+    }
+
+    public void gotoGamePage(int pos, ArrayList<Game> selectedList) {
+        Game game = selectedList.get(pos);
         Intent buyIntent = new Intent(StoreFrontActivity.this, GamePageActivity.class);
         buyIntent.putExtra("buyingUser", this.user);
         buyIntent.putExtra("game", game);

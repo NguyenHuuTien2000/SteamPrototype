@@ -23,6 +23,7 @@ public class GameDataStorage {
     private SQLiteDatabase database;
     private ArrayList<Game> gameLists;
 
+
     public GameDataStorage(Activity activity) {
         this.database = MainActivity.userDataStorage.getDatabase();
 
@@ -45,7 +46,8 @@ public class GameDataStorage {
                 "releaseDate DATETIME NOT NUll," +
                 "price DOUBLE NOT NUll," +
                 "discount DOUBLE NOT NUll," +
-                "image TEXT NOT NUll UNIQUE )";
+                "image TEXT NOT NUll UNIQUE," +
+                "description TEXT )";
         database.execSQL(query);
     }
 
@@ -54,55 +56,11 @@ public class GameDataStorage {
     }
 
     public void seedGameData(Activity activity) {
-
-        this.gameLists = new ArrayList<>();
-        Game game;
-        Date date;
-        String imagePath;
-
-        //hell
-
-        date = convertDate(2018, 6, 1);
-        imagePath = createImageStorage(activity, "azur_lane.jpg");
-        game = new Game(0, "Azure Lane", "Yostar", "Manjuu, Yongshi", "Strategy", "Mobile", date, 0, 0, imagePath);
-        gameLists.add(game);
-        insertGameToDB(game);
-
-        date = convertDate(2015, 11, 3);
-        imagePath = createImageStorage(activity, "nfs.jpg");
-        game = new Game(1, "Need for Speed", "Electronic Arts", "Ghost Games", "Racing", "PC", date, 82, 10, imagePath);
-        gameLists.add(game);
-        insertGameToDB(game);
-
-        date = convertDate(2017, 7, 5);
-        imagePath = createImageStorage(activity, "cold_water.jpg");
-        game = new Game(2, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 25, imagePath);
-        gameLists.add(game);
-        insertGameToDB(game);
-
-        date = convertDate(2019, 4, 19);
-        imagePath = createImageStorage(activity, "arknights.jpg");
-        game = new Game(3, "Arknights", "Yostar", "Hyper Gryph", "Towerdefense", "Mobile", date, 0, 0, imagePath);
-        gameLists.add(game);
-        insertGameToDB(game);
-
-        date = convertDate(2019, 3, 22);
-        imagePath = createImageStorage(activity, "sekiro.jpg");
-        game = new Game(4, "Sekiro", "FromSoftware", "FromSoftware", "Action", "PC", date, 60, 0, imagePath);
-        gameLists.add(game);
-        insertGameToDB(game);
-
-        date = convertDate(2011, 8, 18);
-        imagePath = createImageStorage(activity, "portal2.jpg");
-        game = new Game(5, "Portal 2", "Valve Corp", "Valve Corp", "Puzzle", "PC", date, 10, 0, imagePath);
-        gameLists.add(game);
-        insertGameToDB(game);
-
-        date = convertDate(2020, 9, 28);
-        imagePath = createImageStorage(activity, "genshin.jpg");
-        game = new Game(6, "Genshin Impact", "Mihoyo", "Mihoyo", "Adventure", "PC, Mobile", date, 0, 0, imagePath);
-        gameLists.add(game);
-        insertGameToDB(game);
+        Seedr seeder = new Seedr(activity);
+        this.gameLists = seeder.start();
+        for (Game game : this.gameLists) {
+            insertGameToDB(game);
+        }
     }
 
     public void insertGameToDB(Game game) {
@@ -117,6 +75,7 @@ public class GameDataStorage {
         contentValues.put("price", game.getPrice());
         contentValues.put("discount", game.getDiscount());
         contentValues.put("image", game.getImage());
+        contentValues.put("description", game.getDescription());
         this.database.insert("game", null, contentValues);
     }
 
@@ -143,38 +102,12 @@ public class GameDataStorage {
             double price = cursor.getDouble(7);
             double discount = cursor.getDouble(8);
             String imagePath = cursor.getString(9);
+            String description = cursor.getString(10);
             game = new Game(id, title, publisher, developer, genre, platform, releaseDate, price, discount, imagePath);
+            game.setDescription(description);
             this.gameLists.add(game);
         }
         cursor.close();
-    }
-
-    public String createImageStorage(Activity activity, String imageName) {
-        String path = "";
-        try {
-            String savePath = activity.getApplicationInfo().dataDir + "/images/";
-            File file = new File(savePath + imageName);
-            if (!file.exists()) {
-                InputStream inputStream = activity.getAssets().open(imageName);
-                File folder = new File(savePath);
-                if (!folder.exists()) {
-                    folder.mkdir();
-                }
-                FileOutputStream fileOutputStream = new FileOutputStream(savePath + imageName);
-                byte[] buffer = new byte[1024];
-                int length;
-                while ((length = inputStream.read(buffer)) > 0) {
-                    fileOutputStream.write(buffer, 0, length);
-                }
-                fileOutputStream.flush();
-                fileOutputStream.close();
-                inputStream.close();
-            }
-            path = savePath + imageName;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return path;
     }
 
     public Bitmap getGameImage(String path) {
@@ -184,16 +117,5 @@ public class GameDataStorage {
             bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
         }
         return bitmap;
-    }
-
-
-    public Date convertDate(int year, int month, int day) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY,0);
-        cal.set(Calendar.MINUTE,0);
-        cal.set(Calendar.SECOND,0);
-        cal.set(Calendar.MILLISECOND,0);
-        cal.set(year, month, day);
-        return cal.getTime();
     }
 }
