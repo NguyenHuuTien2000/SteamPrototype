@@ -79,7 +79,7 @@ public class GamePageActivity extends AppCompatActivity {
 
         btnWish.setOnClickListener(v -> {
             intent.putExtra("wish", this.game);
-            setResult(StoreFrontActivity.RESULT_CODE_BOUGHT, intent);
+            setResult(StoreFrontActivity.RESULT_CODE_ADD_TO_WISHLIST, intent);
             finish();
         });
     }

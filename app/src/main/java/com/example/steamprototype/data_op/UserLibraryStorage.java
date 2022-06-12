@@ -134,7 +134,7 @@ public class UserLibraryStorage {
             game.setPopularity(cursor.getInt(1));
             popularGames.add(game);
         }
-        popularGames.sort(Comparator.comparing(Game::getPopularity));
+        popularGames.sort((o1, o2) -> o2.getPopularity() - o1.getPopularity());
         return popularGames;
     }
 }
