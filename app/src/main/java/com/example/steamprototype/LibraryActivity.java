@@ -15,6 +15,7 @@ import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class LibraryActivity  extends AppCompatActivity {
     Button btn_search;
@@ -23,8 +24,6 @@ public class LibraryActivity  extends AppCompatActivity {
     ListViewAdapter listViewAdapter;
     ArrayList<Game> gameArrayList;
     User user;
-    UserLibraryStorage userLibraryStorage;
-    public static final int REQUEST_CODE_BUY = 30;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,24 +33,41 @@ public class LibraryActivity  extends AppCompatActivity {
         Intent intent = getIntent();
 
         this.user = (User) intent.getSerializableExtra("user");
-        gameArrayList = (ArrayList<Game>) this.user.getLibrary();
-        listViewAdapter = new ListViewAdapter(this, gameArrayList);
-        listView.setAdapter(listViewAdapter);
+        this.gameArrayList = (ArrayList<Game>) this.user.getLibrary();
+
+        loadListView(this.gameArrayList);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             gotoGamePage(position);
         });
 
         btn_search.setOnClickListener(v -> {
-            String text = edt_search.getText().toString().trim();
-            listViewAdapter.getFilter().filter(text);
+            String text = edt_search.getText().toString().toLowerCase(Locale.ROOT).trim();
+            if (text.length() == 0) {
+                loadListView(this.gameArrayList);
+            } else {
+                ArrayList<Game> filtered = new ArrayList<>();
+                for (Game game : this.gameArrayList) {
+                    if (game.getTitle().toLowerCase(Locale.ROOT).startsWith(text)) {
+                        filtered.add(game);
+                    }
+                }
+                loadListView(filtered);
+            }
         });
 
 
-    } public void init() {
-        btn_search = (Button) findViewById(R.id.btn_librarysrch);
-        edt_search = (EditText) findViewById(R.id.edit_librarysrch);
-        listView = (ListView) findViewById(R.id.lstVLib);
+    }
+
+    public void loadListView(ArrayList<Game> displayList) {
+        this.listViewAdapter = new ListViewAdapter(LibraryActivity.this, displayList);
+        this.listView.setAdapter(this.listViewAdapter);
+    }
+
+    public void init() {
+        btn_search = findViewById(R.id.btn_librarysrch);
+        edt_search = findViewById(R.id.edit_librarysrch);
+        listView = findViewById(R.id.lstVLib);
     }
     public void gotoGamePage(int pos) {
         Game game = gameArrayList.get(pos);

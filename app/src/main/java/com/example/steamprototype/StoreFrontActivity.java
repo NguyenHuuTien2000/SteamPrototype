@@ -1,6 +1,7 @@
 package com.example.steamprototype;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.steamprototype.adapter.ListViewAdapter;
@@ -21,6 +23,7 @@ import com.example.steamprototype.entity.User;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Locale;
 
 public class StoreFrontActivity extends AppCompatActivity {
@@ -68,6 +71,7 @@ public class StoreFrontActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +115,18 @@ public class StoreFrontActivity extends AppCompatActivity {
                 }
                 loadListView(filtered);
             }
+        });
+
+        btn_new.setOnClickListener(v -> {
+            ArrayList<Game> sorted = new ArrayList<>(this.gameArrayList);
+            sorted.sort(Comparator.comparing(Game::getReleaseDate));
+            loadListView(sorted);
+        });
+
+
+
+        btn_special.setOnClickListener(v -> {
+            loadListView(this.gameArrayList);
         });
     }
 
