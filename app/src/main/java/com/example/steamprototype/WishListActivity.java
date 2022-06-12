@@ -27,7 +27,7 @@ public class WishListActivity extends AppCompatActivity {
     ArrayList<Game> gameArrayList;
     User user;
     UserLibraryStorage userLibraryStorage;
-    public static final int REQUEST_CODE_BUY = 30;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,6 @@ public class WishListActivity extends AppCompatActivity {
         Game game = gameArrayList.get(pos);
         Intent buyIntent = new Intent(WishListActivity.this, GamePageActivity.class);
         buyIntent.putExtra("game", game);
-        startActivityForResult(buyIntent, REQUEST_CODE_BUY);
+        startActivityForResult(buyIntent, StoreFrontActivity.REQUEST_CODE_BUY);
     }
 }

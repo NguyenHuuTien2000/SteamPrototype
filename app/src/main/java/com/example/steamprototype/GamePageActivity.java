@@ -34,12 +34,14 @@ public class GamePageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.game = (Game) intent.getSerializableExtra("game");
         this.user = (User) intent.getSerializableExtra("buyingUser");
+
         if (userLibraryStorage.checkContain(this.user, this.game)) {
             btnBuy.setVisibility(View.INVISIBLE);
             btnWish.setVisibility(View.INVISIBLE);
             btnBuy.setEnabled(false);
             btnWish.setEnabled(false);
         }
+
         this.gameImage.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         this.gameName.setText(game.getTitle());
         this.gamePub.setText("Publisher:\t" + game.getPublisher());

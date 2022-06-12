@@ -27,9 +27,12 @@
         android:id="@+id/txtV_page_dev"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="#00B0FF"
         android:paddingLeft="5dp"
-        android:text="DEV" />
+        android:text="DEV"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtV_page_publisher"
@@ -37,7 +40,9 @@
         android:layout_height="wrap_content"
         android:background="#00B0FF"
         android:paddingLeft="5dp"
-        android:text="Pub" />
+        android:text="Pub"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtV_page_date"
@@ -45,7 +50,9 @@
         android:layout_height="wrap_content"
         android:background="#00B0FF"
         android:paddingLeft="5dp"
-        android:text="Date" />
+        android:text="Date"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtV_page_genre"
@@ -53,7 +60,9 @@
         android:layout_height="wrap_content"
         android:background="#00B0FF"
         android:paddingLeft="5dp"
-        android:text="Genre" />
+        android:text="Genre"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,7 +98,10 @@
             <TextView
                 android:id="@+id/txtV_page_discount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="#76FF03"
                 android:gravity="center"
@@ -100,7 +112,10 @@
             <TextView
                 android:id="@+id/txtV_page_price"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="#00E5FF"
                 android:gravity="center"

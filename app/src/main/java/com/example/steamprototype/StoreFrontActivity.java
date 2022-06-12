@@ -118,8 +118,7 @@ public class StoreFrontActivity extends AppCompatActivity {
         if (requestCode == RESULT_CODE_ADD_TO_WISHLIST) {
             Game game = (Game) data.getSerializableExtra("wishlist");
             this.userLibraryStorage.addGameToLibrary(this.user, game);
-            Toast.makeText(this, game.getTitle() + " added to your library", Toast.LENGTH_LONG).show();
-
+            Toast.makeText(this, game.getTitle() + " added to your wishlist\n Any discount will be notified through email", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -130,9 +129,11 @@ public class StoreFrontActivity extends AppCompatActivity {
         buyIntent.putExtra("game", game);
         startActivityForResult(buyIntent, REQUEST_CODE_BUY);
     }
+
 //    public void goToStore( ) {
 //        startActivity(new Intent(this, StoreFrontActivity.class));
 //    }
+
     public void goToLibrary( ) {
         Intent goIntent = new Intent(this, LibraryActivity.class);
         goIntent.putExtra("user", this.user);
@@ -148,9 +149,11 @@ public class StoreFrontActivity extends AppCompatActivity {
         goIntent.putExtra("user", this.user);
         startActivity(goIntent);
     }
+
     public void logOut() {
         finish();
     }
+
     public void init() {
         sliderView = (SliderView) findViewById(R.id.slider);
         btn_search = (Button) findViewById(R.id.btn_search);
