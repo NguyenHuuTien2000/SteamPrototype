@@ -130,8 +130,8 @@ public class StoreFrontActivity extends AppCompatActivity {
             }
         }
         if (resultCode == RESULT_CODE_ADD_TO_WISHLIST) {
-            Game game = (Game) data.getSerializableExtra("wishlist");
-            this.userLibraryStorage.addGameToLibrary(this.user, game);
+            Game game = (Game) data.getSerializableExtra("wish");
+            this.userLibraryStorage.addGameToWL(this.user, game);
             Toast.makeText(this, game.getTitle() + " added to your wishlist\n Any discount will be notified through email", Toast.LENGTH_LONG).show();
         }
     }
@@ -169,12 +169,12 @@ public class StoreFrontActivity extends AppCompatActivity {
     }
 
     public void init() {
-        sliderView = (SliderView) findViewById(R.id.slider);
-        btn_search = (Button) findViewById(R.id.btn_search);
-        btn_new = (Button) findViewById(R.id.btn_new);
-        btn_popular = (Button) findViewById(R.id.btn_popular);
-        btn_special = (Button) findViewById(R.id.btn_special);
-        edt_search = (EditText) findViewById(R.id.edt_search);
-        listView = (ListView) findViewById(R.id.lstStore);
+        sliderView = findViewById(R.id.slider);
+        btn_search = findViewById(R.id.btn_search);
+        btn_new = findViewById(R.id.btn_new);
+        btn_popular = findViewById(R.id.btn_popular);
+        btn_special = findViewById(R.id.btn_special);
+        edt_search = findViewById(R.id.edt_search);
+        listView = findViewById(R.id.lstStore);
     }
 }

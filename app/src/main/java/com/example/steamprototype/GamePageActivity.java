@@ -42,6 +42,11 @@ public class GamePageActivity extends AppCompatActivity {
             btnWish.setEnabled(false);
         }
 
+        if (userLibraryStorage.checkContainWish(this.user, this.game)) {
+            btnWish.setVisibility(View.INVISIBLE);
+            btnWish.setEnabled(false);
+        }
+
         this.gameImage.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         this.gameName.setText(game.getTitle());
         this.gamePub.setText("Publisher:\t" + game.getPublisher());
@@ -66,6 +71,12 @@ public class GamePageActivity extends AppCompatActivity {
             builder.setIcon(R.drawable.steamdeck_steamlogo);
             AlertDialog dialog = builder.create();
             dialog.show();
+        });
+
+        btnWish.setOnClickListener(v -> {
+            intent.putExtra("wish", this.game);
+            setResult(StoreFrontActivity.RESULT_CODE_BOUGHT, intent);
+            finish();
         });
     }
 
