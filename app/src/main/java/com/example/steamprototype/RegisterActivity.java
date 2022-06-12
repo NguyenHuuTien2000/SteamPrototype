@@ -63,7 +63,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         pattern = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
         if (!email.matches(pattern)) {
-            this.errorMsg += "Email invalid\n";
+            this.errorMsg += "Email format invalid\n";
+            checkPattern = false;
         }
 
         if (!checkPattern) {

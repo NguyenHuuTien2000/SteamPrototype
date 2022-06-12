@@ -22,6 +22,7 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class StoreFrontActivity extends AppCompatActivity {
     SliderView sliderView;
@@ -89,9 +90,8 @@ public class StoreFrontActivity extends AppCompatActivity {
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
 
+        loadListView(this.gameArrayList);
 
-        listViewAdapter = new ListViewAdapter(StoreFrontActivity.this, gameArrayList);
-        listView.setAdapter(listViewAdapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             gotoGamePage(position);
@@ -100,9 +100,24 @@ public class StoreFrontActivity extends AppCompatActivity {
         sliderAdapter.setOnItemClickListener(this::gotoGamePage);
 
         btn_search.setOnClickListener(v -> {
-            String text = edt_search.getText().toString().trim();
-            listViewAdapter.getFilter().filter(text);
+            String text = edt_search.getText().toString().toLowerCase(Locale.ROOT).trim();
+            if (text.length() == 0) {
+                loadListView(this.gameArrayList);
+            } else {
+                ArrayList<Game> filtered = new ArrayList<>();
+                for (Game game : this.gameArrayList) {
+                    if (game.getTitle().toLowerCase(Locale.ROOT).startsWith(text)) {
+                        filtered.add(game);
+                    }
+                }
+                loadListView(filtered);
+            }
         });
+    }
+
+    public void loadListView(ArrayList<Game> displayList) {
+        this.listViewAdapter = new ListViewAdapter(StoreFrontActivity.this, displayList);
+        this.listView.setAdapter(this.listViewAdapter);
     }
 
     @Override

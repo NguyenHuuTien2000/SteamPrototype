@@ -108,7 +108,6 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
                 }
 
                 if (constraint == null || constraint.length() == 0) {
-
                     results.count = tempList.size();
                     results.values = tempList;
                 } else {
