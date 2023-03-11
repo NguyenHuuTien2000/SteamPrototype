@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#03A9F4"
+    android:background="#00BCD4"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/txtV_feature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:text="FEATURE"
+        android:text="@string/store_feature_text"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/white"
             android:ems="10"
-            android:hint="Search"
+            android:hint="@string/search_bar_hint"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:textColorHint="@color/white" />
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#4CAF50"
-            android:text="GO"
+            android:text="@string/search_button_go"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#F44336"
-            android:text="New" />
+            android:text="@string/sort_new_button" />
 
         <Button
             android:id="@+id/btn_popular"
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#F44336"
-            android:text="Popular" />
+            android:text="@string/sort_popular_button" />
 
         <Button
             android:id="@+id/btn_special"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#F44336"
-            android:text="All" />
+            android:text="@string/sort_all_button" />
     </LinearLayout>
 
     <ListView

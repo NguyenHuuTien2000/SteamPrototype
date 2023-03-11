@@ -29,7 +29,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="5dp"
             android:paddingLeft="5dp"
-            android:text="Name"
+            android:text="@string/gameList_name"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -40,7 +40,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="10dp"
             android:paddingLeft="5dp"
-            android:text="Genre"
+            android:text="@string/gameList_genre"
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp" />
     </LinearLayout>

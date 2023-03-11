@@ -1,5 +1,28 @@
 <resources>
-    <string name="app_name">Steam Prototype</string>
-    <string name="sign_in">Sign In</string>
-    <string name="reg">Register</string>
+    <string name="app_name" translatable="false">Steam Prototype</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="register_text">Register</string>
+    <string name="welcome_text">Welcome to</string>
+    <string name="or_text">or</string>
+    <string name="register_page_text">Register a new account</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in_page_text">Sign in to your account</string>
+    <string name="remember_me">Remember me</string>
+    <string name="store_feature_text">FEATURE</string>
+    <string name="search_bar_hint">Search</string>
+    <string name="sort_new_button">New</string>
+    <string name="sort_popular_button">Popular</string>
+    <string name="sort_all_button">All</string>
+    <string name="gameList_name">Name</string>
+    <string name="gameList_genre">Genre</string>
+    <string name="user_library">User Library</string>
+    <string name="lib_searchbar">Search</string>
+    <string name="search_button_go">Go</string>
+    <string name="lib_sort_all">ALL</string>
+    <string name="developer_label">Developer:</string>
+    <string name="publisher_label">Publisher:</string>
+    <string name="genre_label">Genre:</string>
+    <string name="release_date_label">Release Date:</string>
 </resources>

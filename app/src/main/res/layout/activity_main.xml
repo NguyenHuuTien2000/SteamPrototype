@@ -11,16 +11,32 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="Welcome to\nSteam Prototype"
+        android:text="@string/welcome_text"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo1" />
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
 
     <ImageView
         android:id="@+id/logo1"
@@ -40,41 +56,26 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="139dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="140dp"
         android:backgroundTint="#FF5722"
-        android:text="@string/sign_in"
+        android:text="@string/sign_in_text"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
-
-    <Button
-        android:id="@+id/btnToReg"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="139dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="140dp"
-        android:backgroundTint="#FF5722"
-        android:text="@string/reg"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
 
     <TextView
-        android:id="@+id/orText"
+        android:id="@+id/divideLine2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="199dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="194dp"
-        android:text="or"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="8dp"
+        android:text="_________________"
         android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnToSignIn" />
 
@@ -82,8 +83,7 @@
         android:id="@+id/divideLine1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="_________________"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -92,16 +92,33 @@
         app:layout_constraintTop_toBottomOf="@+id/btnToSignIn" />
 
     <TextView
-        android:id="@+id/divideLine2"
+        android:id="@+id/orText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="4dp"
-        android:text="_________________"
+        android:layout_marginStart="199dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="194dp"
+        android:text="@string/or_text"
         android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnToSignIn" />
+
+    <Button
+        android:id="@+id/btnToReg"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="140dp"
+        android:backgroundTint="#FF5722"
+        android:text="@string/register_text"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.338"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

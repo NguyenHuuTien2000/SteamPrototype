@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#3F51B5"
-        android:text="User Library"
+        android:text="@string/user_library"
         android:textColor="@color/white"
         android:textSize="34sp" />
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Search"
+            android:hint="@string/lib_searchbar"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#2196F3"
-            android:text="Go" />
+            android:text="@string/search_button_go" />
 
     </LinearLayout>
 
@@ -43,12 +43,12 @@
         android:id="@+id/btn_libraryall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ALL" />
+        android:text="@string/lib_sort_all" />
 
     <ListView
         android:id="@+id/lstVLib"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
 </LinearLayout>

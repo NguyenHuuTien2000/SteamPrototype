@@ -54,10 +54,10 @@ public class GamePageActivity extends AppCompatActivity {
 
         this.gameImage.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         this.gameName.setText(game.getTitle());
-        this.gamePub.setText("Publisher:\t" + game.getPublisher());
-        this.gameDev.setText("Developer:\t" + game.getDeveloper());
-        this.gameGenre.setText("Genre:\t" + game.getGenre());
-        this.gameDate.setText("Release Date:\t" + game.getReleaseDateString());
+        this.gamePub.setText(game.getPublisher());
+        this.gameDev.setText(game.getDeveloper());
+        //this.gameGenre.setText(getString(R.string.genre,game.getGenre()));
+        this.gameDate.setText(game.getReleaseDateString());
         this.gamePrice.setText(game.getPriceString());
         this.gameDiscount.setText(game.getDiscountString());
         this.gameDesc.setText(game.getDescription());
@@ -90,10 +90,10 @@ public class GamePageActivity extends AppCompatActivity {
     public void innit() {
         this.gameImage = findViewById(R.id.img_page);
         this.gameName = findViewById(R.id.txtV_page_name);
-        this.gameDev = findViewById(R.id.txtV_page_dev);
-        this.gamePub = findViewById(R.id.txtV_page_publisher);
-        this.gameDate = findViewById(R.id.txtV_page_date);
-        this.gameGenre = findViewById(R.id.txtV_page_genre);
+        this.gameDev = findViewById(R.id.label_page_dev);
+        this.gamePub = findViewById(R.id.label_page_publisher);
+        this.gameDate = findViewById(R.id.label_page_date);
+        this.gameGenre = findViewById(R.id.label_page_genre);
         this.gameDiscount = findViewById(R.id.txtV_page_discount);
         this.gamePrice = findViewById(R.id.txtV_page_price);
         this.gameDesc = findViewById(R.id.txtV_page_description);
