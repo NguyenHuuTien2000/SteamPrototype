@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.steamprototype.data_op.GameDataStorage;
+import com.example.steamprototype.data_op.SettingMethods;
 import com.example.steamprototype.data_op.UserDataStorage;
 import com.example.steamprototype.entity.User;
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static UserDataStorage userDataStorage;
     public static GameDataStorage gameDataStorage;
+
+    public static SettingMethods settingMethods = new SettingMethods();
 
     public static final int REQUEST_CODE_SIGN_IN = 69;
     public static final int RESULT_CODE_SIGN_IN_SUCCESS = 70;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingMethods.setLanguage(MainActivity.this);
         setContentView(R.layout.activity_main);
 
         btnToSignIn = findViewById(R.id.btnToSignIn);

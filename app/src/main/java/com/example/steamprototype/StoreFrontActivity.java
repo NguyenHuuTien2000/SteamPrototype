@@ -1,6 +1,12 @@
 package com.example.steamprototype;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,13 +23,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.steamprototype.adapter.ListViewAdapter;
 import com.example.steamprototype.adapter.SliderAdapter;
+import com.example.steamprototype.data_op.SettingMethods;
 import com.example.steamprototype.data_op.UserLibraryStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Locale;
 
 public class StoreFrontActivity extends AppCompatActivity {
@@ -39,7 +45,6 @@ public class StoreFrontActivity extends AppCompatActivity {
 
     User user;
     public static UserLibraryStorage userLibraryStorage;
-
     public static final int REQUEST_CODE_BUY = 30;
     public static final int RESULT_CODE_BOUGHT = 31;
     public static final int RESULT_CODE_ADD_TO_WISHLIST = 32;
@@ -65,16 +70,32 @@ public class StoreFrontActivity extends AppCompatActivity {
 //        if (id == R.id.mn_prof) {
 //            goToProfile();
 //        }
+        if (id == R.id.mn_set) {
+            goToSettings();
+        }
+
         if (id == R.id.mn_out) {
             logOut();
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences("Language",0);
+        if (sharedPreferences.getBoolean("lang_change",false)) {
+            MainActivity.settingMethods.setLanguage(StoreFrontActivity.this);
+            sharedPreferences.edit().putBoolean("lang_change", false).apply();
+            recreate();
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.settingMethods.setLanguage(StoreFrontActivity.this);
         setContentView(R.layout.storefront_activity);
 
         init();
@@ -173,6 +194,10 @@ public class StoreFrontActivity extends AppCompatActivity {
 //    public void goToProfile(){
 //    }
 //
+    private void goToSettings() {
+        Intent goIntent = new Intent(StoreFrontActivity.this, SettingsActivity.class);
+        startActivity(goIntent);
+    }
 
     public void goToWishList(){
         Intent goIntent = new Intent(StoreFrontActivity.this, WishListActivity.class);

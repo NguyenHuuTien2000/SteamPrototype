@@ -26,12 +26,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".SignInActivity"></activity>
-        <activity android:name=".StoreFrontActivity"></activity>
-        <activity android:name=".GamePageActivity"></activity>
-        <activity android:name=".LibraryActivity"></activity>
-        <activity android:name=".WishListActivity"></activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:configChanges="layoutDirection|locale" />
+        <activity
+            android:name=".SignInActivity"
+            android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".StoreFrontActivity"
+            android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".GamePageActivity"
+            android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".LibraryActivity"
+            android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".WishListActivity"
+            android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".SettingsActivity"
+            android:configChanges="layoutDirection|locale"/>
     </application>
 
 </manifest>

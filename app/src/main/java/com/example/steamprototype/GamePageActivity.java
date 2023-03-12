@@ -90,10 +90,10 @@ public class GamePageActivity extends AppCompatActivity {
     public void innit() {
         this.gameImage = findViewById(R.id.img_page);
         this.gameName = findViewById(R.id.txtV_page_name);
-        this.gameDev = findViewById(R.id.label_page_dev);
-        this.gamePub = findViewById(R.id.label_page_publisher);
-        this.gameDate = findViewById(R.id.label_page_date);
-        this.gameGenre = findViewById(R.id.label_page_genre);
+        this.gameDev = findViewById(R.id.txtV_page_dev);
+        this.gamePub = findViewById(R.id.txtV_page_publisher);
+        this.gameDate = findViewById(R.id.txtV_page_date);
+        this.gameGenre = findViewById(R.id.txtV_page_genre);
         this.gameDiscount = findViewById(R.id.txtV_page_discount);
         this.gamePrice = findViewById(R.id.txtV_page_price);
         this.gameDesc = findViewById(R.id.txtV_page_description);

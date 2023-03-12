@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.steamprototype.data_op.SettingMethods;
 import com.example.steamprototype.data_op.UserDataStorage;
 import com.example.steamprototype.entity.User;
 
@@ -25,6 +26,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.settingMethods.setLanguage(SignInActivity.this);
         setContentView(R.layout.sign_in_activity);
         innit();
 
