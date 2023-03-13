@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.steamprototype.data_op.GameDataStorage;
+import com.example.steamprototype.data_op.LocalizeGameAttribute;
 import com.example.steamprototype.data_op.SettingMethods;
 import com.example.steamprototype.data_op.UserDataStorage;
 import com.example.steamprototype.entity.User;

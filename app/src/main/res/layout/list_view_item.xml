@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/lsttV_img_gameImg"
         android:layout_width="140dp"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
@@ -16,8 +16,8 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="70dp"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="#673AB7"
@@ -26,7 +26,7 @@
         <TextView
             android:id="@+id/lsttV_txtV_gameName"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:paddingLeft="5dp"
             android:text="@string/gameList_name"
@@ -46,8 +46,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="70dp"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="#673AB7"
@@ -58,6 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_marginTop="5dp"
+            android:gravity="end"
+            android:paddingEnd="5dp"
             android:text="discount"
             android:textColor="#FFEB3B"
             android:textSize="16sp" />
@@ -65,8 +67,10 @@
         <TextView
             android:id="@+id/lsttV_txtV_price"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="end"
+            android:paddingEnd="5dp"
             android:text="price"
             android:textColor="@color/white"
             android:textSize="16sp" />

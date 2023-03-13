@@ -1,6 +1,9 @@
 package com.example.steamprototype;
 
+import static com.example.steamprototype.StoreFrontActivity.localizeGameAttribute;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -15,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.data_op.UserLibraryStorage;
 import com.example.steamprototype.entity.Game;
+import com.example.steamprototype.entity.LocalizedGame;
 import com.example.steamprototype.entity.User;
 
 public class GamePageActivity extends AppCompatActivity {
@@ -56,11 +60,17 @@ public class GamePageActivity extends AppCompatActivity {
         this.gameName.setText(game.getTitle());
         this.gamePub.setText(game.getPublisher());
         this.gameDev.setText(game.getDeveloper());
-        //this.gameGenre.setText(getString(R.string.genre,game.getGenre()));
+        this.gameGenre.setText(game.getGenre());
         this.gameDate.setText(game.getReleaseDateString());
-        this.gamePrice.setText(game.getPriceString());
         this.gameDiscount.setText(game.getDiscountString());
-        this.gameDesc.setText(game.getDescription());
+
+        SharedPreferences sharedPref = getSharedPreferences("Language",0);
+        String countryCode = sharedPref.getString("lang_code", "en");
+        LocalizedGame localizedGame = localizeGameAttribute.getLocalizedGame(countryCode, game.getGameID());
+
+        this.gamePrice.setText(localizedGame.getConvertedPrice());
+        this.gameDesc.setText(localizedGame.getTranslatedDesc());
+
         this.gameDesc.setMovementMethod(new ScrollingMovementMethod());
 
         btnBuy.setOnClickListener(v -> {

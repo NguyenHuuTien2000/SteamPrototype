@@ -42,6 +42,8 @@
                 android:layout_marginTop="5dp"
                 android:background="#00B0FF"
                 android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="@string/developer_label"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -52,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00B0FF"
                 android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
                 android:text="@string/publisher_label"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -61,9 +64,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:background="#00B0FF"
                 android:paddingLeft="5dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="5dp"
                 android:text="@string/release_date_label"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -74,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00B0FF"
                 android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
                 android:text="@string/genre_label"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -91,6 +96,8 @@
                 android:layout_marginTop="5dp"
                 android:background="#00B0FF"
                 android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:text="DEV"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -101,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00B0FF"
                 android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
                 android:text="Pub"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -110,9 +118,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:background="#00B0FF"
                 android:paddingLeft="5dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="5dp"
                 android:text="Date"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -123,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00B0FF"
                 android:paddingLeft="5dp"
+                android:paddingBottom="5dp"
                 android:text="Genre"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -167,8 +177,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="#76FF03"
                 android:gravity="center"
@@ -181,8 +189,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="#00B0FF"
                 android:gravity="center"
@@ -200,6 +206,6 @@
         android:justificationMode="inter_word"
         android:padding="5dp"
         android:scrollbars="vertical"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 </LinearLayout>

@@ -1,7 +1,10 @@
 package com.example.steamprototype.adapter;
 
+import static com.example.steamprototype.StoreFrontActivity.localizeGameAttribute;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +16,15 @@ import android.widget.TextView;
 
 import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.R;
+import com.example.steamprototype.SettingsActivity;
+import com.example.steamprototype.StoreFrontActivity;
 import com.example.steamprototype.data_op.GameDataStorage;
+import com.example.steamprototype.data_op.LocalizeGameAttribute;
 import com.example.steamprototype.entity.Game;
+import com.example.steamprototype.entity.LocalizedGame;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter implements Filterable {
     Context context;
@@ -24,6 +32,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
     ArrayList<Game> tempList;
 
     GameDataStorage gameDataStorage = MainActivity.gameDataStorage;
+
 
     public ListViewAdapter(Context context, ArrayList<Game> gameList) {
         this.context = context;
@@ -73,7 +82,12 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         lv_row.gameName.setText(game.getTitle());
         lv_row.genre.setText(game.getGenre());
         lv_row.discount.setText(game.getDiscountString());
-        lv_row.price.setText(game.getPriceString());
+
+        SharedPreferences sharedPref = context.getSharedPreferences("Language",0);
+        String countryCode = sharedPref.getString("lang_code", "en");
+        LocalizedGame localizedGame = localizeGameAttribute.getLocalizedGame(countryCode, game.getGameID());
+
+        lv_row.price.setText(localizedGame.getConvertedPrice());
 
         return convertView;
     }

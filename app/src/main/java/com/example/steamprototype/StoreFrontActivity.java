@@ -1,12 +1,7 @@
 package com.example.steamprototype;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.steamprototype.adapter.ListViewAdapter;
 import com.example.steamprototype.adapter.SliderAdapter;
-import com.example.steamprototype.data_op.SettingMethods;
+import com.example.steamprototype.data_op.LocalizeGameAttribute;
 import com.example.steamprototype.data_op.UserLibraryStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
@@ -48,6 +43,8 @@ public class StoreFrontActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_BUY = 30;
     public static final int RESULT_CODE_BOUGHT = 31;
     public static final int RESULT_CODE_ADD_TO_WISHLIST = 32;
+
+    public static LocalizeGameAttribute localizeGameAttribute;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,10 +101,11 @@ public class StoreFrontActivity extends AppCompatActivity {
         this.user = (User) intent.getSerializableExtra("user");
         this.gameArrayList = MainActivity.gameDataStorage.getGameList();
 
+        localizeGameAttribute = new LocalizeGameAttribute(this.gameArrayList);
         userLibraryStorage = new UserLibraryStorage(this.gameArrayList, this.wishList);
         userLibraryStorage.loadUserLists(this.user);
 
-        sliderAdapter = new SliderAdapter(gameArrayList);
+        sliderAdapter = new SliderAdapter(this, gameArrayList);
         sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
         sliderView.setSliderAdapter(sliderAdapter);
         sliderView.setScrollTimeInSec(3);

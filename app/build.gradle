@@ -4,6 +4,7 @@ plugins {
 
 android {
     compileSdk 32
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.example.steamprototype"
@@ -39,4 +40,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
 }

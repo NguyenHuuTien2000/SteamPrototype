@@ -1,6 +1,10 @@
 package com.example.steamprototype.adapter;
 
+import static com.example.steamprototype.StoreFrontActivity.localizeGameAttribute;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +18,10 @@ import com.example.steamprototype.R;
 import com.example.steamprototype.StoreFrontActivity;
 import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.entity.Game;
+import com.example.steamprototype.entity.LocalizedGame;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +32,11 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
     private final GameDataStorage gameDataStorage = MainActivity.gameDataStorage;
     private SliderAdapter.OnItemClickListener listener;
 
+    private Context context;
+
     // Constructor
-    public SliderAdapter(ArrayList<Game> list) {
+    public SliderAdapter(Context context, ArrayList<Game> list) {
+        this.context = context;
         this.gameList = list;
     }
 
@@ -56,7 +65,12 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         viewHolder.imageView.setImageBitmap(gameDataStorage.getGameImage(game.getImage()));
         viewHolder.gameName.setText(game.getTitle());
         viewHolder.gameDiscount.setText(game.getDiscountString());
-        viewHolder.gamePrice.setText(game.getPriceString());
+
+        SharedPreferences sharedPref = context.getSharedPreferences("Language",0);
+        String countryCode = sharedPref.getString("lang_code", "en");
+        LocalizedGame localizedGame = localizeGameAttribute.getLocalizedGame(countryCode, game.getGameID());
+
+        viewHolder.gamePrice.setText(localizedGame.getConvertedPrice());
 
         viewHolder.itemView.setOnClickListener(v -> {
             if (this.listener != null) {
