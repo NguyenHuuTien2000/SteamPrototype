@@ -19,17 +19,36 @@
             android:scaleType="fitXY"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/txtV_profile_username"
-            android:layout_width="wrap_content"
-            android:layout_height="41dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:hint="@string/username"
-            android:textColor="#FEFEFE"
-            android:textColorHint="#FDFDFD" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtV_profile_username"
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:hint="@string/username"
+                android:textColor="#FEFEFE"
+                android:textColorHint="#FDFDFD" />
+
+            <TextView
+                android:id="@+id/txtV_profile_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="Location"
+                android:textColor="@color/white"
+                android:textColorHint="@android:color/darker_gray" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -45,7 +64,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="5dp"
             android:backgroundTint="#595B5D"
-            android:text="Game" />
+            android:text="@string/game" />
 
         <Button
             android:id="@+id/btn_profile_wishlist"
@@ -56,7 +75,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:backgroundTint="#595B5D"
-            android:text="Button" />
+            android:text="@string/wishlist" />
     </LinearLayout>
 
 </LinearLayout>

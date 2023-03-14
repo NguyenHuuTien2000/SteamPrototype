@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#595B5D"
     android:orientation="vertical">
 
     <ImageView
@@ -19,7 +19,7 @@
         android:id="@+id/txtV_page_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#2979FF"
+        android:background="#2D2F31"
         android:paddingLeft="5dp"
         android:text="Name"
         android:textColor="@color/white"
@@ -40,23 +40,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="#00B0FF"
+                android:background="#595B5D"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:text="@string/developer_label"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/label_page_publisher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#00B0FF"
+                android:background="#595B5D"
                 android:paddingLeft="5dp"
                 android:paddingBottom="5dp"
                 android:text="@string/publisher_label"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -64,23 +64,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="#00B0FF"
+                android:background="#595B5D"
                 android:paddingLeft="5dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="5dp"
                 android:text="@string/release_date_label"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/label_page_genre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#00B0FF"
+                android:background="#595B5D"
                 android:paddingLeft="5dp"
                 android:paddingBottom="5dp"
                 android:text="@string/genre_label"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -94,23 +94,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="#00B0FF"
+                android:background="#595B5D"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:text="DEV"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtV_page_publisher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#00B0FF"
+                android:background="#595B5D"
                 android:paddingLeft="5dp"
                 android:paddingBottom="5dp"
                 android:text="Pub"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -118,23 +118,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="#00B0FF"
+                android:background="#595B5D"
                 android:paddingLeft="5dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="5dp"
                 android:text="Date"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtV_page_genre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#00B0FF"
+                android:background="#595B5D"
                 android:paddingLeft="5dp"
                 android:paddingBottom="5dp"
                 android:text="Genre"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -206,6 +206,6 @@
         android:justificationMode="inter_word"
         android:padding="5dp"
         android:scrollbars="vertical"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 </LinearLayout>

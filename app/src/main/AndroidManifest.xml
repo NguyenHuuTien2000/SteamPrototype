@@ -52,6 +52,10 @@
         <activity
             android:name=".SettingsActivity"
             android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".ProfileActivity"
+            android:configChanges="layoutDirection|locale"/>
+
     </application>
 
 </manifest>

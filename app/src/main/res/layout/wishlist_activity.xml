@@ -8,7 +8,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3F51B5"
+        android:background="#2D2F31"
         android:text="@string/wishlist"
         android:textColor="@color/white"
         android:textSize="34sp" />
@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#03A9F4"
+        android:background="#FEFEFE"
         android:orientation="horizontal">
 
         <EditText
@@ -28,7 +28,7 @@
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:text="@string/search_bar_hint"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/btn_wishsearch"

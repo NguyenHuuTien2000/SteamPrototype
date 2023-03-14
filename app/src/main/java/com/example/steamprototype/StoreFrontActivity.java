@@ -188,10 +188,13 @@ public class StoreFrontActivity extends AppCompatActivity {
         goIntent.putExtra("user", this.user);
         startActivity(goIntent);
     }
-//
-//    public void goToProfile(){
-//    }
-//
+
+    public void goToProfile(){
+        Intent goIntent = new Intent(StoreFrontActivity.this, ProfileActivity.class);
+        goIntent.putExtra("user", this.user);
+        startActivity(goIntent);
+    }
+
     private void goToSettings() {
         Intent goIntent = new Intent(StoreFrontActivity.this, SettingsActivity.class);
         startActivity(goIntent);

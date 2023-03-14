@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00BCD4"
+    android:background="#313435"
     android:orientation="vertical">
 
     <TextView
@@ -38,6 +38,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <EditText
@@ -50,7 +51,8 @@
             android:hint="@string/search_bar_hint"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:textColorHint="@color/white" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/black" />
 
         <Button
             android:id="@+id/btn_search"
@@ -96,6 +98,6 @@
         android:id="@+id/lstStore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#03A9F4" />
+        android:background="#3C3F41" />
 
 </LinearLayout>
