@@ -3,6 +3,7 @@ package com.example.steamprototype.network;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -11,45 +12,43 @@ import java.net.URLEncoder;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class TranslateAPI extends AsyncTask<String, String, String> {
-    private OnTranslationCompleteListener listener;
+    private OnTranslationCompleteListener listener = null;
     @Override
     protected String doInBackground(String... strings) {
-        String[] strArr = (String[]) strings;
-        String str = "";
+        String translatedText = "";
         try {
-            String encode = URLEncoder.encode(strArr[0], "utf-8");
-            StringBuilder sb = new StringBuilder();
-            sb.append("https://translate.googleapis.com/translate_a/single?client=gtx&sl=");
-            sb.append(strArr[1]);
-            sb.append("&tl=");
-            sb.append(strArr[2]);
-            sb.append("&dt=t&q=");
-            sb.append(encode);
-            URL convertEndpoint = new URL(sb.toString());
-            HttpsURLConnection connection = (HttpsURLConnection) convertEndpoint.openConnection();
-            if (connection.getResponseCode() == 200) {
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                connection.getOutputStream().write(byteArrayOutputStream.toByteArray());
-                String byteArrayOutputStream2 = byteArrayOutputStream.toString();
-                byteArrayOutputStream.close();
-                JSONArray jSONArray = new JSONArray(byteArrayOutputStream2).getJSONArray(0);
-                String str2 = str;
-                for (int i = 0; i < jSONArray.length(); i++) {
-                    JSONArray jSONArray2 = jSONArray.getJSONArray(i);
-                    StringBuilder sb2 = new StringBuilder();
-                    sb2.append(str2);
-                    sb2.append(jSONArray2.get(0).toString());
-                    str2 = sb2.toString();
-                }
-                return str2;
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("text", strings[0])
+                    .add("target", strings[1])
+                    .add("source", "en")
+                    .build();
+
+            Request request = new Request.Builder()
+                    .url("https://translate-plus.p.rapidapi.com/translate")
+                    .post(body)
+                    .addHeader("content-type", "application/json")
+                    .addHeader("X-RapidAPI-Key", "130066a719msh9dccf59b8d2fb55p14aaffjsncc24348ffbe3")
+                    .addHeader("X-RapidAPI-Host", "translate-plus.p.rapidapi.com")
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200) {
+                JSONObject json = new JSONObject(response.body().string());
+                translatedText = json.getJSONObject("data").getString("translatedText");
             }
-            connection.disconnect();
         } catch (Exception e) {
-            listener.onError(e);
-            return str;
+            e.printStackTrace();
         }
-        return str;
+        return translatedText;
     }
     @Override
     protected void onPostExecute(String text) {
@@ -59,7 +58,7 @@ public class TranslateAPI extends AsyncTask<String, String, String> {
         void onCompleted(String text);
         void onError(Exception e);
     }
-    public void setOnTranslationCompleteListener(OnTranslationCompleteListener listener){
+    public void setListener(OnTranslationCompleteListener listener){
         this.listener=listener;
     }
 }

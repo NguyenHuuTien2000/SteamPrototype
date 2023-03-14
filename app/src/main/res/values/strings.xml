@@ -31,4 +31,6 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_log_out">Log out</string>
     <string name="game">Game</string>
+    <string name="rate_dialog_message">Rate this game?</string>
+    <string name="rate_dialog_notice">Note: a game can only be rated once per week</string>
 </resources>

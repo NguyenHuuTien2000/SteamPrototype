@@ -3,15 +3,17 @@ package com.example.steamprototype.data_op;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.LocalizedGame;
 import com.example.steamprototype.network.ConversionAPI;
+import com.example.steamprototype.network.LocationAPI;
 import com.example.steamprototype.network.TranslateAPI;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
+
 
 public class LocalizeGameAttribute {
     private Map<Integer, LocalizedGame> localizedENGamesMap;
@@ -81,32 +83,31 @@ public class LocalizeGameAttribute {
         localizedGame = new LocalizedGame(id);
 
         String desc = game.getDescription();
-        //localizedGame.setTranslatedDesc(getTranslation(desc, countryCode));
         localizedGame.setTranslatedDesc(desc);
 
         double price = game.getPrice();
-        localizedGame.setConvertedPrice(getConvertedPrice(countryCode, price));
+        String convertedPrice = getConvertedPrice(countryCode, price);
+        localizedGame.setConvertedPrice(convertedPrice);
 
         return localizedGame;
     }
 
     private String getTranslation(String strings, String countryCode) {
-        final String[] translatedStr = {""};
-        translateAPI.setOnTranslationCompleteListener(new TranslateAPI.OnTranslationCompleteListener() {
+        final String[] translatedText = {strings};
+        LocationAPI locationAPI = new LocationAPI();
+        locationAPI.setListener(new LocationAPI.OnLocateCompleteListener() {
             @Override
             public void onCompleted(String text) {
-                if (text.equals("")) {
-                    text = strings;
-                }
-                translatedStr[0] = text;
+                translatedText[0] = text;
             }
+
             @Override
             public void onError(Exception e) {
-                System.out.println(e.getMessage());
+
             }
         });
-        translateAPI.execute(strings ,"en", countryCode);
-        return translatedStr[0];
+        locationAPI.execute();
+        return translatedText[0];
     }
     private String getConvertedPrice(String countryCode, double price) {
         if (price == 0) {
@@ -117,7 +118,7 @@ public class LocalizeGameAttribute {
 
         switch (countryCode) {
             case "vi":
-                currencyCode = "VND";
+                currencyCode = "đ";
                 convertedPrice *= exchangeRateVND;
                 return numberFormat.format(convertedPrice) + " " + currencyCode;
             case "zh":
@@ -138,28 +139,4 @@ public class LocalizeGameAttribute {
         }
         return currencyFormat.format(convertedPrice);
     }
-
-//    private String getConvertedPrice(String currencyCode, String price) {
-//        final String[] convertedStr = {""};
-//        conversionAPI.setListener(new ConversionAPI.OnConversionCompleteListener() {
-//            @Override
-//            public void onCompleted(String text) {
-//                if (text.equals("")) {
-//                    text = price;
-//                }
-//                String formattedText = numberFormat.format(text);
-////                if (formattedText.length() > 5 && formattedText.contains(".")) {
-////                    formattedText = formattedText.substring(0,formattedText.indexOf("."));
-////                }
-//                convertedStr[0] = formattedText + " " + currencyCode;
-//            }
-//
-//            @Override
-//            public void onError(Exception e) {
-//
-//            }
-//        });
-//        conversionAPI.execute(currencyCode, "" + price);
-//        return convertedStr[0];
-//    }
 }
