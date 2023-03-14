@@ -50,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/steamdeck_steamlogo" />
 
-    <EditText
+    <com.example.steamprototype.customView.EditTextWithClear
         android:id="@+id/editUsername"
         android:layout_width="300dp"
         android:layout_height="51dp"
@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInText" />
 
-    <EditText
+    <com.example.steamprototype.customView.EditTextWithClear
         android:id="@+id/editPass"
         android:layout_width="300dp"
         android:layout_height="51dp"

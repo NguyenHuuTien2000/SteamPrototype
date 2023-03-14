@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4CAF50">
+    android:background="#4CAF50"
+    >
 
     <Button
         android:id="@+id/btnReg"
@@ -50,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/steamdeck_steamlogo" />
 
-    <EditText
+    <com.example.steamprototype.customView.EditTextWithClear
         android:id="@+id/editNewUsername"
         android:layout_width="300dp"
         android:layout_height="51dp"
@@ -68,7 +69,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/regText" />
 
-    <EditText
+    <com.example.steamprototype.customView.EditTextWithClear
         android:id="@+id/editNewEmail"
         android:layout_width="300dp"
         android:layout_height="51dp"
@@ -86,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/regText" />
 
-    <EditText
+    <com.example.steamprototype.customView.EditTextWithClear
         android:id="@+id/editNewPass"
         android:layout_width="300dp"
         android:layout_height="51dp"

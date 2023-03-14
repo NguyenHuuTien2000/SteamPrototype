@@ -26,7 +26,7 @@
     <string name="genre_label">Thể loại:</string>
     <string name="release_date_label">Ngày phát hành:</string>
     <string name="select_language_label">Chọn ngôn ngữ</string>
-    <string name="wishlist">Danh sách dự định</string>
+    <string name="wishlist">Danh sách ước</string>
     <string name="menu_store">Cửa hàng</string>
     <string name="menu_library">Thư viện</string>
     <string name="menu_profile">Thông tin cá nhân</string>

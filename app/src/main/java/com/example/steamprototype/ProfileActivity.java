@@ -40,8 +40,8 @@ public class ProfileActivity  extends AppCompatActivity {
         txtV_profile_location.setText("Location");
         wishListArr = (ArrayList<Game>) this.user.getWishlist();
         libListArr = (ArrayList<Game>) this.user.getLibrary();
-        btn_profile_library.setText(R.string.game + "\t" + libListArr.size());
-        btn_profile_wishlist.setText(R.string.wishlist + "\t" + wishListArr.size());
+        btn_profile_library.setText(getString(R.string.game) + "\t" + libListArr.size());
+        btn_profile_wishlist.setText(getString(R.string.wishlist) + "\t" + wishListArr.size());
 
         btn_profile_library.setOnClickListener(new View.OnClickListener() {
             @Override

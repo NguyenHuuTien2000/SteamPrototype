@@ -64,9 +64,9 @@ public class StoreFrontActivity extends AppCompatActivity {
         if (id == R.id.mn_wlst) {
             goToWishList();
         }
-//        if (id == R.id.mn_prof) {
-//            goToProfile();
-//        }
+        if (id == R.id.mn_prof) {
+            goToProfile();
+        }
         if (id == R.id.mn_set) {
             goToSettings();
         }
