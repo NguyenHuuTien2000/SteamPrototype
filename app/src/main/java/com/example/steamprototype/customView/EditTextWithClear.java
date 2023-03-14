@@ -16,7 +16,7 @@ import androidx.core.content.res.ResourcesCompat;
 import com.example.steamprototype.R;
 
 public class EditTextWithClear extends AppCompatEditText {
-
+    int a = 0;
     Drawable mClearButtonImage;
 
     public EditTextWithClear(@NonNull Context context) {
