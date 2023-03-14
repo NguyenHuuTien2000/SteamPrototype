@@ -20,7 +20,7 @@
         android:background="#FEFEFE"
         android:orientation="horizontal">
 
-        <EditText
+        <com.example.steamprototype.customView.EditTextWithClear
             android:id="@+id/edit_librarysrch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:hint="@string/search_bar_hint"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/btn_librarysrch"
