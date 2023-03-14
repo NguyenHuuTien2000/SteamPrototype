@@ -29,37 +29,37 @@ public class Seedr {
 
         date = convertDate(2018, 6, 1);
         imagePath = createImageStorage(this.activity, "azur_lane.jpg");
-        game = new Game(0, "Azure Lane", "Yostar", "Manjuu, Yongshi", "Strategy", "Mobile", date, 0, 0, imagePath);
+        game = new Game(0, "Azure Lane", "Yostar", "Manjuu, Yongshi", "Strategy", "Mobile", date, 0, 0, imagePath, 500_000,100_000);
         gameLists.add(game);
 
         date = convertDate(2015, 11, 3);
         imagePath = createImageStorage(this.activity, "nfs.jpg");
-        game = new Game(1, "Need for Speed", "Electronic Arts", "Ghost Games", "Racing", "PC", date, 82, 10, imagePath);
+        game = new Game(1, "Need for Speed", "Electronic Arts", "Ghost Games", "Racing", "PC", date, 82, 10, imagePath, 78_029,18_918);
         gameLists.add(game);
 
         date = convertDate(2017, 7, 5);
         imagePath = createImageStorage(this.activity, "cold_water.jpg");
-        game = new Game(2, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 25, imagePath);
+        game = new Game(2, "Cold Waters", "Killerfish Games", "Killerfish Games", "Simulator", "PC", date, 40, 25, imagePath,63_389,13_776);
         gameLists.add(game);
 
         date = convertDate(2019, 4, 19);
         imagePath = createImageStorage(this.activity, "arknights.jpg");
-        game = new Game(3, "Arknights", "Yostar", "Hyper Gryph", "Towerdefense", "Mobile", date, 0, 0, imagePath);
+        game = new Game(3, "Arknights", "Yostar", "Hyper Gryph", "Towerdefense", "Mobile", date, 0, 0, imagePath,441_739,93_626);
         gameLists.add(game);
 
         date = convertDate(2019, 3, 22);
         imagePath = createImageStorage(this.activity, "sekiro.jpg");
-        game = new Game(4, "Sekiro", "FromSoftware", "FromSoftware", "Action", "PC", date, 60, 0, imagePath);
+        game = new Game(4, "Sekiro", "FromSoftware", "FromSoftware", "Action", "PC", date, 60, 0, imagePath,350_165,75_352);
         gameLists.add(game);
 
         date = convertDate(2011, 8, 18);
         imagePath = createImageStorage(this.activity, "portal2.jpg");
-        game = new Game(5, "Portal 2", "Valve Corp", "Valve Corp", "Puzzle", "PC", date, 10, 0, imagePath);
+        game = new Game(5, "Portal 2", "Valve Corp", "Valve Corp", "Puzzle", "PC", date, 10, 0, imagePath,0,0);
         gameLists.add(game);
 
         date = convertDate(2020, 9, 28);
         imagePath = createImageStorage(this.activity, "genshin.jpg");
-        game = new Game(6, "Genshin Impact", "Mihoyo", "Mihoyo", "Adventure", "PC, Mobile", date, 0, 0, imagePath);
+        game = new Game(6, "Genshin Impact", "Mihoyo", "Mihoyo", "Adventure", "PC, Mobile", date, 0, 0, imagePath,5_000_000,1_000_000);
         gameLists.add(game);
         writeDescription();
         for (int i = 0; i < gameLists.size(); i++) {

@@ -47,8 +47,7 @@ public class EditTextWithClear extends AppCompatEditText {
                 if ((getCompoundDrawablesRelative()[2] != null)) {
                     float clearButtonStart; // Used for LTR languages
                     float clearButtonEnd;  // Used for RTL languages
-                    boolean isClearButtonClicked = false;
-// Detect the touch in RTL or LTR layout direction.
+                    boolean isClearButtonClicked = false;// Detect the touch in RTL or LTR layout direction.
                     if (getLayoutDirection() == LAYOUT_DIRECTION_RTL) {
                         // If RTL, get the end of the button on the left side.
                         clearButtonEnd = mClearButtonImage

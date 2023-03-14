@@ -15,6 +15,9 @@ import com.example.steamprototype.data_op.SettingMethods;
 import com.example.steamprototype.data_op.UserDataStorage;
 import com.example.steamprototype.entity.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
     Button btnToSignIn, btnToReg;
 
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int RESULT_CODE_SIGN_IN_NO_ACC = 71;
     public static final int REQUEST_CODE_REGISTER = 420;
     public static final int RESULT_CODE_REGISTER_SUCCESS = 421;
+
+    private static final Map<Integer, Boolean> gameRatings = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

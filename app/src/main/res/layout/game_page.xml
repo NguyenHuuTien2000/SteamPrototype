@@ -7,6 +7,11 @@
     android:background="#595B5D"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/img_page"
         android:layout_width="match_parent"
@@ -155,14 +160,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#F44336"
-                android:text="Buy"
+                android:text="@string/buy_button"
                 android:textSize="16sp" />
 
             <Button
                 android:id="@+id/btnWish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add to Wishlist"
+                android:text="@string/add_to_wishlist_button"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -199,6 +204,12 @@
         </LinearLayout>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btnRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rate_button" />
+
     <TextView
         android:id="@+id/txtV_page_description"
         android:layout_width="match_parent"
@@ -208,4 +219,5 @@
         android:scrollbars="vertical"
         android:textColor="@color/white"
         android:textSize="20sp" />
+
 </LinearLayout>

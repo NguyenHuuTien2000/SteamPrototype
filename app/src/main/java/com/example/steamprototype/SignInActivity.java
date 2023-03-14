@@ -34,11 +34,11 @@ public class SignInActivity extends AppCompatActivity {
 
         if (!dataStorage.checkContains()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setPositiveButton("Yes", (dialog, id) -> {
+            builder.setPositiveButton(getString(R.string.yes), (dialog, id) -> {
                 setResult(MainActivity.RESULT_CODE_SIGN_IN_NO_ACC);
                 finish();
             });
-            builder.setNegativeButton("No", (dialog, id) -> {
+            builder.setNegativeButton(getString(R.string.no), (dialog, id) -> {
 
             });
             builder.setMessage("No account was found do you want to create one?");

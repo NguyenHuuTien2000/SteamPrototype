@@ -10,7 +10,7 @@
     <string name="password">Password</string>
     <string name="sign_in_page_text">Sign in to your account</string>
     <string name="remember_me">Remember me</string>
-    <string name="store_feature_text">FEATURE</string>
+    <string name="store_feature_text">FEATURED</string>
     <string name="search_bar_hint">Search</string>
     <string name="sort_new_button">New</string>
     <string name="sort_popular_button">Popular</string>
@@ -33,4 +33,14 @@
     <string name="game">Game</string>
     <string name="rate_dialog_message">Rate this game?</string>
     <string name="rate_dialog_notice">Note: a game can only be rated once per week</string>
+    <string name="buy_button">Buy</string>
+    <string name="add_to_wishlist_button">Add to Wishlist</string>
+    <string name="rate_button">Rating:</string>
+    <string name="rating_thank_message">Thank you for rating this game</string>
+    <string name="buy_confirm_message">Do you want to buy this game?</string>
+    <string name="buy_confirm_title">Confirm order</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="rating_condition_message">You must own this game to rate it</string>
+    <string name="rating_condition_message2">You already rated this game</string>
 </resources>

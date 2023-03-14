@@ -14,6 +14,7 @@ import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.data_op.UserLibraryStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
+import com.example.steamprototype.network.LocationAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,27 +37,34 @@ public class ProfileActivity  extends AppCompatActivity {
         init();
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
+
+        getLocation();
         txtV_profile_username.setText(user.getUsername());
-        txtV_profile_location.setText("Location");
+
         wishListArr = (ArrayList<Game>) this.user.getWishlist();
         libListArr = (ArrayList<Game>) this.user.getLibrary();
-        btn_profile_library.setText(getString(R.string.game) + "\t" + libListArr.size());
-        btn_profile_wishlist.setText(getString(R.string.wishlist) + "\t" + wishListArr.size());
+        btn_profile_library.setText(getString(R.string.game) + " " + libListArr.size());
+        btn_profile_wishlist.setText(getString(R.string.wishlist) + " " + wishListArr.size());
 
-        btn_profile_library.setOnClickListener(new View.OnClickListener() {
+        btn_profile_library.setOnClickListener(v -> goToLibrary());
+
+        btn_profile_wishlist.setOnClickListener(v -> goToWishList());
+
+    }
+
+    private void getLocation() {
+        LocationAPI locationAPI = new LocationAPI();
+        locationAPI.setListener(new LocationAPI.OnLocateCompleteListener() {
             @Override
-            public void onClick(View v) {
-                goToLibrary();
+            public void onCompleted(String text) {
+                txtV_profile_location.setText(text);
+            }
+            @Override
+            public void onError(Exception e) {
+                e.printStackTrace();
             }
         });
-
-        btn_profile_wishlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToWishList();
-            }
-        });
-
+        locationAPI.execute();
     }
 
     public void init(){

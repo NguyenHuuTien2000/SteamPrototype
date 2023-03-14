@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/lsttV_img_gameImg"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
+        android:layout_width="160dp"
+        android:layout_height="105dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:adjustViewBounds="true"
@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_height="105dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="#3C3F41"
@@ -43,11 +43,21 @@
             android:text="@string/gameList_genre"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lsttV_txtV_ratingLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"
+            android:text="@string/rate_button"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_height="105dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="#3C3F41"
@@ -74,6 +84,14 @@
             android:text="price"
             android:textColor="@color/white"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lsttV_txtV_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="right|end"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

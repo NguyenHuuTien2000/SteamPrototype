@@ -66,6 +66,13 @@ public class UserDataStorage {
             e.printStackTrace();
         }
         this.database = activity.openOrCreateDatabase(dbname, Context.MODE_PRIVATE, null);
+        if (firstRun) {
+            String query = "CREATE TABLE IF NOT EXISTS user( " +
+                    "username VARCHAR(20) PRIMARY KEY NOT NUll UNIQUE," +
+                    "password VARCHAR(20) NOT NUll UNIQUE," +
+                    "email VARCHAR(30) NOT NUll UNIQUE)";
+            database.execSQL(query);
+        }
     }
 
     public boolean saveUserData(User user) {

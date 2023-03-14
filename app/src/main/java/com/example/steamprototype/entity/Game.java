@@ -18,11 +18,14 @@ public class Game implements Serializable {
     private double discount;
     private String image;
 
-    public int popularity;
+    private double totalRate;
 
+    private long rateCount;
     private String description;
 
-    public Game(int gameID, String title, String publisher, String developer, String genre, String platform, Date releaseDate, double price, double discount, String image) {
+    private boolean isRated;
+
+    public Game(int gameID, String title, String publisher, String developer, String genre, String platform, Date releaseDate, double price, double discount, String image, double totalRate, long rateCount) {
         this.gameID = gameID;
         this.title = title;
         this.publisher = publisher;
@@ -33,6 +36,46 @@ public class Game implements Serializable {
         this.price = price;
         this.discount = discount;
         this.image = image;
+
+        this.isRated = false;
+        this.totalRate = totalRate;
+        this.rateCount = rateCount;
+    }
+
+    public double getTotalRate() {
+        return totalRate;
+    }
+
+    public void setTotalRate(double totalRate) {
+        this.totalRate = totalRate;
+    }
+
+    public void setRateCount(long rateCount) {
+        this.rateCount = rateCount;
+    }
+
+    public void addRating(double rate) {
+        this.totalRate += rate;
+        this.rateCount += 1;
+    }
+
+    public double getRatingDouble() {
+        return totalRate / rateCount;
+    }
+
+    public String getRatingString() {
+        return String.format( "%.1f", totalRate / rateCount);
+    }
+
+    public long getRatingCount() {
+        return rateCount;
+    }
+
+    public boolean isRated() {
+        return isRated;
+    }
+    public void setRated() {
+        this.isRated = true;
     }
 
     public double getDiscount() {
@@ -145,15 +188,6 @@ public class Game implements Serializable {
     public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
     }
-
-    public int getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
-    }
-
 
     public String getDescription() {
         return description;

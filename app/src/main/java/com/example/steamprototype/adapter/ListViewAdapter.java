@@ -69,6 +69,7 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
             lv_row.genre = (TextView) convertView.findViewById(R.id.lsttV_txtV_genre);
             lv_row.discount = (TextView) convertView.findViewById(R.id.lsttV_txtV_discount);
             lv_row.price = (TextView) convertView.findViewById(R.id.lsttV_txtV_price);
+            lv_row.ratings = (TextView) convertView.findViewById(R.id.lsttV_txtV_rating);
 
             convertView.setTag(lv_row);
 
@@ -82,6 +83,9 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         lv_row.gameName.setText(game.getTitle());
         lv_row.genre.setText(game.getGenre());
         lv_row.discount.setText(game.getDiscountString());
+
+        String ratingText = game.getRatingString() + "★";
+        lv_row.ratings.setText(ratingText);
 
         SharedPreferences sharedPref = context.getSharedPreferences("Language",0);
         String countryCode = sharedPref.getString("lang_code", "en");
@@ -98,6 +102,8 @@ public class ListViewAdapter extends BaseAdapter implements Filterable {
         public TextView genre;
         public TextView discount;
         public TextView price;
+
+        public TextView ratings;
     }
 
     @Override

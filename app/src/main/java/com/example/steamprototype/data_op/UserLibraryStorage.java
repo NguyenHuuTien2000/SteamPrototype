@@ -131,10 +131,15 @@ public class UserLibraryStorage {
         Cursor cursor = database.rawQuery("SELECT gameID, COUNT(gameID) FROM library GROUP BY gameID", null);
         while (cursor.moveToNext()) {
             Game game = fullList.get(cursor.getInt(0));
-            game.setPopularity(cursor.getInt(1));
             popularGames.add(game);
         }
-        popularGames.sort((o1, o2) -> o2.getPopularity() - o1.getPopularity());
+        popularGames.sort((o1, o2) -> {
+            int comp = Double.compare(o2.getRatingDouble(), o1.getRatingDouble());
+            if (comp == 0) {
+                comp = Long.compare(o2.getRatingCount(), o1.getRatingCount());
+            }
+            return comp;
+        });
         return popularGames;
     }
 }

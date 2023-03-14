@@ -92,7 +92,7 @@ public class LocalizeGameAttribute {
         return localizedGame;
     }
 
-    private String getTranslation(String strings, String countryCode) {
+    private String getLocation(String strings, String countryCode) {
         final String[] translatedText = {strings};
         LocationAPI locationAPI = new LocationAPI();
         locationAPI.setListener(new LocationAPI.OnLocateCompleteListener() {

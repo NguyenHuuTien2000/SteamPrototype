@@ -86,6 +86,8 @@ public class StoreFrontActivity extends AppCompatActivity {
             sharedPreferences.edit().putBoolean("lang_change", false).apply();
             recreate();
         }
+        this.gameArrayList = MainActivity.gameDataStorage.getGameList();
+        loadListView(this.gameArrayList);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

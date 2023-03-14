@@ -47,11 +47,14 @@ public class GameDataStorage {
                 "price DOUBLE NOT NUll," +
                 "discount DOUBLE NOT NUll," +
                 "image TEXT NOT NUll UNIQUE," +
-                "description TEXT )";
+                "description TEXT," +
+                "totalRate DOUBLE NOT NULL," +
+                "rateCount LONG NOT NULL)";
         database.execSQL(query);
     }
 
     public ArrayList<Game> getGameList() {
+        loadAllGameFromDB();
         return this.gameLists;
     }
 
@@ -76,6 +79,8 @@ public class GameDataStorage {
         contentValues.put("discount", game.getDiscount());
         contentValues.put("image", game.getImage());
         contentValues.put("description", game.getDescription());
+        contentValues.put("totalRate", game.getTotalRate());
+        contentValues.put("rateCount", game.getRatingCount());
         this.database.insert("game", null, contentValues);
     }
 
@@ -103,11 +108,21 @@ public class GameDataStorage {
             double discount = cursor.getDouble(8);
             String imagePath = cursor.getString(9);
             String description = cursor.getString(10);
-            game = new Game(id, title, publisher, developer, genre, platform, releaseDate, price, discount, imagePath);
+            double totalRate = cursor.getDouble(11);
+            long rateCount = cursor.getLong(12);
+            game = new Game(id, title, publisher, developer, genre, platform, releaseDate, price, discount, imagePath, totalRate, rateCount);
             game.setDescription(description);
             this.gameLists.add(game);
         }
         cursor.close();
+    }
+
+    public void updateGameRating(int id, double rate, long rateCount) {
+        String query = "UPDATE game " +
+                "SET totalRate = " + rate + "," +
+                "    rateCount = " + rateCount + " " +
+                "WHERE gameID = " + id;
+        database.execSQL(query);
     }
 
     public Bitmap getGameImage(String path) {
