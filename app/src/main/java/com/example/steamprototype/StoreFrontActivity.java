@@ -131,7 +131,7 @@ public class StoreFrontActivity extends AppCompatActivity {
             } else {
                 ArrayList<Game> filtered = new ArrayList<>();
                 for (Game game : this.gameArrayList) {
-                    if (game.getTitle().toLowerCase(Locale.ROOT).startsWith(text)) {
+                    if (game.getTitle().toLowerCase(Locale.ROOT).contains(text)) {
                         filtered.add(game);
                     }
                 }
