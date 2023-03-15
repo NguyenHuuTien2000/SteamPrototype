@@ -131,11 +131,12 @@ public class UserLibraryStorage {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public ArrayList<Game> getPopularList() {
         ArrayList<Game> popularGames = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT gameID, COUNT(gameID) FROM library GROUP BY gameID", null);
-        while (cursor.moveToNext()) {
-            Game game = fullList.get(cursor.getInt(0));
-            popularGames.add(game);
-        }
+        //Cursor cursor = database.rawQuery("SELECT gameID, COUNT(gameID) FROM library GROUP BY gameID", null);
+//        while (cursor.moveToNext()) {
+//            Game game = fullList.get(cursor.getInt(0));
+//            popularGames.add(game);
+//        }
+        popularGames.addAll(fullList);
         popularGames.sort((o1, o2) -> {
             int comp = Double.compare(o2.getRatingDouble(), o1.getRatingDouble());
             if (comp == 0) {
