@@ -45,7 +45,7 @@ public class GameDataStorage {
                 "platform VARCHAR(40) NOT NUll," +
                 "releaseDate DATETIME NOT NUll," +
                 "price DOUBLE NOT NUll," +
-                "discount DOUBLE NOT NUll," +
+                "discount DOUBLE," +
                 "image TEXT NOT NUll UNIQUE," +
                 "description TEXT," +
                 "totalRate DOUBLE NOT NULL," +

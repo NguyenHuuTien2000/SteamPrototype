@@ -1,11 +1,15 @@
 package com.example.steamprototype;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -108,7 +112,6 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         localizeGameAttribute = new LocalizeGameAttribute(this.gameArrayList);
         userLibraryStorage = new UserLibraryStorage(this.gameArrayList, this.wishList);
-
         if (!change) {
             userLibraryStorage.loadUserLists(this.user);
         }
@@ -137,6 +140,7 @@ public class StoreFrontActivity extends AppCompatActivity {
                 }
                 loadListView(filtered);
             }
+            hideKeyboard(this);
         });
 
         btn_new.setOnClickListener(v -> {
@@ -151,6 +155,14 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         btn_special.setOnClickListener(v -> {
             loadListView(this.gameArrayList);
+        });
+
+        edt_search.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (keyEvent != null&& (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                hideKeyboard(StoreFrontActivity.this);
+                btn_search.performClick();
+            }
+            return false;
         });
     }
 
@@ -212,6 +224,17 @@ public class StoreFrontActivity extends AppCompatActivity {
         Intent goIntent = new Intent(StoreFrontActivity.this, WishListActivity.class);
         goIntent.putExtra("user", this.user);
         startActivity(goIntent);
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     public void logOut() {

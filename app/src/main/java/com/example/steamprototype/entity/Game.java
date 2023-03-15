@@ -60,10 +60,16 @@ public class Game implements Serializable {
     }
 
     public double getRatingDouble() {
+        if (totalRate == 0) {
+            return totalRate;
+        }
         return totalRate / rateCount;
     }
 
     public String getRatingString() {
+        if (totalRate == 0) {
+            return totalRate + "";
+        }
         return String.format( "%.1f", totalRate / rateCount);
     }
 

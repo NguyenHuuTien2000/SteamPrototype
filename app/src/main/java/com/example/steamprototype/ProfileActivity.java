@@ -41,8 +41,10 @@ public class ProfileActivity  extends AppCompatActivity {
         getLocation();
         txtV_profile_username.setText(user.getUsername());
         img_profile.setImageDrawable(getResources().getDrawable(R.drawable.default_avatar));
-        wishListArr = (ArrayList<Game>) this.user.getWishlist();
-        libListArr = (ArrayList<Game>) this.user.getLibrary();
+
+        wishListArr = this.user.getWishlist();
+        libListArr = this.user.getLibrary();
+
         btn_profile_library.setText(getString(R.string.game) + " " + libListArr.size());
         btn_profile_wishlist.setText(getString(R.string.wishlist) + " " + wishListArr.size());
 

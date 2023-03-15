@@ -15,7 +15,8 @@
         android:id="@+id/sldV_txtV_nameGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#673AB7"
+        android:background="#5C6164"
+        android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:textColor="@color/white"
@@ -26,7 +27,8 @@
         android:id="@+id/sldV_txtV_sliderVdiscount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#673AB7"
+        android:background="#5C6164"
+        android:gravity="right"
         android:paddingLeft="10dp"
         android:textColor="#FFD740" />
 
@@ -34,7 +36,8 @@
         android:id="@+id/sldV_txtV_sliderVprice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#673AB7"
+        android:background="#5C6164"
+        android:gravity="right"
         android:paddingLeft="10dp"
         android:paddingBottom="5dp"
         android:textColor="@color/white" />
