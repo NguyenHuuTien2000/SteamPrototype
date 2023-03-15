@@ -128,6 +128,7 @@ public class StoreFrontActivity extends AppCompatActivity {
         sliderAdapter.setOnItemClickListener(position -> gotoGamePage(position, this.gameArrayList));
 
         btn_search.setOnClickListener(v -> {
+
             String text = edt_search.getText().toString().toLowerCase(Locale.ROOT).trim();
             if (text.length() == 0) {
                 loadListView(this.gameArrayList);

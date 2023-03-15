@@ -42,4 +42,14 @@
         android:paddingBottom="5dp"
         android:textColor="@color/white" />
 
+    <TextView
+        android:id="@+id/sldV_txtV_sliderVDot"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#5C6164"
+        android:gravity="right"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/white" />
+
 </LinearLayout>
