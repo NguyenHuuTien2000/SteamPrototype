@@ -25,6 +25,7 @@ import com.example.steamprototype.entity.LocalizedGame;
 import com.example.steamprototype.entity.User;
 
 import java.text.NumberFormat;
+import java.util.Calendar;
 
 public class GamePageActivity extends AppCompatActivity implements RateGameFragment.OnRateListener {
     ImageView gameImage;
@@ -35,7 +36,7 @@ public class GamePageActivity extends AppCompatActivity implements RateGameFragm
     GameDataStorage gameDataStorage = MainActivity.gameDataStorage;
     UserLibraryStorage userLibraryStorage = StoreFrontActivity.userLibraryStorage;
 
-    private boolean isFragmentDisplayed = false, gameOwned = false;
+    private boolean isFragmentDisplayed = false, gameOwned = false, isRated = false;
     private double rate = 0.0;
     static final String STATE_FRAGMENT = "state_of_fragment";
 
@@ -116,12 +117,20 @@ public class GamePageActivity extends AppCompatActivity implements RateGameFragm
         btnRate.setText(ratingText);
 
         btnRate.setOnClickListener(v -> {
+
+            SharedPreferences sharedPreferences = getSharedPreferences("Ratings",MODE_PRIVATE);
+            isRated = sharedPreferences.getBoolean("" + game.getGameID(), false);
+
+            sharedPreferences = getSharedPreferences("last_launch", 0);
+            int lastLaunch = sharedPreferences.getInt("launch_time",1);
+            if (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) != lastLaunch) {
+                isRated = false;
+            }
+
             if (gameOwned) {
-                if (game.isRated() && !isFragmentDisplayed) {
+                if (isRated && !isFragmentDisplayed) {
                     Toast.makeText(this, getString(R.string.rating_condition_message2), Toast.LENGTH_LONG).show();
                 } else {
-                    SharedPreferences sharedPreferences = getSharedPreferences("Ratings",MODE_PRIVATE);
-                    boolean isRated = sharedPreferences.getBoolean("" + game.getGameID(), false);
                     if (isFragmentDisplayed && !isRated) {
                         closeFragment();
                     } else {
@@ -167,8 +176,9 @@ public class GamePageActivity extends AppCompatActivity implements RateGameFragm
         Toast.makeText(this, getString(R.string.rating_thank_message),  Toast.LENGTH_SHORT).show();
         updateRating();
         SharedPreferences sharedPreferences = getSharedPreferences("Ratings",MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("" + id,true).apply();
+        sharedPreferences.edit().putBoolean("" + id,true).commit();
         closeFragment();
+        setLastLaunch();
     }
 
     public void updateRating() {
@@ -178,6 +188,11 @@ public class GamePageActivity extends AppCompatActivity implements RateGameFragm
                 numberFormat.format(game.getRatingCount()) + ")";
 
         btnRate.setText(ratingText);
+    }
+
+    private void setLastLaunch() {
+        SharedPreferences sharedPreferences = getSharedPreferences("last_launch",0);
+        sharedPreferences.edit().putInt("launch_time", Calendar.getInstance().get(Calendar.DAY_OF_WEEK)).commit();
     }
 
 
