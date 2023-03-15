@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_REGISTER = 420;
     public static final int RESULT_CODE_REGISTER_SUCCESS = 421;
 
-    private static final Map<Integer, Boolean> gameRatings = new HashMap<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

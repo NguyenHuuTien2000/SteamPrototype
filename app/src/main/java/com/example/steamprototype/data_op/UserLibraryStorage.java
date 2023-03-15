@@ -110,6 +110,8 @@ public class UserLibraryStorage {
 
 
     public void loadUserLists(User user) {
+
+        //Get library data
         Cursor cursor = database.rawQuery("SELECT * FROM library WHERE username == '" + user.getUsername() + "'", null);
         while (cursor.moveToNext()) {
             int gameID = Integer.parseInt(cursor.getString(1));
@@ -117,6 +119,7 @@ public class UserLibraryStorage {
         }
         cursor.close();
 
+        //Get wishlist data
         cursor = database.rawQuery("SELECT * FROM wishlist WHERE username == '" + user.getUsername() + "'", null);
         while (cursor.moveToNext()) {
             int gameID = Integer.parseInt(cursor.getString(1));

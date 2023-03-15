@@ -77,11 +77,14 @@ public class StoreFrontActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private static boolean change = false;
+
     @Override
     protected void onResume() {
         super.onResume();
         SharedPreferences sharedPreferences = getSharedPreferences("Language",0);
         if (sharedPreferences.getBoolean("lang_change",false)) {
+            change = true;
             MainActivity.settingMethods.setLanguage(StoreFrontActivity.this);
             sharedPreferences.edit().putBoolean("lang_change", false).apply();
             recreate();
@@ -105,7 +108,9 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         localizeGameAttribute = new LocalizeGameAttribute(this.gameArrayList);
         userLibraryStorage = new UserLibraryStorage(this.gameArrayList, this.wishList);
-        userLibraryStorage.loadUserLists(this.user);
+        if (!change) {
+            userLibraryStorage.loadUserLists(this.user);
+        }
 
         sliderAdapter = new SliderAdapter(this, gameArrayList);
         sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
