@@ -108,6 +108,7 @@ public class StoreFrontActivity extends AppCompatActivity {
 
         localizeGameAttribute = new LocalizeGameAttribute(this.gameArrayList);
         userLibraryStorage = new UserLibraryStorage(this.gameArrayList, this.wishList);
+
         if (!change) {
             userLibraryStorage.loadUserLists(this.user);
         }

@@ -50,10 +50,6 @@ public class RateGameFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_rate_game, container, false);
         RatingBar ratingBar = rootView.findViewById(R.id.rating_bar);
-        Button closeBtn = rootView.findViewById(R.id.rate_close_button);
-        closeBtn.setOnClickListener(view -> {
-            //closeFragment();
-        });
 //        if (getArguments().containsKey(RATE)) {
 //            rate = getArguments().getDouble(RATE);
 //            SharedPreferences sharedPreferences =
