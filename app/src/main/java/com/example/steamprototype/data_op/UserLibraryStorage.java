@@ -105,6 +105,8 @@ public class UserLibraryStorage {
         Date date = new Date();
         contentValues.put("dateAdded", formatter.format(date));
 
+        contentValues.put("discounted", game.getDiscount() > 0);
+
         this.database.insert("Wishlist", null, contentValues);
     }
 

@@ -92,9 +92,11 @@ public class StoreFrontActivity extends AppCompatActivity {
             MainActivity.settingMethods.setLanguage(StoreFrontActivity.this);
             sharedPreferences.edit().putBoolean("lang_change", false).apply();
             recreate();
+        } else {
+            this.gameArrayList = MainActivity.gameDataStorage.getGameList();
+            loadListView(this.gameArrayList);
         }
-        this.gameArrayList = MainActivity.gameDataStorage.getGameList();
-        loadListView(this.gameArrayList);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

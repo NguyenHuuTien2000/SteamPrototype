@@ -1,7 +1,13 @@
 package com.example.steamprototype;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,10 +22,15 @@ import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 import com.example.steamprototype.network.LocationAPI;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileActivity  extends AppCompatActivity {
+    private static final int ACTIVITY_SELECT_IMAGE = 406;
     ImageView img_profile;
     TextView txtV_profile_username, txtV_profile_location;
     Button btn_profile_library,btn_profile_wishlist;
@@ -29,6 +40,8 @@ public class ProfileActivity  extends AppCompatActivity {
 
     List<Game> wishListArr;
     List<Game> libListArr;
+
+    private String imagePath = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,13 +53,28 @@ public class ProfileActivity  extends AppCompatActivity {
 
         getLocation();
         txtV_profile_username.setText(user.getUsername());
-        img_profile.setImageDrawable(getResources().getDrawable(R.drawable.default_avatar));
+
+        SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
+        imagePath = sharedPreferences.getString("profile_pic", "");
+        if (imagePath.isEmpty()) {
+            img_profile.setImageDrawable(getResources().getDrawable(R.drawable.default_avatar));
+        } else {
+            img_profile.setImageBitmap(getAvatarImage(this.imagePath));
+        }
+
+
+        img_profile.setOnClickListener(view -> {
+            Intent pickIntent = null;
+            pickIntent = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(pickIntent, ACTIVITY_SELECT_IMAGE);
+        });
 
         wishListArr = this.user.getWishlist();
         libListArr = this.user.getLibrary();
 
-        btn_profile_library.setText(getString(R.string.game) + " " + libListArr.size());
-        btn_profile_wishlist.setText(getString(R.string.wishlist) + " " + wishListArr.size());
+        btn_profile_library.setText(getString(R.string.game) + "\n" + libListArr.size());
+        btn_profile_wishlist.setText(getString(R.string.wishlist) + "\n" + wishListArr.size());
 
         btn_profile_library.setOnClickListener(v -> goToLibrary());
 
@@ -70,11 +98,11 @@ public class ProfileActivity  extends AppCompatActivity {
     }
 
     public void init(){
-        img_profile = (ImageView) findViewById(R.id.img_profile);
-        txtV_profile_username = (TextView) findViewById(R.id.txtV_profile_username);
-        txtV_profile_location = (TextView) findViewById(R.id.txtV_profile_location);
-        btn_profile_library = (Button) findViewById(R.id.btn_profile_library);
-        btn_profile_wishlist = (Button) findViewById(R.id.btn_profile_wishlist);
+        img_profile = findViewById(R.id.img_profile);
+        txtV_profile_username = findViewById(R.id.txtV_profile_username);
+        txtV_profile_location = findViewById(R.id.txtV_profile_location);
+        btn_profile_library = findViewById(R.id.btn_profile_library);
+        btn_profile_wishlist = findViewById(R.id.btn_profile_wishlist);
     }
 
     public void goToLibrary( ) {
@@ -86,5 +114,54 @@ public class ProfileActivity  extends AppCompatActivity {
         Intent goIntent = new Intent(ProfileActivity.this, WishListActivity.class);
         goIntent.putExtra("user", this.user);
         startActivity(goIntent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ACTIVITY_SELECT_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                InputStream imageStream;
+                try {
+                    imageStream = getContentResolver().openInputStream(selectedImage);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                Bitmap image = BitmapFactory.decodeStream(imageStream);
+                img_profile.setImageBitmap(image);
+
+                imagePath = saveImage(this,"profile_pic.png",image);
+
+                SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
+                sharedPreferences.edit().putString("profile_pic", imagePath).apply();
+            }
+        }
+    }
+
+    public Bitmap getAvatarImage(String path) {
+        File imgFile = new  File(path);
+        Bitmap bitmap = null;
+        if(imgFile.exists()){
+            bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        }
+        return bitmap;
+    }
+
+    public String saveImage(Activity activity, String imageName, Bitmap image) {
+        String path = "";
+        try {
+            String savePath = activity.getApplicationInfo().dataDir + "/avatar/";
+            File file = new File(savePath + imageName);
+            FileOutputStream out = new FileOutputStream(file);
+            image.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.flush();
+            out.close();
+
+            path = savePath + imageName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return path;
     }
 }

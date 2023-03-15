@@ -32,7 +32,7 @@
     <string name="menu_log_out">Log out</string>
     <string name="game">Game</string>
     <string name="rate_dialog_message">Rate this game?</string>
-    <string name="rate_dialog_notice">Note: a game can only be rated once per week</string>
+    <string name="rate_dialog_notice">Note: a game can only be rated once a day</string>
     <string name="buy_button">Buy</string>
     <string name="add_to_wishlist_button">Add to Wishlist</string>
     <string name="rate_button">Rating:</string>

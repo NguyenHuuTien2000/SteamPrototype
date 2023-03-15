@@ -34,7 +34,7 @@
     <string name="menu_log_out">Đăng xuất</string>
     <string name="game">Trò chơi</string>
     <string name="rate_dialog_message">Xếp hạng trò chơi này?</string>
-    <string name="rate_dialog_notice">Lưu ý: một trò chơi chỉ có thể được xếp hạng một lần một tuần</string>
+    <string name="rate_dialog_notice">Lưu ý: một trò chơi chỉ có thể được xếp hạng một lần mỗi ngày</string>
     <string name="buy_button">Mua</string>
     <string name="add_to_wishlist_button">Thêm vào danh sách ước</string>
     <string name="rate_button">Xếp hạng</string>

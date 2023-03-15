@@ -1,6 +1,7 @@
 package com.example.steamprototype.data_op;
 
 import android.app.Activity;
+import android.os.Environment;
 
 import com.example.steamprototype.entity.Game;
 
@@ -65,6 +66,8 @@ public class Seedr {
         for (int i = 0; i < gameLists.size(); i++) {
             gameLists.get(i).setDescription(this.descriptions.get(i));
         }
+
+        //copyStockAvatars();
 
         return gameLists;
     }
@@ -150,4 +153,30 @@ public class Seedr {
                 "\tCho đến khi bạn đoàn tụ với người thân và chứng kiến sự lắng đọng của mọi thứ ở điểm đến cuối cùng.";
         this.descriptions.add(desc);
     }
+
+//    public void copyStockAvatars() {
+//        try {
+//            String savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/stock images";
+//            File folder = new File(savePath);
+//            if (!folder.exists()) {
+//                String[] files = activity.getAssets().list("stock avatar");
+//                for (String fileName : files) {
+//                    InputStream inputStream = activity.getAssets().open("stock avatar/" + fileName);
+//                    FileOutputStream fileOutputStream = new FileOutputStream(savePath + fileName);
+//
+//                    byte[] buffer = new byte[1024];
+//                    int length;
+//                    while ((length = inputStream.read(buffer)) > 0) {
+//                        fileOutputStream.write(buffer, 0, length);
+//                    }
+//
+//                    fileOutputStream.flush();
+//                    fileOutputStream.close();
+//                    inputStream.close();
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
