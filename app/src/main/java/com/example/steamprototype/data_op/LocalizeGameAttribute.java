@@ -47,7 +47,7 @@ public class LocalizeGameAttribute {
 
     public LocalizeGameAttribute(ArrayList<Game> games, Context context) {
         numberFormat.setMaximumFractionDigits(0);
-        updateRate();
+        //updateRate();
 
         this.context = context;
         this.localizedCNGamesMap = new HashMap<>();

@@ -97,14 +97,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void copyStockAvatars() {
         try {
-            String savePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/stock images/";
+            String savePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/stock images/";
             File folder = new File(savePath);
-            if (!folder.exists()) {
+            boolean test = folder.exists();
+            if (!test) {
                 checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_CODE_STORAGE_PERMISSION);
                 folder.mkdir();
-                String[] files = this.getAssets().list("stock avatar");
+                String[] files = this.getAssets().list("stock avatar no bg");
                 for (String fileName : files) {
-                    InputStream inputStream = this.getAssets().open("stock avatar/" + fileName);
+                    InputStream inputStream = this.getAssets().open("stock avatar no bg/" + fileName);
                     File outFile = new File(savePath + fileName);
                     FileOutputStream fileOutputStream = new FileOutputStream(outFile);
 

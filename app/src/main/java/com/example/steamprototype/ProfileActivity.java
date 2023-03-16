@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -61,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
         this.user = (User) intent.getSerializableExtra("user");
 
         txtV_profile_username.setText(user.getUsername());
+        setLocationByGoogle();
 
         SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
         imagePath = sharedPreferences.getString("profile_pic", "");
@@ -72,10 +75,10 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         img_profile.setOnClickListener(view -> {
-            Intent pickIntent = null;
-            pickIntent = new Intent(Intent.ACTION_PICK,
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(pickIntent, ACTIVITY_SELECT_IMAGE);
+            Intent pickIntent = new Intent();
+            pickIntent.setType("image/*");
+            pickIntent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(pickIntent, "Select Picture"), ACTIVITY_SELECT_IMAGE);
         });
 
         wishListArr = this.user.getWishlist();
@@ -88,21 +91,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         btn_profile_wishlist.setOnClickListener(v -> goToWishList());
 
-    }
-
-    private void getLocation() {
-        LocationAPI locationAPI = new LocationAPI();
-        locationAPI.setListener(new LocationAPI.OnLocateCompleteListener() {
-            @Override
-            public void onCompleted(String text) {
-                txtV_profile_location.setText(text);
-            }
-            @Override
-            public void onError(Exception e) {
-                e.printStackTrace();
-            }
-        });
-        locationAPI.execute();
     }
 
     public void init(){
@@ -160,12 +148,15 @@ public class ProfileActivity extends AppCompatActivity {
         String path = "";
         try {
             String savePath = activity.getApplicationInfo().dataDir + "/avatar/";
+            File folder = new File(savePath);
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
             File file = new File(savePath + imageName);
             FileOutputStream out = new FileOutputStream(file);
             image.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
             out.close();
-
             path = savePath + imageName;
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,13 +172,41 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void getLocationByGoogle() {
+    public void setLocationByGoogle() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         checkLocationPermission();
         fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
             if (location != null) {
-                Geocoder geocoder = new Geocoder(ProfileActivity.this, Locale.getDefault());
+                try {
+                    Geocoder geocoder = new Geocoder(ProfileActivity.this, Locale.getDefault());
+                    List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                    Address address = addresses.get(0);
+
+                    ArrayList<String> addressParts = new ArrayList<>();
+
+                    for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                        addressParts.add(address.getAddressLine(i));
+                    }
+                    txtV_profile_location.setText(TextUtils.join("\n", addressParts));
+                } catch (Exception e) {
+
+                }
             }
         });
+    }
+
+    private void setLocationByIP() {
+        LocationAPI locationAPI = new LocationAPI();
+        locationAPI.setListener(new LocationAPI.OnLocateCompleteListener() {
+            @Override
+            public void onCompleted(String text) {
+                txtV_profile_location.setText(text);
+            }
+            @Override
+            public void onError(Exception e) {
+                e.printStackTrace();
+            }
+        });
+        locationAPI.execute();
     }
 }
