@@ -43,4 +43,5 @@
     <string name="no">No</string>
     <string name="rating_condition_message">You must own this game to rate it</string>
     <string name="rating_condition_message2">You already rated this game</string>
+    <string name="price_free">Free</string>
 </resources>

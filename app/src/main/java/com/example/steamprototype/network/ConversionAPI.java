@@ -3,6 +3,7 @@ package com.example.steamprototype.network;
 import android.os.AsyncTask;
 import android.util.JsonReader;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -10,45 +11,34 @@ import java.nio.charset.StandardCharsets;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class ConversionAPI extends AsyncTask<String, String, String> {
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class ConversionAPI extends AsyncTask<Void, Void, String> {
     private OnConversionCompleteListener listener;
 
     @Override
-    protected String doInBackground(String... strings) {
-        StringBuilder sb = new StringBuilder();
-        String[] strArr = (String[]) strings;
-        String str = "";
+    protected String doInBackground(Void... voids) {
         try {
-            sb.append("https://api.apilayer.com/fixer/convert?to=")
-                    .append(strArr[0])
-                    .append("&from=USD")
-                    .append("&amount=")
-                    .append(strArr[1]);
-            URL convertEndpoint = new URL(sb.toString());
-            HttpsURLConnection connection = (HttpsURLConnection) convertEndpoint.openConnection();
-            connection.setRequestProperty("apikey", "GQJhy9mEXtchlY0ZNlA4t2fT9CE6TPrH");
-            if (connection.getResponseCode() == 200) {
-                InputStream responseBody = connection.getInputStream();
-                InputStreamReader responseBodyReader = new InputStreamReader(responseBody, StandardCharsets.UTF_8);
-                JsonReader jsonReader = new JsonReader(responseBodyReader);
-                jsonReader.beginObject();
-                while (jsonReader.hasNext()) {
-                    String key = jsonReader.nextName();
-                    if (key.equals("result")) {
-                        str = jsonReader.nextString();
-                        return str;
-                    } else {
-                        jsonReader.skipValue();
-                    }
-                }
-                jsonReader.close();
-                connection.disconnect();
+            OkHttpClient client = new OkHttpClient().newBuilder().build();
+
+            Request request = new Request.Builder()
+                    .url("https://api.apilayer.com/fixer/latest?symbols=JPY%2C%20CNY%2C%20VND%2C%20EUR&base=USD")
+                    .addHeader("apikey", "GQJhy9mEXtchlY0ZNlA4t2fT9CE6TPrH")
+                    .method("GET", null)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200) {
+                return response.body().string();
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-        return str;
+        return null;
     }
+
     @Override
     protected void onPostExecute(String text) {
         listener.onCompleted(text);

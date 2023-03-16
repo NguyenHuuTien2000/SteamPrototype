@@ -112,9 +112,10 @@ public class StoreFrontActivity extends AppCompatActivity {
         this.user = (User) intent.getSerializableExtra("user");
         this.gameArrayList = MainActivity.gameDataStorage.getGameList();
 
-        localizeGameAttribute = new LocalizeGameAttribute(this.gameArrayList);
+
         userLibraryStorage = new UserLibraryStorage(this.gameArrayList, this.wishList);
         if (!change) {
+            localizeGameAttribute = new LocalizeGameAttribute(this.gameArrayList, this);
             userLibraryStorage.loadUserLists(this.user);
         }
 

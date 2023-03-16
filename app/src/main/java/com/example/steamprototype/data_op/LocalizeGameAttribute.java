@@ -1,10 +1,18 @@
 package com.example.steamprototype.data_op;
 
+
+
+import android.content.Context;
+
+import com.example.steamprototype.MainActivity;
+import com.example.steamprototype.R;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.LocalizedGame;
 import com.example.steamprototype.network.ConversionAPI;
 import com.example.steamprototype.network.LocationAPI;
 import com.example.steamprototype.network.TranslateAPI;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -35,15 +43,20 @@ public class LocalizeGameAttribute {
     private double exchangeRateJPY = 134.54;
     private double exchangeRateEUR = 0.9366;
 
-    public LocalizeGameAttribute(ArrayList<Game> games) {
-        numberFormat.setMaximumFractionDigits(0);
+    public Context context;
 
+    public LocalizeGameAttribute(ArrayList<Game> games, Context context) {
+        numberFormat.setMaximumFractionDigits(0);
+        updateRate();
+
+        this.context = context;
         this.localizedCNGamesMap = new HashMap<>();
         this.localizedFRGamesMap = new HashMap<>();
         this.localizedVIGamesMap = new HashMap<>();
         this.localizedJPGamesMap = new HashMap<>();
         this.localizedSPGamesMap = new HashMap<>();
         this.localizedENGamesMap = new HashMap<>();
+
 
         for (Game game : games) {
             int id = game.getGameID();
@@ -91,27 +104,9 @@ public class LocalizeGameAttribute {
 
         return localizedGame;
     }
-
-    private String getLocation(String strings, String countryCode) {
-        final String[] translatedText = {strings};
-        LocationAPI locationAPI = new LocationAPI();
-        locationAPI.setListener(new LocationAPI.OnLocateCompleteListener() {
-            @Override
-            public void onCompleted(String text) {
-                translatedText[0] = text;
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
-        });
-        locationAPI.execute();
-        return translatedText[0];
-    }
     private String getConvertedPrice(String countryCode, double price) {
         if (price == 0) {
-            return "Free";
+            return context.getString(R.string.price_free);
         }
         String currencyCode;
         double convertedPrice = price;
@@ -138,5 +133,30 @@ public class LocalizeGameAttribute {
                 currencyFormat.setCurrency(Currency.getInstance(Locale.US));
         }
         return currencyFormat.format(convertedPrice);
+    }
+
+    private void updateRate() {
+        ConversionAPI api = new ConversionAPI();
+        api.setListener(new ConversionAPI.OnConversionCompleteListener() {
+            @Override
+            public void onCompleted(String text) {
+                if (text != null) {
+                    try {
+                        JSONObject rates = new JSONObject(text).getJSONObject("rates");
+                        exchangeRateCNY = rates.getDouble("CNY");
+                        exchangeRateEUR = rates.getDouble("EUR");
+                        exchangeRateJPY = rates.getDouble("JPY");
+                        exchangeRateVND = rates.getDouble("CNY");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            @Override
+            public void onError(Exception e) {
+                e.printStackTrace();
+            }
+        });
+        api.execute();
     }
 }

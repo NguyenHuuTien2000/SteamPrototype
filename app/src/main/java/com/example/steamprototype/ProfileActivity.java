@@ -1,10 +1,13 @@
 package com.example.steamprototype;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,12 +18,15 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.data_op.UserLibraryStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 import com.example.steamprototype.network.LocationAPI;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,12 +34,13 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class ProfileActivity  extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
     private static final int ACTIVITY_SELECT_IMAGE = 406;
     ImageView img_profile;
     TextView txtV_profile_username, txtV_profile_location;
-    Button btn_profile_library,btn_profile_wishlist;
+    Button btn_profile_library, btn_profile_wishlist;
 
     User user;
     UserLibraryStorage userLibraryStorage = StoreFrontActivity.userLibraryStorage;
@@ -43,6 +50,8 @@ public class ProfileActivity  extends AppCompatActivity {
 
     private String imagePath = "";
 
+    private FusedLocationProviderClient fusedLocationClient;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +60,6 @@ public class ProfileActivity  extends AppCompatActivity {
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
 
-        getLocation();
         txtV_profile_username.setText(user.getUsername());
 
         SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
@@ -163,5 +171,23 @@ public class ProfileActivity  extends AppCompatActivity {
             e.printStackTrace();
         }
         return path;
+    }
+
+    public void checkLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(ProfileActivity.this, new String[] { Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION }, 99);
+        }
+    }
+
+    public void getLocationByGoogle() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        checkLocationPermission();
+        fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
+            if (location != null) {
+                Geocoder geocoder = new Geocoder(ProfileActivity.this, Locale.getDefault());
+            }
+        });
     }
 }
