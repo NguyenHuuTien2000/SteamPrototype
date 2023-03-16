@@ -1,20 +1,14 @@
 package com.example.steamprototype.data_op;
 
-
-
 import android.content.Context;
 
-import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.R;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.LocalizedGame;
 import com.example.steamprototype.network.ConversionAPI;
-import com.example.steamprototype.network.LocationAPI;
-import com.example.steamprototype.network.TranslateAPI;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Currency;
@@ -31,7 +25,6 @@ public class LocalizeGameAttribute {
     private Map<Integer,LocalizedGame> localizedJPGamesMap;
     private Map<Integer,LocalizedGame> localizedSPGamesMap;
 
-    private TranslateAPI translateAPI;
 
     private ConversionAPI conversionAPI;
 
@@ -47,7 +40,7 @@ public class LocalizeGameAttribute {
 
     public LocalizeGameAttribute(ArrayList<Game> games, Context context) {
         numberFormat.setMaximumFractionDigits(0);
-        //updateRate();
+        updateRate();
 
         this.context = context;
         this.localizedCNGamesMap = new HashMap<>();
@@ -87,9 +80,6 @@ public class LocalizeGameAttribute {
     }
 
     private LocalizedGame localize(String countryCode, Game game) {
-
-        this.translateAPI = new TranslateAPI();
-        this.conversionAPI = new ConversionAPI();
 
         int id = game.getGameID();
         LocalizedGame localizedGame;

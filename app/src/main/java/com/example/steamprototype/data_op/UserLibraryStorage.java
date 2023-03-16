@@ -11,6 +11,7 @@ import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -21,7 +22,7 @@ public class UserLibraryStorage {
     private SQLiteDatabase database = MainActivity.userDataStorage.getDatabase();
     private List<Game> fullList;
     private List<Game> wishlist;
-
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public UserLibraryStorage(ArrayList<Game> fullList, ArrayList<Game> wishlist) {
         this.fullList = fullList;
@@ -87,7 +88,6 @@ public class UserLibraryStorage {
         contentValues.put("gameID", game.getGameID());
         contentValues.put("username", user.getUsername());
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         contentValues.put("dateAdded", formatter.format(date));
 
@@ -101,7 +101,7 @@ public class UserLibraryStorage {
         contentValues.put("gameID", game.getGameID());
         contentValues.put("username", user.getUsername());
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         Date date = new Date();
         contentValues.put("dateAdded", formatter.format(date));
 
@@ -117,7 +117,17 @@ public class UserLibraryStorage {
         Cursor cursor = database.rawQuery("SELECT * FROM library WHERE username == '" + user.getUsername() + "'", null);
         while (cursor.moveToNext()) {
             int gameID = Integer.parseInt(cursor.getString(1));
-            user.addToLibrary(fullList.get(gameID));
+            Game game = fullList.get(gameID);
+
+            Date date = new Date();
+            try {
+                date = formatter.parse(cursor.getString(2));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            game.setDateAdded(date);
+            user.addToLibrary(game);
         }
         cursor.close();
 

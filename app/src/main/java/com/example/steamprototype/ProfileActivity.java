@@ -10,19 +10,20 @@ import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.steamprototype.data_op.GameDataStorage;
+import com.example.steamprototype.adapter.PurchaseListAdapter;
 import com.example.steamprototype.data_op.UserLibraryStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
@@ -35,13 +36,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
 public class ProfileActivity extends AppCompatActivity {
     private static final int ACTIVITY_SELECT_IMAGE = 406;
     ImageView img_profile;
-    TextView txtV_profile_username, txtV_profile_location;
+    TextView txtV_profile_username, txtV_profile_location, txtV_profile_email;
     Button btn_profile_library, btn_profile_wishlist;
 
     User user;
@@ -54,15 +56,23 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FusedLocationProviderClient fusedLocationClient;
 
+    private PurchaseListAdapter purchaseListAdapter;
+    private ListView purchaseList;
+
     @Override
+    @RequiresApi(api = Build.VERSION_CODES.N)
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
         init();
+
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("user");
 
         txtV_profile_username.setText(user.getUsername());
+        txtV_profile_email.setText(user.getEmail());
+
+
         setLocationByGoogle();
 
         SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
@@ -84,6 +94,9 @@ public class ProfileActivity extends AppCompatActivity {
         wishListArr = this.user.getWishlist();
         libListArr = this.user.getLibrary();
 
+        libListArr.sort(Comparator.comparing(Game::getDateAdded));
+        loadListView((ArrayList<Game>) this.libListArr);
+
         btn_profile_library.setText(getString(R.string.game) + "\n" + libListArr.size());
         btn_profile_wishlist.setText(getString(R.string.wishlist) + "\n" + wishListArr.size());
 
@@ -97,8 +110,10 @@ public class ProfileActivity extends AppCompatActivity {
         img_profile = findViewById(R.id.img_profile);
         txtV_profile_username = findViewById(R.id.txtV_profile_username);
         txtV_profile_location = findViewById(R.id.txtV_profile_location);
+        txtV_profile_email = findViewById(R.id.txtV_profile_email);
         btn_profile_library = findViewById(R.id.btn_profile_library);
         btn_profile_wishlist = findViewById(R.id.btn_profile_wishlist);
+        purchaseList = findViewById(R.id.profile_purchase_list);
     }
 
     public void goToLibrary( ) {
@@ -184,15 +199,21 @@ public class ProfileActivity extends AppCompatActivity {
 
                     ArrayList<String> addressParts = new ArrayList<>();
 
-                    for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
-                        addressParts.add(address.getAddressLine(i));
-                    }
+                    addressParts.add(address.getSubAdminArea());
+                    addressParts.add(address.getAdminArea());
+                    addressParts.add(address.getCountryName());
+
                     txtV_profile_location.setText(TextUtils.join("\n", addressParts));
                 } catch (Exception e) {
 
                 }
             }
         });
+    }
+
+    public void loadListView(ArrayList<Game> displayList) {
+        this.purchaseListAdapter = new PurchaseListAdapter(ProfileActivity.this, displayList);
+        this.purchaseList.setAdapter(this.purchaseListAdapter);
     }
 
     private void setLocationByIP() {

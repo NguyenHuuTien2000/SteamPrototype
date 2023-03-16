@@ -162,7 +162,7 @@ public class StoreFrontActivity extends AppCompatActivity {
         });
 
         edt_search.setOnEditorActionListener((textView, i, keyEvent) -> {
-            if (keyEvent != null&& (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+            if (keyEvent != null && (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                 hideKeyboard(StoreFrontActivity.this);
                 btn_search.performClick();
             }
@@ -232,9 +232,7 @@ public class StoreFrontActivity extends AppCompatActivity {
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
         View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
         if (view == null) {
             view = new View(activity);
         }

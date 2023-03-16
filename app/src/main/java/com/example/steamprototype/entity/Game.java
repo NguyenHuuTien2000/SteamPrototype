@@ -13,7 +13,6 @@ public class Game implements Serializable {
     private String platform;
 
     private Date releaseDate;
-    private Date addedDate;
     private double price;
     private double discount;
     private String image;
@@ -24,6 +23,8 @@ public class Game implements Serializable {
     private String description;
 
     private boolean isRated;
+
+    private Date dateAdded;
 
     public Game(int gameID, String title, String publisher, String developer, String genre, String platform, Date releaseDate, double price, double discount, String image, double totalRate, long rateCount) {
         this.gameID = gameID;
@@ -40,6 +41,14 @@ public class Game implements Serializable {
         this.isRated = false;
         this.totalRate = totalRate;
         this.rateCount = rateCount;
+    }
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
     }
 
     public double getTotalRate() {
@@ -180,19 +189,6 @@ public class Game implements Serializable {
 
     public String getDiscountString() {
         return discount == 0.0 ? "" : "-" + discount + "%";
-    }
-
-    public Date getAddedDate() {
-        return addedDate;
-    }
-
-    public String getDateAddedString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return formatter.format(this.addedDate);
-    }
-
-    public void setAddedDate(Date addedDate) {
-        this.addedDate = addedDate;
     }
 
     public String getDescription() {
