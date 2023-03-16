@@ -11,11 +11,8 @@ import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.entity.Game;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class GameDataStorage {

@@ -16,15 +16,11 @@ import android.widget.TextView;
 
 import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.R;
-import com.example.steamprototype.SettingsActivity;
-import com.example.steamprototype.StoreFrontActivity;
 import com.example.steamprototype.data_op.GameDataStorage;
-import com.example.steamprototype.data_op.LocalizeGameAttribute;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.LocalizedGame;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter implements Filterable {
     Context context;

@@ -1,7 +1,5 @@
 package com.example.steamprototype.entity;
 
-import android.app.GameManager;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

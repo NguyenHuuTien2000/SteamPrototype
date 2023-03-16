@@ -3,25 +3,20 @@ package com.example.steamprototype.adapter;
 import static com.example.steamprototype.StoreFrontActivity.localizeGameAttribute;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.steamprototype.GamePageActivity;
 import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.R;
-import com.example.steamprototype.StoreFrontActivity;
 import com.example.steamprototype.data_op.GameDataStorage;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.LocalizedGame;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 

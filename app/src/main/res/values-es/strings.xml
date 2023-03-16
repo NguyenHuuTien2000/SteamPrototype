@@ -44,4 +44,11 @@
     <string name="rating_condition_message">Debes tener este juego para calificarlo</string>
     <string name="rating_condition_message2">Ya calificaste este juego</string>
     <string name="price_free">Gratis</string>
+    <string name="register_success_message">Regístrese con éxito ahora, será directo al frente de la tienda</string>
+    <string name="no_account_message">No se encontró ninguna cuenta, ¿quieres crear una?</string>
+    <string name="no_account_title">No se pueden recuperar los datos de la cuenta</string>
+    <string name="username_password_empty">El nombre de usuario o la contraseña no pueden estar vacíos</string>
+    <string name="username_contain_special_char">Nombre de usuario no válido, no puede contener caracteres especiales</string>
+    <string name="password_not_long_enough">Contraseña no válida, debe tener al menos 6 caracteres</string>
+    <string name="username_password_not_match">El nombre de usuario o la contraseña no coinciden</string>
 </resources>

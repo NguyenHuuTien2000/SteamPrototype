@@ -44,4 +44,11 @@
     <string name="rating_condition_message">You must own this game to rate it</string>
     <string name="rating_condition_message2">You already rated this game</string>
     <string name="price_free">Free</string>
+    <string name="register_success_message">Register success now you will be direct to the store front</string>
+    <string name="no_account_message">No account was found do you want to create one?</string>
+    <string name="no_account_title">Cannot retrieve account data</string>
+    <string name="username_password_empty">Username or password cannot be empty</string>
+    <string name="username_contain_special_char">Username invalid, cannot contains special characters\n</string>
+    <string name="password_not_long_enough">Password invalid, must be at least 6 characters long\n</string>
+    <string name="username_password_not_match">Username or password do not match</string>
 </resources>

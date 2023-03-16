@@ -1,6 +1,5 @@
 package com.example.steamprototype;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -12,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.steamprototype.data_op.SettingMethods;
 import com.example.steamprototype.data_op.UserDataStorage;
 import com.example.steamprototype.entity.User;
 
@@ -41,8 +39,8 @@ public class SignInActivity extends AppCompatActivity {
             builder.setNegativeButton(getString(R.string.no), (dialog, id) -> {
 
             });
-            builder.setMessage("No account was found do you want to create one?");
-            builder.setTitle("Cannot retrieve account data");
+            builder.setMessage(R.string.no_account_message);
+            builder.setTitle(R.string.no_account_title);
             builder.setIcon(R.drawable.steamdeck_steamlogo);
             AlertDialog dialog = builder.create();
             dialog.show();
@@ -77,20 +75,20 @@ public class SignInActivity extends AppCompatActivity {
 
     public boolean checkInput(String username, String password) {
         if (username.isEmpty() || password.isEmpty()) {
-            this.errorMsg = "Username or password cannot be empty";
+            this.errorMsg = getString(R.string.username_password_empty);
             return false;
         }
 
         boolean checkPattern = true;
         String pattern = "^[a-zA-Z0-9]+$";
         if (!username.matches(pattern)) {
-            this.errorMsg = "Username invalid, cannot contains special characters\n";
+            this.errorMsg = getString(R.string.username_contain_special_char) + "\n";
             checkPattern = false;
         }
 
         pattern = "^[\\S]{6,}$";
         if (!password.matches(pattern)) {
-            this.errorMsg += "Password invalid, must be at least 6 characters long\n";
+            this.errorMsg += getString(R.string.password_not_long_enough) + "\n";
             checkPattern = false;
         }
 
@@ -100,7 +98,7 @@ public class SignInActivity extends AppCompatActivity {
 
         this.user = MainActivity.userDataStorage.getUserData(username, password);
         if (this.user == null) {
-            this.errorMsg = "Username or password do not match";
+            this.errorMsg = getString(R.string.username_password_not_match);
             return false;
         }
         return true;

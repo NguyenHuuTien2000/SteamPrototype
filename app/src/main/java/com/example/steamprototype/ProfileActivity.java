@@ -72,11 +72,10 @@ public class ProfileActivity extends AppCompatActivity {
         txtV_profile_username.setText(user.getUsername());
         txtV_profile_email.setText(user.getEmail());
 
-
         setLocationByGoogle();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
-        imagePath = sharedPreferences.getString("profile_pic", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("User Profile Pic", MODE_PRIVATE);
+        imagePath = sharedPreferences.getString(user.getUsername(), "");
         if (imagePath.isEmpty()) {
             img_profile.setImageDrawable(getResources().getDrawable(R.drawable.default_avatar));
         } else {
@@ -144,8 +143,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 imagePath = saveImage(this,"profile_pic.png",image);
 
-                SharedPreferences sharedPreferences = getSharedPreferences("User", MODE_PRIVATE);
-                sharedPreferences.edit().putString("profile_pic", imagePath).apply();
+                SharedPreferences sharedPreferences = getSharedPreferences("User Profile Pic", MODE_PRIVATE);
+                sharedPreferences.edit().putString(user.getUsername(), imagePath).apply();
             }
         }
     }

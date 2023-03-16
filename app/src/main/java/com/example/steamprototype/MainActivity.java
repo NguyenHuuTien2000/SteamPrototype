@@ -1,22 +1,20 @@
 package com.example.steamprototype;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.steamprototype.data_op.GameDataStorage;
-import com.example.steamprototype.data_op.LocalizeGameAttribute;
 import com.example.steamprototype.data_op.SettingMethods;
 import com.example.steamprototype.data_op.UserDataStorage;
 import com.example.steamprototype.entity.User;
@@ -24,9 +22,6 @@ import com.example.steamprototype.entity.User;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     Button btnToSignIn, btnToReg;
@@ -78,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             User newUser = new User(username, password, email);
 
             if (userDataStorage.saveUserData(newUser)) {
-                Toast.makeText(this, "Register success now you will be direct to the store front", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.register_success_message, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, StoreFrontActivity.class);
                 intent.putExtra("user", newUser);
                 startActivity(intent);

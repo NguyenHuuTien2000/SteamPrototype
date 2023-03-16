@@ -11,10 +11,8 @@ import com.example.steamprototype.MainActivity;
 import com.example.steamprototype.entity.Game;
 import com.example.steamprototype.entity.User;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
