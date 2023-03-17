@@ -161,7 +161,7 @@ public class ProfileActivity extends AppCompatActivity {
     public String saveImage(Activity activity, String imageName, Bitmap image) {
         String path = "";
         try {
-            String savePath = activity.getApplicationInfo().dataDir + "/avatar/";
+            String savePath = activity.getApplicationInfo().dataDir + "/avatar/" + user.getUsername() + "/";
             File folder = new File(savePath);
             if (!folder.exists()) {
                 folder.mkdir();
